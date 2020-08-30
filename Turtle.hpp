@@ -1,4 +1,6 @@
 #pragma once
+#include <SDL_render.h>
+
 #include "Position.hpp"
 
 namespace T1
@@ -13,6 +15,7 @@ namespace T1
     public:
         void Move(float distance);
         void Rotate(float angle);
+        void Draw(SDL_Renderer* renderer) const;
 
     protected:
         Position GetForward() const;

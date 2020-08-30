@@ -3,6 +3,8 @@
 #include "SDL.h"
 #include "Turtle.hpp"
 
+using namespace T1;
+
 class Display
 {
 public:
@@ -33,7 +35,7 @@ public:
         return true;
     }
 
-    bool Step() const
+    bool PreRender() const
     {
         SDL_Event event;
 
@@ -44,9 +46,12 @@ public:
         SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(renderer);
 
-        SDL_RenderPresent(renderer);
-
         return true;
+    }
+
+    void Present()
+    {
+        SDL_RenderPresent(renderer);
     }
 };
 
@@ -55,9 +60,14 @@ int main(int argc, char *argv[])
     Display display{ };
     display.Bootstrap(1000, 1000);
 
-    while (display.Step())
+    Turtle turtle;
+    turtle.PenDown = false;
+    turtle.Location = { 500,500 };
+
+    while (display.PreRender())
     {
-        /* do nothing */;
+        turtle.Draw(display.renderer);
+        display.Present();
     }
 
     return 0;

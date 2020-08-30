@@ -4,10 +4,10 @@ namespace T1
 {
     struct Position
     {
-        float x, y;
+        int x, y;
 
         Position() { }
-        Position(float _x, float _y)
+        Position(int _x, int _y)
         {
             x = _x;
             y = _y;
