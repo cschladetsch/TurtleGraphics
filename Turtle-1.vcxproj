@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Display.hpp" />
     <ClInclude Include="Position.hpp" />
     <ClInclude Include="Turtle.hpp" />
   </ItemGroup>

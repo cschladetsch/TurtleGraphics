@@ -21,6 +21,9 @@
     <ClInclude Include="Position.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Display.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Turtle.cpp">
