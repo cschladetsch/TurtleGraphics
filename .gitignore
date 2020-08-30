@@ -4,4 +4,10 @@
 
 *.user
 
+/.current
+
+/External
+
+/SDL2d.dll
+
 
