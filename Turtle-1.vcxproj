@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Command.hpp" />
     <ClInclude Include="Display.hpp" />
     <ClInclude Include="Position.hpp" />
     <ClInclude Include="Turtle.hpp" />
@@ -152,6 +153,9 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Turtle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Commands.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

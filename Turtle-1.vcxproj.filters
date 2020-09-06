@@ -24,6 +24,9 @@
     <ClInclude Include="Display.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Command.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Turtle.cpp">
@@ -32,5 +35,8 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Commands.txt" />
   </ItemGroup>
 </Project>

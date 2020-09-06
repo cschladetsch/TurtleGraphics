@@ -17,12 +17,25 @@ int main(int argc, char *argv[])
     }
 
     Turtle turtle;
-    turtle.PenDown = false;
-    turtle.Location = { 500,500 };
+    turtle.penDown = false;
+    turtle.location = { 500,500 };
+
+    if (!turtle.ReadCommands("Commands.txt"))
+    {
+        std::cerr << "Failed to read commands\n";
+        return - 1;
+    }
+
+    if (!turtle.ProcessCommands())
+    {
+        std::cerr << "Failed to execute commands\n";
+        return - 1;
+    }
+
+    std::cout << turtle.Trace() << std::endl;
 
     while (display.PreRender())
     {
-        // TODO: handle input from file
         // TODO: handle input from app
         turtle.Draw(display.renderer);
         display.Present();
