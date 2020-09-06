@@ -10,7 +10,7 @@ using namespace T1;
 int main(int argc, char *argv[])
 {
     Display display{ };
-    if (display.Bootstrap(1000, 1000))
+    if (!display.Bootstrap(1000, 1000))
     {
         std::cerr << "Failed to startup SDL.\n";
         return -1;
