@@ -51,9 +51,8 @@ namespace T1
 
     void Turtle::Move(float distance)
     {
-        auto end = location + GetForward()*distance;
+        auto end = GetForward()*distance;
         _lineSegments.emplace_back(end, penDown);
-        location = end;
     }
 
     void Turtle::Rotate(float angle)
@@ -65,8 +64,8 @@ namespace T1
     
     Position Turtle::GetForward() const
     {
-        const float x = cos(orientation*3.1415f/180.0f);
-        const float y = sin(orientation*3.1415f/180.0f);
+        const float x = cos(orientation*M_PI/180.0f);
+        const float y = sin(orientation*M_PI/180.0f);
         return { x, y };
     }
 
