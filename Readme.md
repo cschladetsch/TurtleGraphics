@@ -2,7 +2,7 @@
 Base tech: C++ and STL.
 Intention: Basic implementation of turtle graphics using C++ and SDL. Not trying to show best practise or folder structure or anything like that.
 
-See [YouTube Vids] for commentary on development(https://studio.youtube.com/video/YXAmNWvC77M)
+See [YouTube Vids](https://studio.youtube.com/video/YXAmNWvC77M) for commentary on development.
 
 
 ## First session
