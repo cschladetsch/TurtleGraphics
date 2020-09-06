@@ -1,5 +1,9 @@
 # Turtle Graphics
-Base tech: C++ and STL
+Base tech: C++ and STL.
+Intention: Basic implementation of turtle graphics using C++ and SDL. Not trying to show best practise or folder structure or anything like that.
+
+See [YouTube Vids] for commentary on development(https://studio.youtube.com/video/YXAmNWvC77M)
+
 
 ## First session
 * Setup tools and libs
@@ -21,7 +25,7 @@ Base tech: C++ and STL
   * Pen up and down
   * Move
 
-## Third Session
+## Third Session (TODO)
 Repeating blocks:
 
 ```
