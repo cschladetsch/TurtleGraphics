@@ -26,11 +26,11 @@ int main(int argc, char *argv[])
         return - 1;
     }
 
-    if (!turtle.ProcessCommands())
-    {
-        std::cerr << "Failed to execute commands\n";
-        return - 1;
-    }
+    //if (!turtle.ProcessCommands())
+    //{
+    //    std::cerr << "Failed to execute commands\n";
+    //    return - 1;
+    //}
 
     std::cout << turtle.Trace() << std::endl;
 

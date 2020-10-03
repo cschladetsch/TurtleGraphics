@@ -1,42 +1,78 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Turtle.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Position.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Display.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Turtle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Include\Processor">
+      <UniqueIdentifier>{aa11076d-c159-4cfb-b100-848037c1fb5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Processor">
+      <UniqueIdentifier>{56d8bf01-2cec-4024-8186-24631b85987d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\Command.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Display.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Position.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Turtle.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Lexer.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Template.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Executor.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Parser.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Translator.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Turtle.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\Lexer.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\Template.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\Executor.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\Parser.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\Translator.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

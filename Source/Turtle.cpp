@@ -106,19 +106,20 @@ namespace T1
         return str.str();
     }
 
-    bool Turtle::ProcessCommands()
-    {
-        for (auto cmd : _commands)
-        {
-            switch (cmd.type)
-            {
-            case Pen: penDown = true; break; // TODO
-            case ECommandType::Move: Move(cmd.distance); break;
-            case ECommandType::Rotate: Rotate(cmd.rotation); break;
-            case Quit: return true;
-            }
-        }
+    //bool Turtle::ProcessCommands()
+    //{
+    //    for (auto cmd : _commands)
+    //    {
+    //        switch (cmd.type)
+    //        {
+    //        case Pen: penDown = true; break; // TODO
+    //        case ECommandType::Move: Move(cmd.distance); break;
+    //        case ECommandType::Rotate: Rotate(cmd.rotation); break;
+    //        case Quit: return true;
+    //        }
+    //    }
 
-        return true;
-    }
+    //    return true;
+    //}
 }
+
