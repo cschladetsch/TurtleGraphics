@@ -11,7 +11,7 @@ namespace T1
     class Turtle
     {
     public:
-        const Position location {};
+        Position location {};
         float orientation {};
         bool penDown {};
 

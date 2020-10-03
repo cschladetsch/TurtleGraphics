@@ -64,8 +64,8 @@ namespace T1
     
     Position Turtle::GetForward() const
     {
-        const float x = cos(orientation*M_PI/180.0f);
-        const float y = sin(orientation*M_PI/180.0f);
+        const float x = cosf(orientation*(float)M_PI/180.0f);
+        const float y = sinf(orientation*(float)M_PI/180.0f);
         return { x, y };
     }
 
