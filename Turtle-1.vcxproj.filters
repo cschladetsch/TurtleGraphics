@@ -19,6 +19,9 @@
     <Filter Include="Source\Processor">
       <UniqueIdentifier>{56d8bf01-2cec-4024-8186-24631b85987d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests">
+      <UniqueIdentifier>{84f6fa2c-3702-450d-bfe4-6eadcbb74183}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands.txt" />
@@ -51,6 +54,12 @@
     <ClInclude Include="Include\Processor\Translator.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Processor\Token.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\StringSplice.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -73,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Source\Processor\Translator.cpp">
       <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TestMain.cpp">
+      <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

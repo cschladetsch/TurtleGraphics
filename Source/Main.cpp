@@ -7,7 +7,7 @@
 
 using namespace T1;
 
-int main(int argc, char *argv[])
+int main2(int argc, char *argv[])
 {
     Display display{ };
     if (!display.Bootstrap(1000, 1000))

@@ -154,7 +154,9 @@
     <ClInclude Include="Include\Processor\Executor.hpp" />
     <ClInclude Include="Include\Processor\Lexer.hpp" />
     <ClInclude Include="Include\Processor\Parser.hpp" />
+    <ClInclude Include="Include\Processor\StringSplice.hpp" />
     <ClInclude Include="Include\Processor\Template.hpp" />
+    <ClInclude Include="Include\Processor\Token.hpp" />
     <ClInclude Include="Include\Processor\Translator.hpp" />
     <ClInclude Include="Include\Turtle.hpp" />
   </ItemGroup>
@@ -165,6 +167,7 @@
     <ClCompile Include="Source\Processor\Parser.cpp" />
     <ClCompile Include="Source\Processor\Template.cpp" />
     <ClCompile Include="Source\Processor\Translator.cpp" />
+    <ClCompile Include="Source\TestMain.cpp" />
     <ClCompile Include="Source\Turtle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
