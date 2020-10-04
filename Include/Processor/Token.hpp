@@ -7,13 +7,20 @@ namespace T1 {
         enum EToken
         {
             None,
-            PenChange,
+            PenDown,
+            PenUp,
             True,
             False,
             Move,
             Rotate,
             WhiteSpace,
             Number,
+            Identifier,
+            Quit,
+            Color,
+            Repeat,
+            If,
+            Else,
         };
 
         struct Token
@@ -29,7 +36,8 @@ namespace T1 {
 
             friend bool operator==(const Token& left, const Token& right)
             {
-                return left.Type == right.Type && left.Splice == right.Splice;
+                // note: we only compare the token types
+                return left.Type == right.Type;
             }
         };
     }

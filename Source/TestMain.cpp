@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <array>
 
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
@@ -7,26 +8,37 @@
 
 using namespace T1::Processor;
 
+TEST_CASE("Test String", "[processor]")
+{
+    const char* text = "hello\nworld";
+    std::string hello(text, text + 6);
+    REQUIRE(hello[5] == '\n');
+}
+
 TEST_CASE("Test Lexer", "[processor]")
 {
-    const char* i0 = "P true\nM 50\n";
+    const char* i0 = "penDown  move\t50 repeat 123 quit";
     Lexer lexer(i0);
-    const auto tokens = lexer.GetTokens();
-    EToken expected[] =
+
+    std::array expected
     {
-        EToken::PenChange,
-        EToken::WhiteSpace,
-        EToken::True,
+        EToken::PenDown,
         EToken::WhiteSpace,
         EToken::Move,
         EToken::WhiteSpace,
         EToken::Number,
         EToken::WhiteSpace,
+        EToken::Repeat,
+        EToken::WhiteSpace,
+        EToken::Number,
+        EToken::WhiteSpace,
+        EToken::Quit,
         EToken::None,
     };
 
     REQUIRE(lexer.Run());
-    REQUIRE(tokens.size() == 9);
-    REQUIRE(std::equal(begin(tokens), end(tokens), expected));
+    const auto tokens = lexer.GetTokens();
+    REQUIRE(tokens.size() == expected.size());
+    REQUIRE(std::equal(begin(tokens), end(tokens), begin(expected)));
 }
 
