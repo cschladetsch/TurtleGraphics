@@ -60,6 +60,9 @@
     <ClInclude Include="Include\Processor\StringSplice.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Processor\ProcessBase.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="Source\TestMain.cpp">
       <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\ProcessBase.cpp">
+      <Filter>Source\Processor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

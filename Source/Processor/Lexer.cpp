@@ -62,9 +62,10 @@ namespace T1 { namespace Processor {
         _lines.push_back(std::string(start, text + 1));
     }
 
-    bool Lexer::Run()
+    bool Lexer::Run() 
     {
-        _failed = false;
+        Reset();
+
         while (GetNext())
             ;
 
@@ -76,13 +77,14 @@ namespace T1 { namespace Processor {
         if (AtEnd())
             return false;
 
-        if (GetCurrent() == '\n')
+        char current = GetCurrent();
+        if (current == '\n')
         {
             _lineNumber++;
             return true;
         }
 
-        if (std::isalpha(GetCurrent()))
+        if (std::isalpha(current))
         {
             auto splice = Gather(std::isalpha);
             auto text = splice.GetText();
@@ -93,18 +95,29 @@ namespace T1 { namespace Processor {
             return AddToken(splice, EToken::Identifier);
         }
 
-        if (std::isdigit(GetCurrent()))
+        if (std::isdigit(current))
             return AddToken(Gather(std::isdigit), EToken::Number);
         
-        if (std::isspace(GetCurrent()))
+        if (std::isspace(current))
             return AddToken(Gather(std::isspace), EToken::WhiteSpace);
 
+        switch (current)
+        {
+        case '{': return AddToken(EToken::OpenBrace, 1);
+        case '}': return AddToken(EToken::CloseBrace, 1);
+        }
+
         // TODO: error reporting
-        _failed = GetCurrent() != 0;
+        _failed = current != 0;
         if (!_failed)
             _tokens.emplace_back(Token{ None });
 
         return false;
+    }
+
+    bool Lexer::AddToken(EToken type, size_t length)
+    {
+        return AddToken(StringSplice(*this, _lineNumber, _offset, length), type);
     }
 
     bool Lexer::AddToken(StringSplice splice, EToken type)

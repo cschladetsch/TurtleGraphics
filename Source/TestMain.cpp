@@ -5,6 +5,7 @@
 #include "catch.hpp"
 
 #include "Processor/Lexer.hpp"
+#include "Processor/Parser.hpp"
 
 using namespace T1::Processor;
 
@@ -42,3 +43,10 @@ TEST_CASE("Test Lexer", "[processor]")
     REQUIRE(std::equal(begin(tokens), end(tokens), begin(expected)));
 }
 
+TEST_CASE("Test Parser", "[processor]")
+{
+    const char* i0 = "penDown repeat 4 { rotate 90 move 100 } quit";
+    Lexer lexer(i0);
+
+    Parser parser(lexer);
+}

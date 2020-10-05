@@ -155,6 +155,7 @@
     <ClInclude Include="Include\Processor\Executor.hpp" />
     <ClInclude Include="Include\Processor\Lexer.hpp" />
     <ClInclude Include="Include\Processor\Parser.hpp" />
+    <ClInclude Include="Include\Processor\ProcessBase.hpp" />
     <ClInclude Include="Include\Processor\StringSplice.hpp" />
     <ClInclude Include="Include\Processor\Template.hpp" />
     <ClInclude Include="Include\Processor\Token.hpp" />
@@ -166,6 +167,7 @@
     <ClCompile Include="Source\Processor\Executor.cpp" />
     <ClCompile Include="Source\Processor\Lexer.cpp" />
     <ClCompile Include="Source\Processor\Parser.cpp" />
+    <ClCompile Include="Source\Processor\ProcessBase.cpp" />
     <ClCompile Include="Source\Processor\Template.cpp" />
     <ClCompile Include="Source\Processor\Translator.cpp" />
     <ClCompile Include="Source\TestMain.cpp" />

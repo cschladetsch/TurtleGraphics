@@ -21,6 +21,8 @@ namespace T1 {
             Repeat,
             If,
             Else,
+            OpenBrace,
+            CloseBrace,
         };
 
         struct Token

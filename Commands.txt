@@ -1,7 +1,9 @@
-P true
+penDown 
+
 repeat 4
 {
-    R 90
-    M 100
+    rotate 90
+    move 100
 }
-Q
+
+quit
