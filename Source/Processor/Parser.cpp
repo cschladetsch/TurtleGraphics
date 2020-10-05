@@ -35,7 +35,7 @@ namespace T1 { namespace Processor {
         case Repeat: return ParseRepeat();
         case Rotate: return ParseRotate();
         case Move: return ParseMove();
-        case Quit: return false;
+        case Quit: return AppendChild(Quit);
         }
 
         return false;
@@ -54,7 +54,7 @@ namespace T1 { namespace Processor {
 
         LeaveNode();
 
-        return false;
+        return true;
     }
 
     AstNodePtr Parser::GetRoot() const 
@@ -87,8 +87,10 @@ namespace T1 { namespace Processor {
         if (!ParseStatements())
             return false;
 
-        if (!Expect(CloseBrace))
+        if (!CurrentTokenType(CloseBrace))
             return false;
+
+        ++_currentToken;
 
         return true;
     }
@@ -110,6 +112,7 @@ namespace T1 { namespace Processor {
 
         auto rotate = AstNode::New(Rotate);
         rotate->AddChild(AstNode::New(NextToken()));
+        ++_currentToken;
         AddChild(rotate);
         return true;
     }
@@ -121,6 +124,7 @@ namespace T1 { namespace Processor {
 
         auto move = AstNode::New(Move);
         move->AddChild(AstNode::New(NextToken()));
+        ++_currentToken;
         AddChild(move);
         return true;
     }

@@ -65,7 +65,7 @@ TEST_CASE("Test Parser", "[processor]")
 
     auto repeat = children[1];
     auto repeatChildren = repeat->GetChildren();
-    REQUIRE(repeatChildren.size() == 2);
+    REQUIRE(repeatChildren.size() == 3);
     REQUIRE(repeatChildren[0]->GetType() == Number);
     REQUIRE(repeatChildren[1]->GetType() == Rotate);
     REQUIRE(repeatChildren[2]->GetType() == Move);
