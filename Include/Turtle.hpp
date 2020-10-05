@@ -1,6 +1,6 @@
 #pragma once
+
 #include <list>
-#include <SDL_render.h>
 #include <string>
 
 #include "Command.hpp"

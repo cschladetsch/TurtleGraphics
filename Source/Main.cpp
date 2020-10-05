@@ -1,7 +1,9 @@
+#include "Pch.hpp"
+
 #define SDL_MAIN_HANDLED
 
-#include <iostream>
 #include "SDL.h"
+#include <iostream>
 #include "Display.hpp"
 #include "Turtle.hpp"
 

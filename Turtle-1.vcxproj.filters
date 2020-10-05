@@ -63,6 +63,15 @@
     <ClInclude Include="Include\Processor\ProcessBase.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Processor\ProcessorPch.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Pch.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\AstNode.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -90,6 +99,15 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Processor\ProcessBase.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\ProcessorPch.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Pch.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\AstNode.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
   </ItemGroup>

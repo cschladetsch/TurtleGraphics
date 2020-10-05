@@ -6,8 +6,8 @@ namespace T1 { namespace Processor {
     struct ProcessBase
     {
     protected:
-        bool _failed;
-        std::string _error;
+        mutable bool _failed;
+        mutable std::string _error;
 
     public:
         virtual bool Run() = 0;
@@ -22,10 +22,11 @@ namespace T1 { namespace Processor {
         bool HasSucceeded() const { return !_failed; }
 
     protected:
-        bool Fail(const char* errorText)
+        bool Fail(const char* errorText) const
         {
             _failed = true;
             _error = errorText;
+            return false;
         }
     };
 } }

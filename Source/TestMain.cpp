@@ -1,8 +1,10 @@
+#define CATCH_CONFIG_MAIN
+
+#include "catch.hpp"
+
+#include "Pch.hpp"
 #include <algorithm>
 #include <array>
-
-#define CATCH_CONFIG_MAIN
-#include "catch.hpp"
 
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
@@ -49,4 +51,32 @@ TEST_CASE("Test Parser", "[processor]")
     Lexer lexer(i0);
 
     Parser parser(lexer);
+    REQUIRE(lexer.Run());
+
+    REQUIRE(parser.Run());
+    auto root = parser.GetRoot();
+    REQUIRE(root);
+
+    auto const& children = root->GetChildren();
+    REQUIRE(children.size() == 3);
+    REQUIRE(children[0]->GetType() == PenDown);
+    REQUIRE(children[1]->GetType() == Repeat);
+    REQUIRE(children[2]->GetType() == Quit);
+
+    auto repeat = children[1];
+    auto repeatChildren = repeat->GetChildren();
+    REQUIRE(repeatChildren.size() == 2);
+    REQUIRE(repeatChildren[0]->GetType() == Number);
+    REQUIRE(repeatChildren[1]->GetType() == Rotate);
+    REQUIRE(repeatChildren[2]->GetType() == Move);
+
+    // rotate command
+    REQUIRE(repeatChildren[1]->GetChildren().size() == 1);
+
+    // move command
+    REQUIRE(repeatChildren[2]->GetChildren().size() == 1);
+
+    REQUIRE(repeatChildren[1]->GetChildren()[0]->GetType() == Number);
+    REQUIRE(repeatChildren[2]->GetChildren()[0]->GetType() == Number);
+
 }

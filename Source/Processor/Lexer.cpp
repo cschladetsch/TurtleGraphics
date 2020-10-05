@@ -1,4 +1,4 @@
-#include <assert.h>
+#include "Processor/ProcessorPch.hpp"
 #include "Processor/Lexer.hpp"
 
 namespace T1 { namespace Processor {

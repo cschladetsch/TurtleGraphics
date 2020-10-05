@@ -7,6 +7,7 @@ namespace T1 {
         enum EToken
         {
             None,
+            Start,
             PenDown,
             PenUp,
             True,
