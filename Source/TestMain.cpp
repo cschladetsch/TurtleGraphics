@@ -49,9 +49,9 @@ TEST_CASE("Test Parser", "[processor]")
 {
     const char* i0 = "penDown repeat 4 { rotate 90 move 100 } quit";
     Lexer lexer(i0);
+    REQUIRE(lexer.Run());
 
     Parser parser(lexer);
-    REQUIRE(lexer.Run());
 
     REQUIRE(parser.Run());
     auto root = parser.GetRoot();

@@ -9,7 +9,7 @@ namespace T1 { namespace Processor {
     class Parser : public ProcessBase
     {
     private:
-        const Lexer& _lexer;
+        std::vector<Token> _tokens;
         size_t _currentToken = 0;
         std::vector<AstNodePtr> _context;
 
@@ -29,10 +29,11 @@ namespace T1 { namespace Processor {
         bool ParseStatements();
         bool ParseStatementBlock();
 
-        std::vector<Token> GetTokens() const { return _lexer.GetTokens(); }
+        std::vector<Token> GetTokens() const { return _tokens; }
 
         Token CurrentToken() const { return GetTokens()[_currentToken]; }
         EToken CurrentTokenType() const { return CurrentToken().Type; }
+        bool CurrentTokenType(EToken type) const { return CurrentToken().Type == type; }
         std::string CurrentTokenText() const { return CurrentToken().Splice.GetText(); }
 
         Token NextToken() { return GetTokens()[++_currentToken]; }

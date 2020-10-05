@@ -2,10 +2,15 @@
 #include "Processor/Parser.hpp"
 
 namespace T1 { namespace Processor {
+
     Parser::Parser(const Lexer& lexer)
-        : _lexer(lexer)
     {
         _context.push_back(AstNode::New(Start));
+        for (const auto& token : lexer.GetTokens())
+        {
+            if (token.Type != WhiteSpace)
+                _tokens.push_back(token);
+        }
     }
 
     bool Parser::Run()
@@ -25,11 +30,6 @@ namespace T1 { namespace Processor {
     {
         switch (CurrentTokenType())
         {
-        case WhiteSpace: 
-        {
-            ++_currentToken;
-            return true;
-        }
         case PenDown: return AppendChild(PenDown);
         case PenUp: return AppendChild(PenUp);
         case Repeat: return ParseRepeat();
@@ -96,9 +96,9 @@ namespace T1 { namespace Processor {
     bool Parser::Expect(EToken type)
     {
         if (!Peek(type))
-            return Fail("Unexpected token type");
+            return Fail("Unexpected different token type");
 
-        ++_currentToken;
+        _currentToken += 2;
 
         return true;
     }
