@@ -44,6 +44,8 @@ namespace T1 { namespace Processor {
 
     void Lexer::AddText(const char *text)
     {
+        assert(text != nullptr);
+
         const char* start = text;
         while (text && *text)
         {
@@ -73,6 +75,12 @@ namespace T1 { namespace Processor {
     {
         if (AtEnd())
             return false;
+
+        if (GetCurrent() == '\n')
+        {
+            _lineNumber++;
+            return true;
+        }
 
         if (std::isalpha(GetCurrent()))
         {
