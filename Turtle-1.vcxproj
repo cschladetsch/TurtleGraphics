@@ -149,7 +149,7 @@
     <Text Include="Commands.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Command.hpp" />
+    <ClInclude Include="Include\Config.hpp" />
     <ClInclude Include="Include\Display.hpp" />
     <ClInclude Include="Include\Pch.hpp" />
     <ClInclude Include="Include\Position.hpp" />
@@ -163,6 +163,7 @@
     <ClInclude Include="Include\Processor\Template.hpp" />
     <ClInclude Include="Include\Processor\Token.hpp" />
     <ClInclude Include="Include\Processor\Translator.hpp" />
+    <ClInclude Include="Include\StdAliases.hpp" />
     <ClInclude Include="Include\Turtle.hpp" />
   </ItemGroup>
   <ItemGroup>

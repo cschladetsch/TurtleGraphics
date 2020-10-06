@@ -17,15 +17,15 @@ typedef std::shared_ptr<AstNode> AstNodePtr;
 
 class AstNode {
     Token _token;
-    std::vector<AstNodePtr> _children;
+    vector<AstNodePtr> _children;
 
  public:
     explicit AstNode(Token token) : _token(token) { }
     explicit AstNode(EToken type = EToken::None) : _token(type) { }
 
     EToken GetType() const { return _token.Type; }
-    std::string GetText() const { return _token.Splice.GetText(); }
-    std::vector<AstNodePtr> const &GetChildren() const { return _children; }
+    string GetText() const { return _token.Splice.GetText(); }
+    vector<AstNodePtr> const &GetChildren() const { return _children; }
 
     void AddChild(AstNodePtr node);
     void ForEachChild(std::function<void(const AstNode&)> action);

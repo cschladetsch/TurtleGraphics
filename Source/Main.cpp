@@ -12,10 +12,14 @@
 using Turtle1::Display;
 using Turtle1::Turtle;
 
+using std::cout;
+using std::cerr;
+using std::endl;
+
 int main2(int argc, char *argv[]) {
     Display display{ };
     if (!display.Bootstrap(1000, 1000)) {
-        std::cerr << "Failed to startup SDL.\n";
+        cerr << "Failed to startup SDL.\n";
         return -1;
     }
 
@@ -23,21 +27,9 @@ int main2(int argc, char *argv[]) {
     turtle.penDown = false;
     turtle.location = { 500, 500 };
 
-    if (!turtle.ReadCommands("Commands.txt")) {
-        std::cerr << "Failed to read commands\n";
-        return - 1;
-    }
-
-    // if (!turtle.ProcessCommands())
-    // {
-    //    std::cerr << "Failed to execute commands\n";
-    //    return - 1;
-    // }
-
-    std::cout << turtle.Trace() << std::endl;
+    cout << turtle.Trace() << endl;
 
     while (display.PreRender()) {
-        // TODO(cjs): handle input from app
         turtle.Draw(display.renderer);
         display.Present();
     }

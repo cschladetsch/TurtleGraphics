@@ -13,13 +13,12 @@
 
 namespace Turtle1 { namespace Processor {
 
-// produces a series of Tokens from a string
 class Lexer : public ProcessBase {
-    std::vector<Token> _tokens;
-    std::vector<std::string> _lines;
-    std::size_t _lineNumber = 0;
-    std::size_t _offset = 0;
-    std::map<std::string, EToken> _tokenTypes;
+    vector<Token> _tokens;
+    vector<string> _lines;
+    size_t _lineNumber = 0;
+    size_t _offset = 0;
+    map<string, EToken> _tokenTypes;
     bool _failed;
 
  public:
@@ -27,8 +26,8 @@ class Lexer : public ProcessBase {
 
     bool Run() override;
 
-    const std::vector<Token> GetTokens() const { return _tokens; }
-    const std::vector<std::string>& GetLines() const { return _lines; }
+    const vector<Token> GetTokens() const { return _tokens; }
+    const vector<string>& GetLines() const { return _lines; }
 
     bool IsValid(StringSplice splice) const;
 

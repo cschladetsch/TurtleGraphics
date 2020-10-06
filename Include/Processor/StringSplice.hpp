@@ -4,20 +4,22 @@
 
 #include <string>
 
+#include "StdAliases.hpp"
+
 namespace Turtle1 { namespace Processor {
 
 class Lexer;
 
 struct StringSplice {
     const Lexer* Source = 0;
-    std::size_t LineNumber = 0;
-    std::size_t Offset = 0;
-    std::size_t Length = 0;
+    size_t LineNumber = 0;
+    size_t Offset = 0;
+    size_t Length = 0;
 
     StringSplice() { }
 
     StringSplice(const Lexer& lex, std::size_t ln,
-        std::size_t ofs, std::size_t len)
+        size_t ofs, size_t len)
         : Source(&lex) {
         LineNumber = ln;
         Offset = ofs;
@@ -32,7 +34,7 @@ struct StringSplice {
             && left.Length == right.Length;
     }
 
-    std::string GetText() const;
+    string GetText() const;
 };
 }  // namespace Processor
 }  // namespace Turtle1

@@ -1,45 +1,27 @@
 # Turtle Graphics
-Base tech: C++ and STL.
-Intention: Basic implementation of turtle graphics using C++ and SDL. Not trying to show best practise or folder structure or anything like that.
+A Turtle graphics system.
 
-See [YouTube Vids](https://studio.youtube.com/video/YXAmNWvC77M) for commentary on development.
+* Base tech: C++, STL and SDL.
+* Implementation of turtle graphics, with an interpreter. 
+* Trying to show best practises.
 
+See [YouTube Playlist](https://youtube.com) for realtime commentary on development.
 
 ## First session
+See [video](https://youtube.com).
 * Setup tools and libs
 * Get a window up
 * Draw the turtle
 
 ## Second session
-* Draw a better turtle
-  * Correct size
-  * Fill?
-  * Thick lines?
-* How to animate?
-  * Need to preserve lines
-  * Need to animate turtle
-    * Rotations and Movement
-  * Store the sequence of lines to draw, then draw the turtle
-* Add turtle functionality
-  * Rotate
-  * Pen up and down
-  * Move
+Add Interpreter structure [video](https://youtube.com).
 
-## Third Session (TODO)
-Repeating blocks:
+## Third session
+Add Lexer [video](https://youtube.com).
 
-```
-R 5
-{
-    M 50
-    R 60
-    M 30
-    R 30
-}
-```
+## Forth session
+Add Parser [video](https://youtube.com).
 
-
-
-
-
+## Fifth session
+TODO: Add Translator and Executor [video](https://youtube.com).
 

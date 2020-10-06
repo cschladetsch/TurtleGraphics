@@ -17,9 +17,9 @@ namespace Turtle1 {
 
         auto const len = 20;
         Position offsets[] = {
-            {-len, len},
-            {0, -len},
-            {len, len},
+            { -len, len },
+            { 0, -len },
+            { len, len },
         };
 
         const auto p0 = location + offsets[0];
@@ -63,36 +63,8 @@ namespace Turtle1 {
         return { x, y };
     }
 
-    bool Turtle::ReadCommands(const std::string fileName) {
-        auto file = std::fstream(fileName);
-        if (!file)
-            return false;
-
-        char buff[2000];
-        while (file.getline(buff, 2000)) {
-            std::string line { buff };
-            auto cmd = Command::Parse(line);
-            if (cmd.type != None) {
-                _commands.push_back(cmd);
-            } else {
-                std::cerr << "Failed to parse command '" << line << "'\n";
-            }
-        }
-
-        return true;
-    }
-
-    std::string Turtle::Trace() const {
-        std::stringstream str;
-        str << "Pos=" << location << ", Orientation=" << orientation
-            << std::endl;
-        for (const auto cmd : _commands)
-            str << cmd.type << ": " << cmd.distance << ", ";
-        str << std::endl;
-        for (const auto ls : _lineSegments)
-            str << ls.first << ": " << ls.second << ", ";
-
-        return str.str();
+    string Turtle::Trace() const {
+        return "Turtle";
     }
 }  // namespace Turtle1
 

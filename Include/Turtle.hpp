@@ -6,7 +6,6 @@
 #include <string>
 #include <utility>
 
-#include "Command.hpp"
 #include "Position.hpp"
 
 namespace Turtle1 {
@@ -17,8 +16,7 @@ class Turtle {
     bool penDown {};
 
  private:
-    std::list<Command> _commands {};
-    std::list<std::pair<Position, bool>> _lineSegments;
+    list<pair<Position, bool>> _lineSegments;
 
  public:
     Turtle() = default;
@@ -26,9 +24,8 @@ class Turtle {
     void Move(float distance);
     void Rotate(float angle);
     void Draw(SDL_Renderer* renderer) const;
-    bool ReadCommands(std::string fileName);
 
-    std::string Trace() const;
+    string Trace() const;
 
  protected:
     Position GetForward() const;

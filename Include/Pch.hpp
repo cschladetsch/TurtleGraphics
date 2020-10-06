@@ -11,6 +11,7 @@
 #include <SDL_render.h>
 #include <SDL.h>
 
+#include "Config.hpp"
 #include "Display.hpp"
 #include "Turtle.hpp"
 

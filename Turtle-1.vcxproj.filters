@@ -27,9 +27,6 @@
     <Text Include="Commands.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\Command.hpp">
-      <Filter>Include</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Display.hpp">
       <Filter>Include</Filter>
     </ClInclude>
@@ -71,6 +68,12 @@
     </ClInclude>
     <ClInclude Include="Include\Processor\Pch.hpp">
       <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\StdAliases.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Config.hpp">
+      <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

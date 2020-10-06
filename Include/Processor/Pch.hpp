@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <iterator>
 
+#include "StdAliases.hpp"
 #include "Processor/ProcessBase.hpp"
 #include "Processor/StringSplice.hpp"
 #include "Processor/Token.hpp"
