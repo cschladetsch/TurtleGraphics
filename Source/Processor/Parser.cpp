@@ -1,3 +1,5 @@
+// Copyright 2020 christian@schladetsch.com
+
 #include "Processor/Pch.hpp"
 #include "Processor/Parser.hpp"
 
@@ -24,8 +26,8 @@ namespace T1 { namespace Processor {
     }
 
     bool Parser::ParseStatements() {
-        while (ParseStatement())
-            ;
+        while (ParseStatement()) {
+        }
 
         return HasSucceeded();
     }
@@ -46,7 +48,7 @@ namespace T1 { namespace Processor {
     bool Parser::ParseRepeat() {
         if (!Peek(EToken::Number))
             return Fail("Number expected");
-        
+
         EnterNode(AstNode::New(EToken::Repeat));
         AddChild(NextToken());
 
@@ -58,16 +60,15 @@ namespace T1 { namespace Processor {
         return true;
     }
 
-    AstNodePtr Parser::GetRoot() const 
-    {
+    AstNodePtr Parser::GetRoot() const {
         if (_context.size() != 1) {
             Fail("Unbalanced parse tree");
             return 0;
         }
-        
+
         return _context.front();
     }
-    
+
     void Parser::EnterNode(AstNodePtr node) {
         _context.back()->AddChild(node);
         _context.push_back(node);
@@ -124,6 +125,10 @@ namespace T1 { namespace Processor {
         return false;
     }
 
+    bool Parser::AppendChild(EToken token) {
+        return AppendChild(Token{ token });
+    }
+
     bool Parser::AppendChild(Token token) {
         AddChild(token);
         ++_currentToken;
@@ -138,5 +143,6 @@ namespace T1 { namespace Processor {
         _context.back()->AddChild(node);
         return true;
     }
-} }
+}  // namespace Processor
+}  // namespace T1
 

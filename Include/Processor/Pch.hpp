@@ -1,4 +1,8 @@
+// Copyright 2020 christian@schladetsch.com
+
 #pragma once
+
+#include <assert.h>
 
 #include <string>
 #include <vector>
@@ -6,8 +10,6 @@
 #include <map>
 #include <algorithm>
 #include <iterator>
-
-#include <assert.h>
 
 #include "Processor/ProcessBase.hpp"
 #include "Processor/StringSplice.hpp"

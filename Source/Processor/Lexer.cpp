@@ -1,3 +1,5 @@
+// Copyright 2020 christian@schladetsch.com
+
 #include "Processor/Pch.hpp"
 #include "Processor/Lexer.hpp"
 
@@ -20,7 +22,7 @@ namespace T1 { namespace Processor {
             return false;
 
         auto const& line = _lines[splice.LineNumber];
-        return splice.Offset < line.size() 
+        return splice.Offset < line.size()
             && splice.Offset + splice.Length < line.size();
     }
 
@@ -58,14 +60,13 @@ namespace T1 { namespace Processor {
     bool Lexer::Run() {
         Reset();
 
-        while (GetNext())
-            ;
+        while (GetNext()) {
+        }
 
         return !_failed;
     }
 
-    bool Lexer::GetNext()
-    {
+    bool Lexer::GetNext() {
         if (AtEnd())
             return false;
 
@@ -87,7 +88,7 @@ namespace T1 { namespace Processor {
 
         if (std::isdigit(current))
             return AddToken(Gather(std::isdigit), EToken::Number);
-        
+
         if (std::isspace(current))
             return AddToken(Gather(std::isspace), EToken::WhiteSpace);
 
@@ -96,7 +97,7 @@ namespace T1 { namespace Processor {
         case '}': return AddToken(EToken::CloseBrace, 1);
         }
 
-        // TODO: error reporting
+        // TODO(cjs): error reporting
         _failed = current != 0;
         if (!_failed)
             _tokens.emplace_back(Token{ EToken::None });
@@ -105,7 +106,8 @@ namespace T1 { namespace Processor {
     }
 
     bool Lexer::AddToken(EToken type, size_t length) {
-        return AddToken(StringSplice(*this, _lineNumber, _offset, length), type);
+        return AddToken(
+            StringSplice(*this, _lineNumber, _offset, length), type);
     }
 
     bool Lexer::AddToken(StringSplice splice, EToken type) {
@@ -114,7 +116,7 @@ namespace T1 { namespace Processor {
         return true;
     }
 
-    StringSplice Lexer::Gather(std::function<bool (char)> predicate) {
+    StringSplice Lexer::Gather(std::function<bool(char)> predicate) {
         std::size_t end = _offset;
         while (!AtEnd(end) && predicate(GetCurrent(end)))
             ++end;
@@ -143,5 +145,6 @@ namespace T1 { namespace Processor {
     char Lexer::GetCurrent() const {
         return GetCurrent(_offset);
     }
-} }
+}  // namespace Processor
+}  // namespace T1
 

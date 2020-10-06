@@ -1,3 +1,5 @@
+// Copyright 2020 christian@schladetsch.com
+
 #include "Processor/Pch.hpp"
 #include "Processor/AstNode.hpp"
 
@@ -19,4 +21,5 @@ namespace T1 { namespace Processor {
     AstNodePtr AstNode::New(Token token) {
         return std::make_shared<AstNode>(token);
     }
-} }
+}  // namespace Processor
+}  // namespace T1

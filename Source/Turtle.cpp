@@ -1,7 +1,9 @@
+// Copyright 2020 christian@schladetsch.com
+
 #include "Pch.hpp"
-#include <fstream>
 #include "Turtle.hpp"
 
+#include <fstream>
 #include <iostream>
 
 namespace T1 {
@@ -15,9 +17,9 @@ namespace T1 {
 
         auto const len = 20;
         Position offsets[] = {
-            {-len,len},
-            {0,-len},
-            {len,len},
+            {-len, len},
+            {0, -len},
+            {len, len},
         };
 
         const auto p0 = location + offsets[0];
@@ -43,8 +45,7 @@ namespace T1 {
         }
     }
 
-    void Turtle::Move(float distance)
-    {
+    void Turtle::Move(float distance) {
         auto end = GetForward()*distance;
         _lineSegments.emplace_back(end, penDown);
     }
@@ -54,10 +55,11 @@ namespace T1 {
         while (orientation > 360)
             orientation -= 360;
     }
-    
+
     Position Turtle::GetForward() const {
-        const float x = cosf(orientation*(float)M_PI/180.0f);
-        const float y = sinf(orientation*(float)M_PI/180.0f);
+        const float d2f = static_cast<float>(M_PI/180.);
+        const float x = cosf(orientation*d2f);
+        const float y = sinf(orientation*d2f);
         return { x, y };
     }
 
@@ -82,7 +84,8 @@ namespace T1 {
 
     std::string Turtle::Trace() const {
         std::stringstream str;
-        str << "Pos=" << location << ", Orientation=" << orientation << std::endl;
+        str << "Pos=" << location << ", Orientation=" << orientation
+            << std::endl;
         for (const auto cmd : _commands)
             str << cmd.type << ": " << cmd.distance << ", ";
         str << std::endl;
@@ -91,21 +94,5 @@ namespace T1 {
 
         return str.str();
     }
-
-    //bool Turtle::ProcessCommands()
-    //{
-    //    for (auto cmd : _commands)
-    //    {
-    //        switch (cmd.type)
-    //        {
-    //        case Pen: penDown = true; break; // TODO
-    //        case ECommandType::Move: Move(cmd.distance); break;
-    //        case ECommandType::Rotate: Rotate(cmd.rotation); break;
-    //        case Quit: return true;
-    //        }
-    //    }
-
-    //    return true;
-    //}
-}
+}  // namespace T1
 
