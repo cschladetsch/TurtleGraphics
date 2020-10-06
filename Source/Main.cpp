@@ -19,15 +19,13 @@ using std::endl;
 int main2(int argc, char *argv[]) {
     Display display{ };
     if (!display.Bootstrap(1000, 1000)) {
-        cerr << "Failed to startup SDL.\n";
+        cerr << "Failed to startup SDL." << endl;
         return -1;
     }
 
     Turtle turtle;
     turtle.penDown = false;
     turtle.location = { 500, 500 };
-
-    cout << turtle.Trace() << endl;
 
     while (display.PreRender()) {
         turtle.Draw(display.renderer);

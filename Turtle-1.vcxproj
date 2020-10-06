@@ -167,6 +167,10 @@
     <ClInclude Include="Include\Turtle.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Display.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>

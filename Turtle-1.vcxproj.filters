@@ -113,5 +113,8 @@
     <ClCompile Include="Source\Processor\AstNode.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Display.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
