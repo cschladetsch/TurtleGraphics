@@ -12,8 +12,7 @@
 namespace T1 { namespace Processor {
 
     // produces a series of Tokens from a string
-    class Lexer : public ProcessBase
-    {
+    class Lexer : public ProcessBase {
         std::vector<Token> _tokens;
         std::vector<std::string> _lines;
         std::size_t _lineNumber = 0;
@@ -44,5 +43,5 @@ namespace T1 { namespace Processor {
         bool AddToken(EToken type, size_t length);
         bool GetNext();
     };
-}}
+} }
 

@@ -4,21 +4,17 @@
 
 #include <iostream>
 
-namespace T1
-{
-    void Turtle::Draw(SDL_Renderer* renderer) const
-    {
+namespace T1 {
+    void Turtle::Draw(SDL_Renderer* renderer) const {
         DrawTurtle(renderer);
         DrawLineSegments(renderer);
     }
 
-    void Turtle::DrawTurtle(SDL_Renderer* renderer) const
-    {
+    void Turtle::DrawTurtle(SDL_Renderer* renderer) const {
         SDL_SetRenderDrawColor(renderer, 20, 155, 80, SDL_ALPHA_OPAQUE);
 
         auto const len = 20;
-        Position offsets[] = 
-        {
+        Position offsets[] = {
             {-len,len},
             {0,-len},
             {len,len},
@@ -33,15 +29,12 @@ namespace T1
         SDL_RenderDrawLine(renderer, p2.x, p2.y, p0.x, p0.y);
     }
 
-    void Turtle::DrawLineSegments(SDL_Renderer *renderer) const
-    {
+    void Turtle::DrawLineSegments(SDL_Renderer *renderer) const {
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
         auto loc = location;
-        for (auto ls : _lineSegments)
-        {
+        for (auto ls : _lineSegments) {
             const auto next = loc + ls.first;
-            if (true)//ls.second)
-            {
+            if (true) {
                 SDL_RenderDrawLine(renderer
                     , loc.x, loc.y, next.x, next.y);
             }
@@ -56,37 +49,30 @@ namespace T1
         _lineSegments.emplace_back(end, penDown);
     }
 
-    void Turtle::Rotate(float angle)
-    {
+    void Turtle::Rotate(float angle) {
         orientation += angle;
         while (orientation > 360)
             orientation -= 360;
     }
     
-    Position Turtle::GetForward() const
-    {
+    Position Turtle::GetForward() const {
         const float x = cosf(orientation*(float)M_PI/180.0f);
         const float y = sinf(orientation*(float)M_PI/180.0f);
         return { x, y };
     }
 
-    bool Turtle::ReadCommands(const std::string fileName)
-    {
+    bool Turtle::ReadCommands(const std::string fileName) {
         auto file = std::fstream(fileName);
         if (!file)
             return false;
 
         char buff[2000];
-        while (file.getline(buff, 2000))
-        {
+        while (file.getline(buff, 2000)) {
             std::string line { buff };
             auto cmd = Command::Parse(line);
-            if (cmd.type != None)
-            {
+            if (cmd.type != None) {
                 _commands.push_back(cmd);
-            }
-            else
-            {
+            } else {
                 std::cerr << "Failed to parse command '" << line << "'\n";
             }
         }
@@ -94,8 +80,7 @@ namespace T1
         return true;
     }
 
-    std::string Turtle::Trace() const
-    {
+    std::string Turtle::Trace() const {
         std::stringstream str;
         str << "Pos=" << location << ", Orientation=" << orientation << std::endl;
         for (const auto cmd : _commands)

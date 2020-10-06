@@ -5,6 +5,8 @@
 #include <list>
 #include <map>
 #include <algorithm>
+#include <iterator>
+
 #include <assert.h>
 
 #include "Processor/ProcessBase.hpp"

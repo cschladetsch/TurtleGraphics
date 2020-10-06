@@ -17,7 +17,7 @@ namespace T1 { namespace Processor {
         std::vector<AstNodePtr> _children;
 
     public:
-        AstNode(Token token = None) : _token(token) { }
+        AstNode(Token token = EToken::None) : _token(token) { }
         AstNode(EToken type) : _token(type) { }
 
         EToken GetType() const { return _token.Type; }

@@ -4,8 +4,7 @@
 
 namespace T1 {
     namespace Processor {
-        enum EToken
-        {
+        enum class EToken {
             None,
             Start,
             PenDown,
@@ -32,13 +31,11 @@ namespace T1 {
             StringSplice Splice;
 
             Token(EToken type = EToken::None) : Type(type) { }
-            Token(EToken type, StringSplice splice) : Token(type)
-            {
+            Token(EToken type, StringSplice splice) : Token(type) {
                 Splice = splice;
             }
 
-            friend bool operator==(const Token& left, const Token& right)
-            {
+            friend bool operator==(const Token& left, const Token& right) {
                 // note: we only compare the token types
                 return left.Type == right.Type;
             }

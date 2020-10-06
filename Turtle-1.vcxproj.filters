@@ -63,13 +63,13 @@
     <ClInclude Include="Include\Processor\ProcessBase.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Processor\ProcessorPch.hpp">
-      <Filter>Include\Processor</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Pch.hpp">
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="Include\Processor\AstNode.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Pch.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
   </ItemGroup>

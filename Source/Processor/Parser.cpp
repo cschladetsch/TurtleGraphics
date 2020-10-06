@@ -1,52 +1,53 @@
-#include "Processor/ProcessorPch.hpp"
+#include "Processor/Pch.hpp"
 #include "Processor/Parser.hpp"
 
 namespace T1 { namespace Processor {
 
-    Parser::Parser(const Lexer& lexer)
-    {
-        _context.push_back(AstNode::New(Start));
-        for (const auto& token : lexer.GetTokens())
-        {
-            if (token.Type != WhiteSpace)
+    Parser::Parser(const Lexer& lexer) {
+        _context.push_back(AstNode::New(EToken::Start));
+        auto const& tokens = lexer.GetTokens();
+
+        copy_if(
+            begin(tokens), end(tokens), back_inserter(_tokens),
+            [](const auto &tok) { return tok.Type != EToken::WhiteSpace; });
+
+        _tokens.clear();
+
+        for (const auto& token : lexer.GetTokens()) {
+            if (token.Type != EToken::WhiteSpace)
                 _tokens.push_back(token);
         }
     }
 
-    bool Parser::Run()
-    {
+    bool Parser::Run() {
         return ParseStatements();
     }
 
-    bool Parser::ParseStatements()
-    {
+    bool Parser::ParseStatements() {
         while (ParseStatement())
             ;
 
         return HasSucceeded();
     }
 
-    bool Parser::ParseStatement()
-    {
-        switch (CurrentTokenType())
-        {
-        case PenDown: return AppendChild(PenDown);
-        case PenUp: return AppendChild(PenUp);
-        case Repeat: return ParseRepeat();
-        case Rotate: return ParseRotate();
-        case Move: return ParseMove();
-        case Quit: return AppendChild(Quit);
+    bool Parser::ParseStatement() {
+        switch (CurrentTokenType()) {
+        case EToken::PenDown: return AppendChild(EToken::PenDown);
+        case EToken::PenUp: return AppendChild(EToken::PenUp);
+        case EToken::Repeat: return ParseRepeat();
+        case EToken::Rotate: return ParseRotate();
+        case EToken::Move: return ParseMove();
+        case EToken::Quit: return AppendChild(EToken::Quit);
         }
 
         return false;
     }
 
-    bool Parser::ParseRepeat()
-    {
-        if (!Peek(Number))
+    bool Parser::ParseRepeat() {
+        if (!Peek(EToken::Number))
             return Fail("Number expected");
         
-        EnterNode(AstNode::New(Repeat));
+        EnterNode(AstNode::New(EToken::Repeat));
         AddChild(NextToken());
 
         if (!ParseStatementBlock())
@@ -59,8 +60,7 @@ namespace T1 { namespace Processor {
 
     AstNodePtr Parser::GetRoot() const 
     {
-        if (_context.size() != 1)
-        {
+        if (_context.size() != 1) {
             Fail("Unbalanced parse tree");
             return 0;
         }
@@ -68,35 +68,31 @@ namespace T1 { namespace Processor {
         return _context.front();
     }
     
-    void Parser::EnterNode(AstNodePtr node)
-    {
+    void Parser::EnterNode(AstNodePtr node) {
         _context.back()->AddChild(node);
         _context.push_back(node);
     }
 
-    void Parser::LeaveNode()
-    {
+    void Parser::LeaveNode() {
         _context.pop_back();
     }
 
-    bool Parser::ParseStatementBlock()
-    {
+    bool Parser::ParseStatementBlock() {
         NextToken();
 
-        if (!Expect(OpenBrace))
+        if (!Expect(EToken::OpenBrace))
             return false;
 
         if (!ParseStatements())
             return false;
 
-        if (!Expect(CloseBrace))
+        if (!Expect(EToken::CloseBrace))
             return false;
 
         return true;
     }
 
-    bool Parser::Expect(EToken type)
-    {
+    bool Parser::Expect(EToken type) {
         if (!CurrentTokenType(type))
             return Fail("Unexpected different token type");
 
@@ -105,19 +101,16 @@ namespace T1 { namespace Processor {
         return true;
     }
 
-    bool Parser::ParseRotate()
-    {
-        return AddParameterisedCommand(Rotate);
+    bool Parser::ParseRotate() {
+        return AddParameterisedCommand(EToken::Rotate);
     }
 
-    bool Parser::ParseMove()
-    {
-        return AddParameterisedCommand(Move);
+    bool Parser::ParseMove() {
+        return AddParameterisedCommand(EToken::Move);
     }
 
-    bool Parser::AddParameterisedCommand(EToken type)
-    {
-        if (!Peek(Number))
+    bool Parser::AddParameterisedCommand(EToken type) {
+        if (!Peek(EToken::Number))
             return Fail("Number expected");
 
         auto node = AstNode::New(type);
@@ -127,25 +120,21 @@ namespace T1 { namespace Processor {
         return true;
     }
 
-    bool Parser::ParseExpression()
-    {
+    bool Parser::ParseExpression() {
         return false;
     }
 
-    bool Parser::AppendChild(Token token)
-    {
+    bool Parser::AppendChild(Token token) {
         AddChild(token);
         ++_currentToken;
         return true;
     }
 
-    bool Parser::AddChild(Token token)
-    {
+    bool Parser::AddChild(Token token) {
         return AddChild(AstNode::New(token));
     }
 
-    bool Parser::AddChild(AstNodePtr node)
-    {
+    bool Parser::AddChild(AstNodePtr node) {
         _context.back()->AddChild(node);
         return true;
     }

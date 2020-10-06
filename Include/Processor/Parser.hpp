@@ -6,8 +6,7 @@
 
 namespace T1 { namespace Processor {
 
-    class Parser : public ProcessBase
-    {
+    class Parser : public ProcessBase {
     private:
         std::vector<Token> _tokens;
         size_t _currentToken = 0;
@@ -15,9 +14,7 @@ namespace T1 { namespace Processor {
 
     public:
         Parser(const Lexer& lexer);
-
         bool Run() override;
-
         AstNodePtr GetRoot() const;
 
     private:

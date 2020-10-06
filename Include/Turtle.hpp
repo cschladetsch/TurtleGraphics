@@ -6,10 +6,8 @@
 #include "Command.hpp"
 #include "Position.hpp"
 
-namespace T1
-{
-    class Turtle
-    {
+namespace T1 {
+    class Turtle {
     public:
         Position location {};
         float orientation {};
@@ -28,7 +26,6 @@ namespace T1
         bool ReadCommands(std::string fileName);
 
         std::string Trace() const;
-        bool ProcessCommands();
 
     protected:
         Position GetForward() const;

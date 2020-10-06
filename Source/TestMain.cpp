@@ -9,23 +9,22 @@
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
 
+using T1::Processor::EToken;
+using T1::Processor::Token;
+using T1::Processor::Lexer;
+using T1::Processor::Parser;
 
-using namespace T1::Processor;
-
-TEST_CASE("Test String", "[processor]")
-{
+TEST_CASE("Test String", "[processor]") {
     const char* text = "hello\nworld";
     std::string hello(text, text + 6);
     REQUIRE(hello[5] == '\n');
 }
 
-TEST_CASE("Test Lexer", "[processor]")
-{
+TEST_CASE("Test Lexer", "[processor]") {
     const char* i0 = "penDown  move\t50 repeat 123 quit";
     Lexer lexer(i0);
 
-    std::array expected
-    {
+    std::array expected {
         EToken::PenDown,
         EToken::WhiteSpace,
         EToken::Move,
@@ -60,16 +59,16 @@ TEST_CASE("Test Parser", "[processor]")
 
     auto const& children = root->GetChildren();
     REQUIRE(children.size() == 3);
-    REQUIRE(children[0]->GetType() == PenDown);
-    REQUIRE(children[1]->GetType() == Repeat);
-    REQUIRE(children[2]->GetType() == Quit);
+    REQUIRE(children[0]->GetType() == EToken::PenDown);
+    REQUIRE(children[1]->GetType() == EToken::Repeat);
+    REQUIRE(children[2]->GetType() == EToken::Quit);
 
     auto repeat = children[1];
     auto repeatChildren = repeat->GetChildren();
     REQUIRE(repeatChildren.size() == 3);
-    REQUIRE(repeatChildren[0]->GetType() == Number);
-    REQUIRE(repeatChildren[1]->GetType() == Rotate);
-    REQUIRE(repeatChildren[2]->GetType() == Move);
+    REQUIRE(repeatChildren[0]->GetType() == EToken::Number);
+    REQUIRE(repeatChildren[1]->GetType() == EToken::Rotate);
+    REQUIRE(repeatChildren[2]->GetType() == EToken::Move);
 
     // rotate command
     REQUIRE(repeatChildren[1]->GetChildren().size() == 1);

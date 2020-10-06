@@ -4,7 +4,6 @@
 
 namespace T1 { namespace Processor {
     // Executes a series of commands
-    class Executor
-    {
+    class Executor {
     };
 } }

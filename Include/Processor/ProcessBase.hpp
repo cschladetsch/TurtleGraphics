@@ -3,8 +3,7 @@
 #include <string>
 
 namespace T1 { namespace Processor {
-    struct ProcessBase
-    {
+    struct ProcessBase {
     protected:
         mutable bool _failed;
         mutable std::string _error;
@@ -12,8 +11,7 @@ namespace T1 { namespace Processor {
     public:
         virtual bool Run() = 0;
 
-        void Reset()
-        {
+        void Reset() {
             _failed = false;
             _error.clear();
         }
@@ -22,8 +20,7 @@ namespace T1 { namespace Processor {
         bool HasSucceeded() const { return !_failed; }
 
     protected:
-        bool Fail(const char* errorText) const
-        {
+        bool Fail(const char* errorText) const {
             _failed = true;
             _error = errorText;
             return false;
