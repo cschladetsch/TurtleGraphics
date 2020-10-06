@@ -9,7 +9,7 @@
 
 #include "Processor/Token.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 
 class AstNode;
 
@@ -34,5 +34,5 @@ class AstNode {
     static AstNodePtr New(EToken token) { return New(Token(token)); }
 };
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1
 

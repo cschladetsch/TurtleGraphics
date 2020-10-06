@@ -4,9 +4,9 @@
 
 #include "Processor/Translator.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 // Executes a series of commands
 class Executor {
 };
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1

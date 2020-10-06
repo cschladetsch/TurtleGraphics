@@ -4,7 +4,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace T1 {
+namespace Turtle1 {
     enum ECommandType {
         None = 0,
         Pen,

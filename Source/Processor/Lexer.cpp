@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/Lexer.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 
     std::string StringSplice::GetText() const {
         assert(Source != nullptr);
@@ -146,5 +146,5 @@ namespace T1 { namespace Processor {
         return GetCurrent(_offset);
     }
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1
 

@@ -11,7 +11,7 @@
 #include "Processor/Token.hpp"
 #include "Processor/StringSplice.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 
 // produces a series of Tokens from a string
 class Lexer : public ProcessBase {
@@ -46,5 +46,5 @@ class Lexer : public ProcessBase {
     bool GetNext();
 };
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1
 

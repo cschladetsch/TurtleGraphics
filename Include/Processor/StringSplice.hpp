@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 
 class Lexer;
 
@@ -16,8 +16,8 @@ struct StringSplice {
 
     StringSplice() { }
 
-    StringSplice(const Lexer& lex, std::size_t ln, std::size_t ofs,
-        std::size_t len)
+    StringSplice(const Lexer& lex, std::size_t ln,
+        std::size_t ofs, std::size_t len)
         : Source(&lex) {
         LineNumber = ln;
         Offset = ofs;
@@ -35,4 +35,4 @@ struct StringSplice {
     std::string GetText() const;
 };
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1

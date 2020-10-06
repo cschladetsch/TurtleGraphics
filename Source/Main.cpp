@@ -9,8 +9,8 @@
 #include "Display.hpp"
 #include "Turtle.hpp"
 
-using T1::Display;
-using T1::Turtle;
+using Turtle1::Display;
+using Turtle1::Turtle;
 
 int main2(int argc, char *argv[]) {
     Display display{ };

@@ -4,8 +4,8 @@
 
 #include "Processor/Parser.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 class Translator {
 };
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1

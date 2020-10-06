@@ -9,7 +9,7 @@
 #include "Command.hpp"
 #include "Position.hpp"
 
-namespace T1 {
+namespace Turtle1 {
 class Turtle {
  public:
     Position location {};
@@ -35,5 +35,5 @@ class Turtle {
     void DrawTurtle(SDL_Renderer* renderer) const;
     void DrawLineSegments(SDL_Renderer *renderer) const;
 };
-}  // namespace T1
+}  // namespace Turtle1
 

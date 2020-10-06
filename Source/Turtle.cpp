@@ -6,7 +6,7 @@
 #include <fstream>
 #include <iostream>
 
-namespace T1 {
+namespace Turtle1 {
     void Turtle::Draw(SDL_Renderer* renderer) const {
         DrawTurtle(renderer);
         DrawLineSegments(renderer);
@@ -94,5 +94,5 @@ namespace T1 {
 
         return str.str();
     }
-}  // namespace T1
+}  // namespace Turtle1
 

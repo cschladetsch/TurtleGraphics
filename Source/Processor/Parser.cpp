@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/Parser.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 
     Parser::Parser(const Lexer& lexer) {
         _context.push_back(AstNode::New(EToken::Start));
@@ -144,5 +144,5 @@ namespace T1 { namespace Processor {
         return true;
     }
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1
 

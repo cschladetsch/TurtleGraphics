@@ -4,7 +4,7 @@
 
 #include "Processor/StringSplice.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
 enum class EToken {
     None,
     Start,
@@ -41,5 +41,5 @@ struct Token {
     }
 };
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1
 

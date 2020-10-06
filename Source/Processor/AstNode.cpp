@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/AstNode.hpp"
 
-namespace T1 { namespace Processor {
+namespace Turtle1 { namespace Processor {
     void AstNode::AddChild(AstNodePtr node) {
         assert(node);
 
@@ -22,4 +22,4 @@ namespace T1 { namespace Processor {
         return std::make_shared<AstNode>(token);
     }
 }  // namespace Processor
-}  // namespace T1
+}  // namespace Turtle1

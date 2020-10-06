@@ -3,7 +3,7 @@
 #pragma once
 #include <SDL.h>
 
-namespace T1 {
+namespace Turtle1 {
 
 class Display {
  public:
@@ -52,4 +52,4 @@ class Display {
         SDL_RenderPresent(renderer);
     }
 };
-}  // namespace T1
+}  // namespace Turtle1

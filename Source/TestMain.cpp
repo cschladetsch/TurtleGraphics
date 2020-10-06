@@ -11,10 +11,10 @@
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
 
-using T1::Processor::EToken;
-using T1::Processor::Token;
-using T1::Processor::Lexer;
-using T1::Processor::Parser;
+using Turtle1::Processor::EToken;
+using Turtle1::Processor::Token;
+using Turtle1::Processor::Lexer;
+using Turtle1::Processor::Parser;
 
 TEST_CASE("Test String", "[processor]") {
     const char* text = "hello\nworld";
