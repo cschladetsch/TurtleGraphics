@@ -46,5 +46,7 @@ namespace T1 { namespace Processor {
         bool AddChild(AstNodePtr node);
         void EnterNode(AstNodePtr node);
         void LeaveNode();
+
+        bool AddParameterisedCommand(EToken type);
     };
 } }

@@ -81,51 +81,49 @@ namespace T1 { namespace Processor {
 
     bool Parser::ParseStatementBlock()
     {
+        NextToken();
+
         if (!Expect(OpenBrace))
             return false;
 
         if (!ParseStatements())
             return false;
 
-        if (!CurrentTokenType(CloseBrace))
+        if (!Expect(CloseBrace))
             return false;
-
-        ++_currentToken;
 
         return true;
     }
 
     bool Parser::Expect(EToken type)
     {
-        if (!Peek(type))
+        if (!CurrentTokenType(type))
             return Fail("Unexpected different token type");
 
-        _currentToken += 2;
+        ++_currentToken;
 
         return true;
     }
 
     bool Parser::ParseRotate()
     {
-        if (!Peek(Number))
-            return Fail("Angle expected");
-
-        auto rotate = AstNode::New(Rotate);
-        rotate->AddChild(AstNode::New(NextToken()));
-        ++_currentToken;
-        AddChild(rotate);
-        return true;
+        return AddParameterisedCommand(Rotate);
     }
 
     bool Parser::ParseMove()
     {
-        if (!Peek(Number))
-            return Fail("Distance expected");
+        return AddParameterisedCommand(Move);
+    }
 
-        auto move = AstNode::New(Move);
-        move->AddChild(AstNode::New(NextToken()));
+    bool Parser::AddParameterisedCommand(EToken type)
+    {
+        if (!Peek(Number))
+            return Fail("Number expected");
+
+        auto node = AstNode::New(type);
+        node->AddChild(AstNode::New(NextToken()));
         ++_currentToken;
-        AddChild(move);
+        AddChild(node);
         return true;
     }
 
@@ -152,3 +150,4 @@ namespace T1 { namespace Processor {
         return true;
     }
 } }
+

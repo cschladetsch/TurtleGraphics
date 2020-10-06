@@ -9,6 +9,7 @@
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
 
+
 using namespace T1::Processor;
 
 TEST_CASE("Test String", "[processor]")
@@ -76,7 +77,8 @@ TEST_CASE("Test Parser", "[processor]")
     // move command
     REQUIRE(repeatChildren[2]->GetChildren().size() == 1);
 
-    REQUIRE(repeatChildren[1]->GetChildren()[0]->GetType() == Number);
-    REQUIRE(repeatChildren[2]->GetChildren()[0]->GetType() == Number);
-
+    auto rotateValue = repeatChildren[1]->GetChildren()[0];
+    auto moveValue = repeatChildren[2]->GetChildren()[0];
+    REQUIRE(std::stoi(rotateValue->GetText()) == 90);
+    REQUIRE(std::stoi(moveValue->GetText()) == 100);
 }
