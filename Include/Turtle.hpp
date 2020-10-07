@@ -6,7 +6,9 @@
 #include <string>
 #include <utility>
 
+#include <SDL.h>
 #include "Position.hpp"
+#include "StdAliases.hpp"
 
 namespace Turtle1 {
 class Turtle {

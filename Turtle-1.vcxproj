@@ -154,6 +154,7 @@
     <ClInclude Include="Include\Pch.hpp" />
     <ClInclude Include="Include\Position.hpp" />
     <ClInclude Include="Include\Processor\AstNode.hpp" />
+    <ClInclude Include="Include\Processor\Command.hpp" />
     <ClInclude Include="Include\Processor\Executor.hpp" />
     <ClInclude Include="Include\Processor\Lexer.hpp" />
     <ClInclude Include="Include\Processor\Parser.hpp" />
@@ -163,10 +164,16 @@
     <ClInclude Include="Include\Processor\Template.hpp" />
     <ClInclude Include="Include\Processor\Token.hpp" />
     <ClInclude Include="Include\Processor\Translator.hpp" />
+    <ClInclude Include="Include\Process\EToken.hpp" />
     <ClInclude Include="Include\StdAliases.hpp" />
     <ClInclude Include="Include\Turtle.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Include\Processor\CommandSequence.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Processor/Pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
     <ClCompile Include="Source\Display.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
@@ -228,6 +235,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

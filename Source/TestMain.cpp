@@ -4,17 +4,26 @@
 
 #include "catch.hpp"
 
-#include "Pch.hpp"
 #include <algorithm>
 #include <array>
 
+#include "Turtle.hpp"
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
+#include "Processor/Translator.hpp"
+#include "Processor/Executor.hpp"
+
+using Turtle1::Turtle;
 
 using Turtle1::Processor::EToken;
 using Turtle1::Processor::Token;
 using Turtle1::Processor::Lexer;
 using Turtle1::Processor::Parser;
+using Turtle1::Processor::Translator;
+using Turtle1::Processor::Executor;
+using Turtle1::Processor::Command;
+using Turtle1::Processor::ECommandType;
+using Turtle1::Processor::CommandSequence;
 
 TEST_CASE("Test String", "[processor]") {
     const char* text = "hello\nworld";
@@ -82,3 +91,21 @@ TEST_CASE("Test Parser", "[processor]") {
     REQUIRE(std::stoi(rotateValue->GetText()) == 90);
     REQUIRE(std::stoi(moveValue->GetText()) == 100);
 }
+
+TEST_CASE("Test Executor", "[exec]") {
+    Turtle turtle;
+    auto commands = std::vector { 
+        Command(50),
+        Command(ECommandType::Rotate),
+        Command(100),
+        Command(ECommandType::Move),
+    };
+    auto sequence = std::make_shared<CommandSequence>(commands);
+
+    Executor executor{ turtle, sequence };
+    REQUIRE(executor.Run());
+
+    REQUIRE(true);
+}
+
+

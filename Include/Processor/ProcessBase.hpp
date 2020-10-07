@@ -22,7 +22,7 @@ struct ProcessBase {
     bool HasSucceeded() const { return !_failed; }
 
  protected:
-    bool Fail(const char* errorText) const {
+    bool Fail(const char* errorText) const noexcept {
         _failed = true;
         _error = errorText;
         return false;

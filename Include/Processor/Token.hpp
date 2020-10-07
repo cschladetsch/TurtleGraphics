@@ -2,30 +2,10 @@
 
 #pragma once
 
+#include "Processor/EToken.hpp"
 #include "Processor/StringSplice.hpp"
 
 namespace Turtle1 { namespace Processor {
-enum class EToken {
-    None,
-    Start,
-    PenDown,
-    PenUp,
-    True,
-    False,
-    Move,
-    Rotate,
-    WhiteSpace,
-    Number,
-    Identifier,
-    Quit,
-    Color,
-    Repeat,
-    If,
-    Else,
-    OpenBrace,
-    CloseBrace,
-};
-
 struct Token {
     EToken Type;
     StringSplice Splice;

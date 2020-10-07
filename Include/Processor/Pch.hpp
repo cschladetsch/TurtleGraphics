@@ -10,6 +10,7 @@
 #include <map>
 #include <algorithm>
 #include <iterator>
+#include <variant>
 
 #include "StdAliases.hpp"
 #include "Processor/ProcessBase.hpp"

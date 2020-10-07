@@ -3,6 +3,7 @@
 #pragma once
 
 #include "Processor/Parser.hpp"
+#include "Processor/Command.hpp"
 
 namespace Turtle1 { namespace Processor {
 class Translator {

@@ -3,7 +3,7 @@ A Turtle graphics system.
 
 * Base tech: C++, STL and SDL.
 * Implementation of turtle graphics, with an interpreter. 
-* Trying to show best practises.
+* Trying to show best practices.
 
 See [YouTube Playlist](https://youtube.com) for realtime commentary on development.
 
@@ -24,4 +24,7 @@ Add Parser [video](https://youtube.com).
 
 ## Fifth session
 TODO: Add Translator and Executor [video](https://youtube.com).
+
+## Todo
+Maybe have multiple Turtles?
 

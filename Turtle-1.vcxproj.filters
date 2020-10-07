@@ -75,6 +75,12 @@
     <ClInclude Include="Include\Config.hpp">
       <Filter>Include</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Process\EToken.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Command.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -116,5 +122,11 @@
     <ClCompile Include="Source\Display.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Include\Processor\CommandSequence.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Readme.md" />
   </ItemGroup>
 </Project>
