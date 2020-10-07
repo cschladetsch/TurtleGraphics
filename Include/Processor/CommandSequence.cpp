@@ -1,7 +1,7 @@
 // Copyright 2020 christian@schladetsch.com
 
 #include "Processor/Pch.hpp"
-#include "Processor/Command.hpp"
+#include "Processor/CommandSequence.hpp"
 
 namespace Turtle1 { namespace Processor {
 void CommandSequence::Enter() {

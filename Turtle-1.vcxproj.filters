@@ -81,6 +81,12 @@
     <ClInclude Include="Include\Processor\Command.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Processor\CommandSequence.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\ECommandType.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">

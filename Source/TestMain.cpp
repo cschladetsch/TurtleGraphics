@@ -11,6 +11,7 @@
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
 #include "Processor/Translator.hpp"
+#include "Processor/CommandSequence.hpp"
 #include "Processor/Executor.hpp"
 
 using Turtle1::Turtle;

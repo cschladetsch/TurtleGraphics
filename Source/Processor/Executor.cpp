@@ -2,6 +2,7 @@
 
 #include "Processor/Pch.hpp"
 #include "Processor/Executor.hpp"
+#include "Processor/CommandSequence.hpp"
 
 namespace Turtle1 { namespace Processor {
     
