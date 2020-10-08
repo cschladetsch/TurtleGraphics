@@ -21,6 +21,11 @@ bool Translator::Run() {
 }
 
 CommandSequencePtr Translator::GetCommands() const {
+    if (_commands.size() != 1) {
+        Fail("Internal Error: Unbalanced translation");
+        return nullptr;
+    }
+
     return _commands.back();
 }
 

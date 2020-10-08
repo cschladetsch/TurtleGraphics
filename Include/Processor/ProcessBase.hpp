@@ -7,7 +7,7 @@
 namespace Turtle1 { namespace Processor {
 struct ProcessBase {
  protected:
-    mutable bool _failed;
+    mutable bool _failed = false;
     mutable std::string _error;
 
  public:
