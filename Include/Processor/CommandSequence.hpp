@@ -11,6 +11,7 @@ class CommandSequence {
     size_t _offset = 0;
 
 public:
+    CommandSequence() { }
     CommandSequence(vector<Command> commands) {
         _commands = commands;
     }
@@ -20,6 +21,13 @@ public:
 
     bool AtEnd() const { return _offset == _commands.size(); }
     Command Next();
+
+private:
+    friend class Translator;
+
+    void Append(Command cmd) {
+        _commands.push_back(cmd);
+    }
 };
 }  // namespace Processor
 }  // namespace Turtle1

@@ -6,6 +6,8 @@ namespace Turtle1 { namespace Processor {
 enum class ECommandType {
     None,
     Value,
+    PenDown,
+    PenUp,
     Move,
     Rotate,
     Repeat,

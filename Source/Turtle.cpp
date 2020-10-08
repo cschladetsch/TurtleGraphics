@@ -47,11 +47,13 @@ void Turtle::DrawLineSegments(SDL_Renderer *renderer) const {
 }
 
 void Turtle::Move(float distance) {
+    std::cout << "Move " << distance << std::endl;
     auto end = GetForward()*distance;
     _lineSegments.emplace_back(end, penDown);
 }
 
 void Turtle::Rotate(float angle) {
+    std::cout << "Rotate " << angle << std::endl;
     orientation += angle;
     while (orientation > 360)
         orientation -= 360;

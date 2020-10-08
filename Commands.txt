@@ -4,13 +4,7 @@ repeat 4
 {
     rotate 90
     move 100
-
-    repeat 5
-    {
-        penUp
-        rotate 45
-        move 50
-    }
 }
 
 quit
+

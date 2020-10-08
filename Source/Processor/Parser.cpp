@@ -9,12 +9,6 @@ namespace Turtle1 { namespace Processor {
         _context.push_back(AstNode::New(EToken::Start));
         auto const& tokens = lexer.GetTokens();
 
-        copy_if(
-            begin(tokens), end(tokens), back_inserter(_tokens),
-            [](const auto &tok) { return tok.Type != EToken::WhiteSpace; });
-
-        _tokens.clear();
-
         for (const auto& token : lexer.GetTokens()) {
             if (token.Type != EToken::WhiteSpace)
                 _tokens.push_back(token);

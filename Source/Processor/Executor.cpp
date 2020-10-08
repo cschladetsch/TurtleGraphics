@@ -38,6 +38,12 @@ bool Executor::Execute(CommandSequence& sequence) {
 
 bool Executor::Execute(Command command) {
     switch (command.Type) {
+    case ECommandType::PenUp:
+        _turtle->penDown = false;
+        return true;
+    case ECommandType::PenDown:
+        _turtle->penDown = true;
+        return true;
     case ECommandType::Value:
         _data.push_back(command);
         return true;
@@ -79,7 +85,23 @@ bool Executor::PopFloat(float &f) {
 }
 
 bool Executor::DoRepeat() {
-    return Fail("Not implemented");
+    auto numTimes = DataPop<int>();
+    if (!numTimes.has_value()) {
+        return Fail("Number of times to repeat expected");
+    }
+
+    auto commandsOpt = DataPop<CommandSequencePtr>();
+    if (!commandsOpt.has_value()) {
+        return Fail("Commands to repeat expected");
+    }
+
+    auto commands = *commandsOpt;
+    for (int n = 0; n < *numTimes; ++n) {
+        Run(commands);
+        commands->Leave();
+    }
+
+    return true;
 }
 
 }  // namespace Processor

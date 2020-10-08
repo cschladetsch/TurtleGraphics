@@ -29,6 +29,10 @@ struct Command {
     explicit Command(int num) : Command(ECommandType::Value) {
         Value = num;
     }
+
+    explicit Command(CommandSequencePtr commands) : Command(ECommandType::Value) {
+        Value = commands;
+    }
 };
 
 

@@ -12,15 +12,15 @@
 
 namespace Turtle1 {
 class Turtle {
- public:
-    Position location {};
-    float orientation {};
-    bool penDown {};
+public:
+    Position location = { 500, 500 };
+    float orientation = 0;
+    bool penDown = false;
 
- private:
+private:
     list<pair<Position, bool>> _lineSegments;
 
- public:
+public:
     Turtle() = default;
 
     void Move(float distance);
@@ -29,7 +29,7 @@ class Turtle {
 
     string Trace() const;
 
- protected:
+protected:
     Position GetForward() const;
     void DrawTurtle(SDL_Renderer* renderer) const;
     void DrawLineSegments(SDL_Renderer *renderer) const;

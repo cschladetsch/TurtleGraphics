@@ -109,4 +109,18 @@ TEST_CASE("Test Executor", "[exec]") {
     REQUIRE(true);
 }
 
+TEST_CASE("Test1", "[exec]") {
+    const char* i0 = "penDown repeat 4 { rotate 80 move 120 } quit";
+    Lexer lexer(i0);
+    REQUIRE(lexer.Run());
 
+    Parser parser(lexer);
+    REQUIRE(parser.Run());
+
+    Translator translator(parser.GetRoot());
+    REQUIRE(translator.Run());
+
+    Turtle turtle;
+    Executor exec(turtle, translator.GetCommands());
+    REQUIRE(exec.Run());
+}
