@@ -1,9 +1,10 @@
 # Turtle Graphics
 A Turtle graphics system.
 
-* Base tech: C++, STL and SDL.
-* Implementation of turtle graphics, with an interpreter. 
-* Trying to show best practices.
+* [Modern C++](ModernCpp), and [SDL](Sdl).
+* Implementation of [turtle graphics](TurtleGraphcis), with an [interpreter](Interpreter)
+* Trying to show [best practices](CppBestPractices)
+* Passes [Google C++ lint](CppLint) (with a couple [exceptions](GoogleLintExceptions))
 
 See [YouTube Playlist](https://youtube.com) for realtime commentary on development.
 
