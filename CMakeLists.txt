@@ -21,6 +21,22 @@ include_directories(Include)
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "Source/*.cpp")
 
 add_executable(${proj_name} ${sources})
-set(Win64_libs winmm.lib version.lib Imm32.lib Setupapi.lib kernel32.lib user32.lib gdi32.lib )
+set(Win64_libs
+    winmm.lib
+    version.lib
+    Imm32.lib
+    Setupapi.lib
+    kernel32.lib
+    user32.lib
+    gdi32.lib
+    gdi32.lib
+    winspool.lib
+    shell32.lib
+    ole32.lib
+    oleaut32.lib
+    uuid.lib
+    comdlg32.lib
+    advapi32.lib
+)
 target_link_libraries(${proj_name} PUBLIC Boost::filesystem ${Win64_libs} SDL2)
 

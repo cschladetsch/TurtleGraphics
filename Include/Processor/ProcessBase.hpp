@@ -10,7 +10,7 @@ struct ProcessBase {
     mutable bool _failed = false;
     mutable std::string _error;
 
- public:
+public:
     virtual bool Run() = 0;
 
     void Reset() {
@@ -21,7 +21,7 @@ struct ProcessBase {
     bool HasFailed() const { return _failed; }
     bool HasSucceeded() const { return !_failed; }
 
- protected:
+protected:
     bool Fail(const char* errorText) const noexcept {
         _failed = true;
         _error = errorText;
