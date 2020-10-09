@@ -1,4 +1,5 @@
 // Copyright 2020 christian@schladetsch.com
+#if 0
 
 #include "Pch.hpp"
 #include <iostream>
@@ -34,3 +35,5 @@ int main2(int argc, char *argv[]) {
 
     return 0;
 }
+
+#endif
