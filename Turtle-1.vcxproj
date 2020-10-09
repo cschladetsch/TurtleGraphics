@@ -171,28 +171,12 @@
     <ClInclude Include="Include\Turtle.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Include\Processor\CommandSequence.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Processor/Pch.hpp</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="Source\Display.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Source\Main.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
-    </ClCompile>
-    <ClCompile Include="Source\Pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
-    </ClCompile>
     <ClCompile Include="Source\Processor\AstNode.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Processor/Pch.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
+    <ClCompile Include="Source\Processor\CommandSequence.cpp" />
     <ClCompile Include="Source\Processor\Executor.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Processor/Pch.hpp</PrecompiledHeaderFile>
@@ -228,15 +212,10 @@
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Processor/Pch.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">catch.hpp</PrecompiledHeaderFile>
-      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Test.pch</PrecompiledHeaderOutputFile>
-    </ClCompile>
-    <ClCompile Include="Source\Turtle.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
-      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
-    </ClCompile>
+    <ClCompile Include="Source\Tests\TestMain.cpp" />
+    <ClCompile Include="Source\Turtle\Display.cpp" />
+    <ClCompile Include="Source\Turtle\Pch.cpp" />
+    <ClCompile Include="Source\Turtle\Turtle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />

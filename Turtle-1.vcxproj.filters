@@ -22,6 +22,9 @@
     <Filter Include="Tests">
       <UniqueIdentifier>{84f6fa2c-3702-450d-bfe4-6eadcbb74183}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Turtle">
+      <UniqueIdentifier>{93893a6b-94f8-41e0-a8a4-7223a18dc86e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Commands.txt" />
@@ -89,12 +92,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Main.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Turtle.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Processor\Lexer.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
@@ -110,25 +107,28 @@
     <ClCompile Include="Source\Processor\Translator.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\TestMain.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Processor\ProcessBase.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
     <ClCompile Include="Source\Processor\ProcessorPch.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Pch.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Processor\AstNode.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Display.cpp">
-      <Filter>Source</Filter>
+    <ClCompile Include="Source\Turtle\Display.cpp">
+      <Filter>Source\Turtle</Filter>
     </ClCompile>
-    <ClCompile Include="Include\Processor\CommandSequence.cpp">
+    <ClCompile Include="Source\Turtle\Pch.cpp">
+      <Filter>Source\Turtle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Turtle\Turtle.cpp">
+      <Filter>Source\Turtle</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tests\TestMain.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\CommandSequence.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
   </ItemGroup>
