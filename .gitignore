@@ -1,6 +1,7 @@
 /Debug
 /x64
 /.vs
+/.idea
 
 *.user
 
@@ -10,4 +11,5 @@
 
 /SDL2d.dll
 
-
+/build*
+/cmake-build*
