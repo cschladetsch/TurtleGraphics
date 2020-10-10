@@ -131,6 +131,9 @@
     <ClCompile Include="Source\Processor\CommandSequence.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />

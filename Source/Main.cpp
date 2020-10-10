@@ -1,10 +1,8 @@
 // Copyright 2020 christian@schladetsch.com
-#if 0
+#ifndef TURTLE_UNIT_TESTS
 
 #include "Pch.hpp"
 #include <iostream>
-
-#define SDL_MAIN_HANDLED
 
 #include "SDL.h"
 #include "Display.hpp"
@@ -12,12 +10,13 @@
 
 using Turtle1::Display;
 using Turtle1::Turtle;
+asdasd
 
 using std::cout;
 using std::cerr;
 using std::endl;
 
-int main2(int argc, char *argv[]) {
+int main(int argc, char *argv[]) {
     Display display{ };
     if (!display.Bootstrap(1000, 1000)) {
         cerr << "Failed to startup SDL." << endl;
@@ -36,4 +35,4 @@ int main2(int argc, char *argv[]) {
     return 0;
 }
 
-#endif
+#endif // !TURTLE_UNIT_TESTS

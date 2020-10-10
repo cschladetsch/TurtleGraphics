@@ -1,5 +1,4 @@
 // Copyright 2020 christian@schladetsch.com
-#ifdef TURTLE_UNIT_TESTS
 
 #define CATCH_CONFIG_MAIN
 
@@ -125,5 +124,3 @@ TEST_CASE("Test1", "[exec]") {
     Executor exec(turtle, translator.GetCommands());
     REQUIRE(exec.Run());
 }
-
-#endif TURTLE_UNIT_TESTS
