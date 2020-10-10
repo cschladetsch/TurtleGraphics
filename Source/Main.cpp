@@ -10,7 +10,6 @@
 
 using Turtle1::Display;
 using Turtle1::Turtle;
-asdasd
 
 using std::cout;
 using std::cerr;
