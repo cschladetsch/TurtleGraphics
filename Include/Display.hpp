@@ -8,13 +8,13 @@ namespace Turtle1 {
 
 class Display {
 public:
-    SDL_Window* window = 0;
-    SDL_Renderer* renderer = 0;
+    SDL_Window* Window = nullptr;
+    SDL_Renderer* Renderer = nullptr;
 
     ~Display();
 
-    bool Bootstrap(int width, int height);
-    bool PreRender() const;
+    [[nodiscard]] bool Bootstrap(int width, int height);
+    [[nodiscard]] bool PreRender() const;
     void Present();
 };
 

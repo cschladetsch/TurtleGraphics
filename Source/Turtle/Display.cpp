@@ -6,8 +6,8 @@
 namespace Turtle1 {
 
 Display::~Display() {
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(Renderer);
+    SDL_DestroyWindow(Window);
     SDL_Quit();
 }
 
@@ -20,7 +20,7 @@ bool Display::Bootstrap(int width, int height) {
     }
 
     if (SDL_CreateWindowAndRenderer(width, height,
-        SDL_WINDOW_RESIZABLE, &window, &renderer)) {
+        SDL_WINDOW_RESIZABLE, &Window, &Renderer)) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
             "Couldn't create window and renderer: %s",
             SDL_GetError());
@@ -37,13 +37,13 @@ bool Display::PreRender() const {
     if (event.type == SDL_QUIT)
         return false;
 
-    SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
-    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(Renderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_RenderClear(Renderer);
 
     return true;
 }
 
 void Display::Present() {
-    SDL_RenderPresent(renderer);
+    SDL_RenderPresent(Renderer);
 }
 }  // namespace Turtle1
