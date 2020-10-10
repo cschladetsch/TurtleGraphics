@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
     turtle.Location = { 500, 500 };
 
     while (display.PreRender()) {
-        turtle.Draw(display.renderer);
+        turtle.Draw(display.Renderer);
         display.Present();
     }
 
