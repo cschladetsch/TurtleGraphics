@@ -1,4 +1,4 @@
 #!/bin/sh
 
-x64/Debug/Turtle-1.exe $*
+x64/UnitTests/Turtle-1-tests.exe $*
 
