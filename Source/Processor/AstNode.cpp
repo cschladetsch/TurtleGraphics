@@ -5,13 +5,13 @@
 
 namespace Turtle1::Processor {
 
-void AstNode::AddChild(AstNodePtr node) {
+void AstNode::AddChild(const AstNodePtr& node) {
     assert(node);
 
     _children.emplace_back(node);
 }
 
-void AstNode::ForEachChild(const std::function<void(const AstNode&)> action) {
+void AstNode::ForEachChild(const std::function<void(const AstNode&)>& action) {
     assert(action);
 
     for (auto const& child : _children) {

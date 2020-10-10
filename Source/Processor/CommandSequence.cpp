@@ -5,16 +5,19 @@
 
 namespace Turtle1::Processor {
 
-CommandSequence::CommandSequence(const vector<Command> &commands)
-    : _commands(commands)
+CommandSequence::CommandSequence(vector<Command> commands)
+    : _commands(std::move(commands))
 {
+}
+
+void CommandSequence::Reset() {
+    _offset = 0;
 }
 
 void CommandSequence::Enter() {
 }
 
 void CommandSequence::Leave() {
-    _offset = 0;
 }
 
 Command CommandSequence::Next() {
@@ -22,6 +25,10 @@ Command CommandSequence::Next() {
         return Command();
 
     return _commands[_offset++];
+}
+
+void CommandSequence::Append(const Command& cmd) {
+    _commands.push_back(cmd);
 }
 
 }  // namespace Turtle1::Processor

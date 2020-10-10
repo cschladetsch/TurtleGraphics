@@ -8,7 +8,7 @@
 
 namespace Turtle1::Processor {
 
-class RunContext final : public ProcessBase
+class RunContext : public ProcessBase
 {
     Lexer _lexer;
     Parser _parser;
@@ -16,11 +16,12 @@ class RunContext final : public ProcessBase
     Executor _executor;
 
 public:
-    bool Run(const char *text);
-    bool Run() override;
+    RunContext(Turtle &turtle, const char *code)
+        : _lexer(code), _parser(_lexer), _translator(_parser.GetRoot()), _executor(turtle)
+    {
+    }
 
-private:
-    RunContext() = delete;
+    bool Run() override;
 };
 
 }  // namespace Turtle1::Processor

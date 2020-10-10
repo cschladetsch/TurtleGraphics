@@ -104,7 +104,7 @@ bool Executor::DoRepeat() {
     auto commands = *commandsOpt;
     for (auto n = 0; n < *numTimesOpt; ++n) {
         Run(commands);
-        commands->Leave();
+        commands->Reset();
     }
 
     return true;

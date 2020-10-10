@@ -5,28 +5,28 @@
 #include "Config.hpp"
 #include "Processor/Command.hpp"
 
-namespace Turtle1 { namespace Processor {
+namespace Turtle1::Processor {
+
 class CommandSequence {
     vector<Command> _commands;
     size_t _offset = 0;
 
 public:
-    CommandSequence() { }
+    CommandSequence() = default;
+    explicit CommandSequence(vector<Command> commands);
 
-    explicit CommandSequence(const vector<Command> &commands);
-
-    static void Enter();
+    void Reset();
+    void Enter();
     void Leave();
 
     [[nodiscard]] bool AtEnd() const { return _offset == _commands.size(); }
-    Command Next();
+    [[nodiscard]] Command Next();
 
 private:
     friend class Translator;
 
-    void Append(const Command cmd) {
-        _commands.push_back(cmd);
-    }
+    void Append(const Command& command);
 };
-}  // namespace Processor
-}  // namespace Turtle1
+
+}  // namespace Turtle1::Processor
+

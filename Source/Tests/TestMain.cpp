@@ -14,6 +14,7 @@
 #include "Processor/Translator.hpp"
 #include "Processor/CommandSequence.hpp"
 #include "Processor/Executor.hpp"
+#include "Processor/RunContext.hpp"
 
 using Turtle1::Turtle;
 
@@ -126,4 +127,9 @@ TEST_CASE("Test1", "[exec]") {
     REQUIRE(exec.Run());
 }
 
-#endif TURTLE_UNIT_TESTS
+TEST_CASE("Test RunContext", "[exec]") {
+    Turtle turtle;
+    Turtle1::Processor::RunContext context(turtle, "move 100");
+}
+
+#endif // TURTLE_UNIT_TESTS

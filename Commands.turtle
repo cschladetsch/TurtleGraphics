@@ -1,10 +1,14 @@
 penDown 
 
-repeat 4
+fun drawSide()
 {
     rotate 90
     move 100
 }
 
-quit
+repeat 4
+{
+    drawSide() &
+}
+
 

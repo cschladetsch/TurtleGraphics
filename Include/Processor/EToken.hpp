@@ -9,6 +9,7 @@ enum class EToken {
     Start,
     PenDown,
     PenUp,
+    Function,
     True,
     False,
     Move,
@@ -23,6 +24,8 @@ enum class EToken {
     Else,
     OpenBrace,
     CloseBrace,
+    OpenParan,
+    CloseParan,
 };
 
 }  // namespace Turtle1::Processor

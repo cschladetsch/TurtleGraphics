@@ -38,6 +38,7 @@ void Lexer::AddTokenNames() {
     _tokenTypes["repeat"] = EToken::Repeat;
     _tokenTypes["if"] = EToken::If;
     _tokenTypes["else"] = EToken::Else;
+    _tokenTypes["fun"] = EToken::Function;
 }
 
 void Lexer::AddText(const char *text) {
@@ -95,6 +96,8 @@ bool Lexer::GetNext() {
     switch (current) {
     case '{': return AddToken(EToken::OpenBrace, 1);
     case '}': return AddToken(EToken::CloseBrace, 1);
+    case '(': return AddToken(EToken::OpenParan, 1);
+    case ')': return AddToken(EToken::CloseParan, 1);
     default: ;
     }
 
