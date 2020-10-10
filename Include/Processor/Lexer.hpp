@@ -1,4 +1,4 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
@@ -39,7 +39,7 @@ class Lexer : public ProcessBase {
     bool AtEnd(size_t offset) const;
     char GetCurrent() const;
     char GetCurrent(size_t offset) const;
-    StringSplice Gather(std::function<bool(char)> predicate);
+    StringSplice Gather(std::function<bool(char)> predicate) const;
     bool AddToken(StringSplice splice, EToken type);
     bool AddToken(EToken type, size_t length);
     bool GetNext();

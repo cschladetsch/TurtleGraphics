@@ -1,9 +1,15 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #include "Processor/Pch.hpp"
 #include "Processor/CommandSequence.hpp"
 
-namespace Turtle1 { namespace Processor {
+namespace Turtle1::Processor {
+
+CommandSequence::CommandSequence(const vector<Command> &commands)
+    : _commands(commands)
+{
+}
+
 void CommandSequence::Enter() {
 }
 
@@ -17,5 +23,5 @@ Command CommandSequence::Next() {
 
     return _commands[_offset++];
 }
-}  // namespace Processor
-}  // namespace Turtle1
+
+}  // namespace Turtle1::Processor

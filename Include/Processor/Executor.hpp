@@ -1,4 +1,4 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
@@ -14,47 +14,44 @@ class Executor : public ProcessBase {
     CommandSequencePtr _commands;
     Turtle* _turtle = nullptr;
     bool _break = false;
+    CommandSequencePtr _sequence;
 
- public:
+public:
     Executor(Turtle &turtle) {
         _turtle = &turtle;
     }
 
-    Executor(Turtle &turtle, CommandSequencePtr sequence)
-        : Executor(turtle) {
-        _context.push_back(sequence);
+    Executor(Turtle& turtle, const CommandSequencePtr sequence);
+
+    bool Run(CommandSequencePtr sequence);
+    bool Run() override;
+
+private:
+    bool Execute(CommandSequence& sequence);
+    bool Execute(Command const& command);
+    bool NextSequence();
+
+    template <typename Ty>
+    std::optional<Ty> DataPop() {
+        if (_data.empty()) {
+            Fail("Data stack empty");
+            return std::nullopt;
+        }
+
+        try {
+            auto top = _data.back();
+            _data.pop_back();
+            return std::get<Ty>(top.Value);
+        } catch (std::exception& e) {
+            (void)e;
+            Fail("Wrong data type");
+        }
+
+        return std::nullopt;
     }
 
-    void Run(CommandSequencePtr sequence);
-    bool Run();
-
- private:
-     bool Execute(CommandSequence& sequence);
-     bool Execute(Command command);
-     bool NextSequence();
-
-     template <typename Ty>
-     std::optional<Ty> DataPop() {
-         if (_data.empty()) {
-             Fail("Data stack empty");
-             return std::nullopt;
-         }
-
-         try {
-             auto top = _data.back();
-             _data.pop_back();
-             return std::get<Ty>(top.Value);
-         } catch (std::exception& e) {
-             (void)e;
-             Fail("Wrong data type");
-         }
-
-         return std::nullopt;
-     }
-
-     bool PopFloat(float &num);
-
-     bool DoRepeat();
+    bool PopFloat(float &num);
+    bool DoRepeat();
 };
 }  // namespace Processor
 }  // namespace Turtle1

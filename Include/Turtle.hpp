@@ -1,4 +1,4 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
@@ -11,11 +11,12 @@
 #include "StdAliases.hpp"
 
 namespace Turtle1 {
+
 class Turtle {
 public:
-    Position location = { 500, 500 };
-    float orientation = 0;
-    bool penDown = false;
+    Position Location = { 500, 500 };
+    float Orientation = 0;
+    bool PenDown = false;
 
 private:
     list<pair<Position, bool>> _lineSegments;
@@ -30,9 +31,10 @@ public:
     string Trace() const;
 
 protected:
-    Position GetForward() const;
+    [[nodiscard]] Position GetForward() const;
     void DrawTurtle(SDL_Renderer* renderer) const;
     void DrawLineSegments(SDL_Renderer *renderer) const;
 };
+
 }  // namespace Turtle1
 

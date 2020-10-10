@@ -1,9 +1,8 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
 #include <variant>
-#include "Config.hpp"
 #include "Processor/ECommandType.hpp"
 
 namespace Turtle1 { namespace Processor {
@@ -18,20 +17,20 @@ struct Command {
     Command() : Command(ECommandType::None) {
     }
 
-    explicit Command(ECommandType type) {
+    explicit Command(const ECommandType type) {
         Type = type;
     }
 
-    explicit Command(string Text) : Command(ECommandType::Value) {
-        Value = Text;
+    explicit Command(const string& text) : Value(text) {
+        Type = ECommandType::Value;
     }
 
     explicit Command(int num) : Command(ECommandType::Value) {
         Value = num;
     }
 
-    explicit Command(CommandSequencePtr commands) : Command(ECommandType::Value) {
-        Value = commands;
+    explicit Command(const CommandSequencePtr& commands) : Value(commands) {
+        Type = ECommandType::Value;
     }
 };
 

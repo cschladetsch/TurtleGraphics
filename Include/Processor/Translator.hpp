@@ -1,4 +1,4 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
@@ -21,9 +21,9 @@ public:
     CommandSequencePtr GetCommands() const;
 
 private:
-    bool Translate(AstNodePtr node);
+    bool Translate(AstNodePtr const& node);
     bool Translate(vector<AstNodePtr> const& children);
-    bool TranslateRepeat(AstNodePtr node);
+    bool TranslateRepeat(const AstNodePtr& node);
 
     CommandSequencePtr Enter();
     void Leave();
@@ -33,9 +33,9 @@ private:
     bool Append(Command command) { Current()->Append(command); return true;  }
     bool Append(ECommandType type);
 
-    bool AddUnaryOperation(AstNodePtr node, ECommandType type);
+    bool AddUnaryOperation(AstNodePtr const& node, ECommandType type);
 
-    int MakeValueInt(AstNodePtr node);
+    int MakeValueInt(const AstNodePtr& node) const;
     static string MakeValueString(AstNodePtr node);
 };
 }  // namespace Processor

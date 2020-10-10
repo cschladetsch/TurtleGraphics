@@ -1,14 +1,16 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 #include <ostream>
 
 namespace Turtle1 {
+
 struct Position {
     int x = 0;
     int y = 0;
 
-    Position() { }
+    Position() = default;
+
     Position(int _x, int _y) {
         x = _x;
         y = _y;

@@ -1,9 +1,8 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #include "Pch.hpp"
 #include "Turtle.hpp"
 
-#include <fstream>
 #include <iostream>
 
 namespace Turtle1 {
@@ -23,9 +22,9 @@ void Turtle::DrawTurtle(SDL_Renderer* renderer) const {
         { len, len },
     };
 
-    const auto p0 = location + offsets[0];
-    const auto p1 = location + offsets[1];
-    const auto p2 = location + offsets[2];
+    const auto p0 = Location + offsets[0];
+    const auto p1 = Location + offsets[1];
+    const auto p2 = Location + offsets[2];
 
     SDL_RenderDrawLine(renderer, p0.x, p0.y, p1.x, p1.y);
     SDL_RenderDrawLine(renderer, p1.x, p1.y, p2.x, p2.y);
@@ -34,35 +33,33 @@ void Turtle::DrawTurtle(SDL_Renderer* renderer) const {
 
 void Turtle::DrawLineSegments(SDL_Renderer *renderer) const {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-    auto loc = location;
+    auto loc = Location;
     for (auto ls : _lineSegments) {
         const auto next = loc + ls.first;
-        if (true) {
-            SDL_RenderDrawLine(renderer
-                , loc.x, loc.y, next.x, next.y);
-        }
+        SDL_RenderDrawLine(renderer
+            , loc.x, loc.y, next.x, next.y);
 
         loc = next;
     }
 }
 
 void Turtle::Move(float distance) {
-    std::cout << "Move " << distance << std::endl;
+    //std::cout << "Move " << distance << std::endl;
     auto end = GetForward()*distance;
-    _lineSegments.emplace_back(end, penDown);
+    _lineSegments.emplace_back(end, PenDown);
 }
 
 void Turtle::Rotate(float angle) {
-    std::cout << "Rotate " << angle << std::endl;
-    orientation += angle;
-    while (orientation > 360)
-        orientation -= 360;
+    //std::cout << "Rotate " << angle << std::endl;
+    Orientation += angle;
+    while (Orientation > 360)
+        Orientation -= 360;
 }
 
 Position Turtle::GetForward() const {
-    const float d2f = static_cast<float>(M_PI/180.);
-    const float x = cosf(orientation*d2f);
-    const float y = sinf(orientation*d2f);
+    const auto d2F = static_cast<float>(M_PI/180.);
+    const auto x = cosf(Orientation*d2F);
+    const auto y = sinf(Orientation*d2F);
     return { x, y };
 }
 

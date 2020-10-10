@@ -1,7 +1,9 @@
-// Copyright 2020 christian@schladetsch.com
-#ifndef TURTLE_UNIT_TESTS
+// Copyright © 2020 christian@schladetsch.com
 
 #include "Pch.hpp"
+
+#ifndef TURTLE_UNIT_TESTS
+
 #include <iostream>
 
 #include "SDL.h"
@@ -23,8 +25,8 @@ int main(int argc, char *argv[]) {
     }
 
     Turtle turtle;
-    turtle.penDown = false;
-    turtle.location = { 500, 500 };
+    turtle.PenDown = false;
+    turtle.Location = { 500, 500 };
 
     while (display.PreRender()) {
         turtle.Draw(display.renderer);

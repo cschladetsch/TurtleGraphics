@@ -1,4 +1,4 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
@@ -9,7 +9,7 @@
 
 #include "Processor/Token.hpp"
 
-namespace Turtle1 { namespace Processor {
+namespace Turtle1::Processor {
 
 class AstNode;
 
@@ -20,12 +20,12 @@ class AstNode {
     vector<AstNodePtr> _children;
 
  public:
-    explicit AstNode(Token token) : _token(token) { }
-    explicit AstNode(EToken type = EToken::None) : _token(type) { }
+    explicit AstNode(const Token token) : _token(token) { }
+    explicit AstNode(const EToken type = EToken::None) : _token(type) { }
 
-    EToken GetType() const { return _token.Type; }
-    string GetText() const { return _token.Splice.GetText(); }
-    vector<AstNodePtr> const &GetChildren() const { return _children; }
+    [[nodiscard]] EToken GetType() const { return _token.Type; }
+    [[nodiscard]] string GetText() const { return _token.Splice.GetText(); }
+    [[nodiscard]] vector<AstNodePtr> const &GetChildren() const { return _children; }
 
     void AddChild(AstNodePtr node);
     void ForEachChild(std::function<void(const AstNode&)> action);
@@ -33,6 +33,5 @@ class AstNode {
     static AstNodePtr New(Token token);
     static AstNodePtr New(EToken token) { return New(Token(token)); }
 };
-}  // namespace Processor
-}  // namespace Turtle1
+}  // namespace Turtle1::Processor
 

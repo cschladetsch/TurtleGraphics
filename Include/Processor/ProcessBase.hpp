@@ -1,4 +1,4 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
@@ -11,9 +11,10 @@ struct ProcessBase {
     mutable std::string _error;
 
 public:
+    virtual ~ProcessBase() = default;
     virtual bool Run() = 0;
 
-    void Reset() {
+    virtual void Reset() {
         _failed = false;
         _error.clear();
     }

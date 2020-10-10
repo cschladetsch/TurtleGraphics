@@ -1,25 +1,27 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #include "Processor/Pch.hpp"
 #include "Processor/AstNode.hpp"
 
-namespace Turtle1 { namespace Processor {
-    void AstNode::AddChild(AstNodePtr node) {
-        assert(node);
+namespace Turtle1::Processor {
 
-        _children.emplace_back(node);
+void AstNode::AddChild(AstNodePtr node) {
+    assert(node);
+
+    _children.emplace_back(node);
+}
+
+void AstNode::ForEachChild(const std::function<void(const AstNode&)> action) {
+    assert(action);
+
+    for (auto const& child : _children) {
+        action(*child);
     }
+}
 
-    void AstNode::ForEachChild(std::function<void(const AstNode&)> action) {
-        assert(action);
+AstNodePtr AstNode::New(Token token) {
+    return std::make_shared<AstNode>(token);
+}
 
-        for (auto const& child : _children) {
-            action(*child);
-        }
-    }
+}  // namespace Turtle1::Processor
 
-    AstNodePtr AstNode::New(Token token) {
-        return std::make_shared<AstNode>(token);
-    }
-}  // namespace Processor
-}  // namespace Turtle1

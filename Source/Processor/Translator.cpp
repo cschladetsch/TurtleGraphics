@@ -1,10 +1,11 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #include "Processor/Pch.hpp"
 #include "Processor/Translator.hpp"
 
-namespace Turtle1 { namespace Processor {
-Translator::Translator(AstNodePtr root) {
+namespace Turtle1::Processor {
+
+Translator::Translator(const AstNodePtr root) {
     _root = root;
 }
 
@@ -29,7 +30,8 @@ CommandSequencePtr Translator::GetCommands() const {
     return _commands.back();
 }
 
-bool Translator::Translate(AstNodePtr node) {
+bool Translator::Translate(AstNodePtr const &node) {
+    assert(node);
     switch (node->GetType()) {
     case EToken::Start:
         Enter();
@@ -46,6 +48,7 @@ bool Translator::Translate(AstNodePtr node) {
         return Append(ECommandType::PenUp);
     case EToken::Repeat:
         return TranslateRepeat(node);
+    default: ;
     }
 
     return false;
@@ -60,16 +63,19 @@ bool Translator::Translate(vector<AstNodePtr> const &children) {
     return true;
 }
 
-bool Translator::TranslateRepeat(AstNodePtr node) {
+bool Translator::TranslateRepeat(const AstNodePtr &node) {
     auto const& children = node->GetChildren();
-    int numTimes = MakeValueInt(children[0]);
+    const auto numTimes = MakeValueInt(children[0]);
 
-    auto commands = Enter();
+    const auto commands = Enter();
     for (size_t n = 1; n < children.size(); ++n) {
-        if (!Translate(children[n]))
+        if (!Translate(children[n])) {
             return false;
+        }
     }
+
     Leave();
+
     Append(Command(commands));
     Append(Command(numTimes));
     Append(ECommandType::Repeat);
@@ -97,13 +103,14 @@ bool Translator::Append(ECommandType type) {
     return true;
 }
 
-bool Translator::AddUnaryOperation(AstNodePtr node, ECommandType type) {
+bool Translator::AddUnaryOperation(AstNodePtr const &node, ECommandType type) {
     Append(Command(MakeValueInt(node->GetChildren()[0])));
     Append(Command(type));
     return true;
 }
 
-int Translator::MakeValueInt(AstNodePtr node) {
+int Translator::MakeValueInt(const AstNodePtr &node) const
+{
     try {
         return std::stoi(node->GetText());
     }
@@ -118,6 +125,5 @@ string Translator::MakeValueString(AstNodePtr node) {
     return node->GetText();
 }
 
-}  // namespace Processor
-}  // namespace Turtle1
+}  // namespace Turtle1::Processor
 

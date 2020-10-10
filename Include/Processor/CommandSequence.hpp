@@ -1,4 +1,4 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
@@ -12,20 +12,19 @@ class CommandSequence {
 
 public:
     CommandSequence() { }
-    CommandSequence(vector<Command> commands) {
-        _commands = commands;
-    }
 
-    void Enter();
+    explicit CommandSequence(const vector<Command> &commands);
+
+    static void Enter();
     void Leave();
 
-    bool AtEnd() const { return _offset == _commands.size(); }
+    [[nodiscard]] bool AtEnd() const { return _offset == _commands.size(); }
     Command Next();
 
 private:
     friend class Translator;
 
-    void Append(Command cmd) {
+    void Append(const Command cmd) {
         _commands.push_back(cmd);
     }
 };

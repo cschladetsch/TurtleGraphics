@@ -1,9 +1,8 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #pragma once
 
-namespace Turtle1 { namespace Processor {
+namespace Turtle1::Processor {
 class Foo {
 };
-}  // namespace Processor
-}  // namespace Turtle1
+}  // namespace Turtle1::Processor

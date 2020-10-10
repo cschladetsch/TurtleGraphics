@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Source">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -25,9 +21,6 @@
     <Filter Include="Source\Turtle">
       <UniqueIdentifier>{93893a6b-94f8-41e0-a8a4-7223a18dc86e}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Commands.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\Display.hpp">
@@ -78,9 +71,6 @@
     <ClInclude Include="Include\Config.hpp">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Process\EToken.hpp">
-      <Filter>Include\Processor</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Processor\Command.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
@@ -90,12 +80,15 @@
     <ClInclude Include="Include\Processor\ECommandType.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Processor\RunContext.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\EToken.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Processor\Lexer.cpp">
-      <Filter>Source\Processor</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Processor\Template.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
     <ClCompile Include="Source\Processor\Executor.cpp">
@@ -134,8 +127,17 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Processor\RunContext.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\Template.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Commands.turtle" />
   </ItemGroup>
 </Project>

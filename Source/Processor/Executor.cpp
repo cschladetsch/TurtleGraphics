@@ -1,14 +1,20 @@
-// Copyright 2020 christian@schladetsch.com
+// Copyright © 2020 christian@schladetsch.com
 
 #include "Processor/Pch.hpp"
 #include "Processor/Executor.hpp"
 #include "Processor/CommandSequence.hpp"
 
-namespace Turtle1 { namespace Processor {
-    
-void Executor::Run(CommandSequencePtr sequence) {
+namespace Turtle1::Processor {
+
+Executor::Executor(Turtle& turtle, const CommandSequencePtr sequence)
+    : _sequence((sequence)) {
+    _turtle = &turtle;
     _context.push_back(sequence);
-    NextSequence();
+}
+
+bool Executor::Run(CommandSequencePtr sequence) {
+    _context.push_back(sequence);
+    return NextSequence();
 }
 
 bool Executor::Run() {
@@ -36,13 +42,13 @@ bool Executor::Execute(CommandSequence& sequence) {
     return NextSequence();
 }
 
-bool Executor::Execute(Command command) {
+bool Executor::Execute(Command const &command) {
     switch (command.Type) {
     case ECommandType::PenUp:
-        _turtle->penDown = false;
+        _turtle->PenDown = false;
         return true;
     case ECommandType::PenDown:
-        _turtle->penDown = true;
+        _turtle->PenDown = true;
         return true;
     case ECommandType::Value:
         _data.push_back(command);
@@ -75,18 +81,18 @@ bool Executor::Execute(Command command) {
     return Fail("Unhandled command");
 }
 
-bool Executor::PopFloat(float &f) {
-    auto val = DataPop<int>();
-    if (!val.has_value()) {
+bool Executor::PopFloat(float &num) {
+    const auto opt = DataPop<int>();
+    if (!opt.has_value())
         return Fail("No value");
-    }
-    f = static_cast<float>(val.value());
+
+    num = static_cast<float>(opt.value());
     return true;
 }
 
 bool Executor::DoRepeat() {
-    auto numTimes = DataPop<int>();
-    if (!numTimes.has_value()) {
+    auto numTimesOpt = DataPop<int>();
+    if (!numTimesOpt.has_value()) {
         return Fail("Number of times to repeat expected");
     }
 
@@ -96,7 +102,7 @@ bool Executor::DoRepeat() {
     }
 
     auto commands = *commandsOpt;
-    for (int n = 0; n < *numTimes; ++n) {
+    for (auto n = 0; n < *numTimesOpt; ++n) {
         Run(commands);
         commands->Leave();
     }
@@ -104,5 +110,4 @@ bool Executor::DoRepeat() {
     return true;
 }
 
-}  // namespace Processor
-}  // namespace Turtle1
+}  // namespace Turtle1::Processor
