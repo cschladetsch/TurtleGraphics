@@ -23,8 +23,12 @@ namespace Turtle1::Processor {
 //    return _executor.Run(_translator.GetCommands());
 //}
 //
-bool RunContext::Run() {
+bool RunContext::Run() noexcept {
     return HasSucceeded();
 }
 
+Scope &RunContext::GetScope() {
+    return _executor.GetScope();
 }
+
+}   // namespace Turtle1::Processor

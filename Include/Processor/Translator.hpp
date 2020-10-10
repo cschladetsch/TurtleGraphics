@@ -6,17 +6,18 @@
 #include <string>
 
 #include "Processor/AstNode.hpp"
-#include "Processor/CommandSequence.hpp"
+#include "Processor/Continuation.hpp"
 
-namespace Turtle1 { namespace Processor {
-class Translator : public ProcessBase {
+namespace Turtle1::Processor {
+
+class Translator final : public ProcessBase {
     vector<CommandSequencePtr> _commands;
     AstNodePtr _root;
 
 public:
     explicit Translator(AstNodePtr root);
 
-    bool Run();
+    bool Run() noexcept override;
 
     CommandSequencePtr GetCommands() const;
 
@@ -30,13 +31,13 @@ private:
 
     CommandSequencePtr Current() const { return _commands.back(); }
 
-    bool Append(Command command) { Current()->Append(command); return true;  }
-    bool Append(ECommandType type);
+    bool Append(Command command) const;
+    bool Append(ECommandType type) const;
 
-    bool AddUnaryOperation(AstNodePtr const& node, ECommandType type);
+    bool AddUnaryOperation(AstNodePtr const& node, ECommandType type) const;
 
     int MakeValueInt(const AstNodePtr& node) const;
-    static string MakeValueString(AstNodePtr node);
+    static string MakeValueString(const AstNodePtr& node);
 };
-}  // namespace Processor
-}  // namespace Turtle1
+
+}  // namespace Turtle1::Processor

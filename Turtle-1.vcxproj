@@ -222,7 +222,7 @@
     <ClInclude Include="Include\Position.hpp" />
     <ClInclude Include="Include\Processor\AstNode.hpp" />
     <ClInclude Include="Include\Processor\Command.hpp" />
-    <ClInclude Include="Include\Processor\CommandSequence.hpp" />
+    <ClInclude Include="Include\Processor\Continuation.hpp" />
     <ClInclude Include="Include\Processor\EToken.hpp" />
     <ClInclude Include="Include\Processor\RunContext.hpp" />
     <ClInclude Include="Include\Processor\ECommandType.hpp" />
@@ -251,7 +251,7 @@
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='UnitTests|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>
     </ClCompile>
-    <ClCompile Include="Source\Processor\CommandSequence.cpp">
+    <ClCompile Include="Source\Processor\Continuation.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Processor/Pch.hpp</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>

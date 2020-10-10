@@ -15,7 +15,7 @@ Parser::Parser(const Lexer& lexer) {
     }
 }
 
-bool Parser::Run() {
+bool Parser::Run() noexcept {
     return ParseStatements();
 }
 
@@ -34,6 +34,7 @@ bool Parser::ParseStatement() {
     case EToken::Rotate: return ParseRotate();
     case EToken::Move: return ParseMove();
     case EToken::Quit: return AppendChild(EToken::Quit);
+    case EToken::Function: return ParseFunction();
     default: ;
     }
 
@@ -62,6 +63,37 @@ AstNodePtr Parser::GetRoot() const {
     }
 
     return _context.front();
+}
+
+bool Parser::ParseFunction() {
+    if (!Expect(EToken::Identifier)) {
+        return Fail("Function identifier expected");
+    }
+    const auto funName = CurrentToken();
+
+    if (!Expect(EToken::OpenParan)) {
+        return Fail("Open parenthesis expected");
+    }
+
+    auto fun = AstNode::New(EToken::Function);
+    fun->AddChild(AstNode::New(funName));
+
+    auto args = AstNode::New(EToken::ArgList);
+    EnterNode(args);
+    while (Peek(EToken::Identifier))
+    {
+        if (!Peek(EToken::Comma))
+            break;
+        NextToken();
+    }
+
+    if (!Expect(EToken::CloseParan)) {
+        return Fail("Close parenthesis expected");
+    }
+    LeaveNode();
+
+    //AddChild(args);
+    LeaveNode();
 }
 
 void Parser::EnterNode(const AstNodePtr node) {

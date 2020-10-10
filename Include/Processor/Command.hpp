@@ -5,10 +5,10 @@
 #include <variant>
 #include "Processor/ECommandType.hpp"
 
-namespace Turtle1 { namespace Processor {
+namespace Turtle1::Processor {
 
-class CommandSequence;
-typedef std::shared_ptr<CommandSequence> CommandSequencePtr;
+class Continuation;
+typedef std::shared_ptr<Continuation> CommandSequencePtr;
 
 struct Command {
     ECommandType Type;
@@ -34,6 +34,4 @@ struct Command {
     }
 };
 
-
-}  // namespace Processor
-}  // namespace Turtle1
+}  // namespace Turtle1::Processor

@@ -18,10 +18,11 @@ class Parser : public ProcessBase {
 
  public:
     explicit Parser(const Lexer& lexer);
-    bool Run() override;
+    bool Run() noexcept override;
     AstNodePtr GetRoot() const;
 
  private:
+    bool ParseFunction();
     bool ParseStatement();
     bool ParseRepeat();
     bool ParseMove();

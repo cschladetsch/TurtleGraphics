@@ -12,7 +12,7 @@
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
 #include "Processor/Translator.hpp"
-#include "Processor/CommandSequence.hpp"
+#include "Processor/Continuation.hpp"
 #include "Processor/Executor.hpp"
 #include "Processor/RunContext.hpp"
 
@@ -26,7 +26,7 @@ using Turtle1::Processor::Translator;
 using Turtle1::Processor::Executor;
 using Turtle1::Processor::Command;
 using Turtle1::Processor::ECommandType;
-using Turtle1::Processor::CommandSequence;
+using Turtle1::Processor::Continuation;
 
 TEST_CASE("Test String", "[processor]") {
     const char* text = "hello\nworld";
@@ -103,7 +103,7 @@ TEST_CASE("Test Executor", "[exec]") {
         Command(100),
         Command(ECommandType::Move),
     };
-    auto sequence = std::make_shared<CommandSequence>(commands);
+    auto sequence = std::make_shared<Continuation>(commands);
 
     Executor executor{ turtle, sequence };
     REQUIRE(executor.Run());
@@ -130,6 +130,12 @@ TEST_CASE("Test1", "[exec]") {
 TEST_CASE("Test RunContext", "[exec]") {
     Turtle turtle;
     Turtle1::Processor::RunContext context(turtle, "move 100");
+}
+
+TEST_CASE("Test Function", "[lang]") {
+    Turtle turtle;
+    Turtle1::Processor::RunContext context(turtle, "fun foo() { }");
+    //REQUIRE(context.GetScope().has)
 }
 
 #endif // TURTLE_UNIT_TESTS

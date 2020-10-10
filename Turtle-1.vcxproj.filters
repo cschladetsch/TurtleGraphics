@@ -74,9 +74,6 @@
     <ClInclude Include="Include\Processor\Command.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
-    <ClInclude Include="Include\Processor\CommandSequence.hpp">
-      <Filter>Include\Processor</Filter>
-    </ClInclude>
     <ClInclude Include="Include\Processor\ECommandType.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
@@ -84,6 +81,9 @@
       <Filter>Include\Processor</Filter>
     </ClInclude>
     <ClInclude Include="Include\Processor\EToken.hpp">
+      <Filter>Include\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Processor\Continuation.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
   </ItemGroup>
@@ -121,9 +121,6 @@
     <ClCompile Include="Source\Tests\TestMain.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Processor\CommandSequence.cpp">
-      <Filter>Source\Processor</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -131,6 +128,9 @@
       <Filter>Source\Processor</Filter>
     </ClCompile>
     <ClCompile Include="Source\Processor\Template.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Processor\Continuation.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
   </ItemGroup>

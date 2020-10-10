@@ -2,7 +2,7 @@
 
 #include "Processor/Pch.hpp"
 #include "Processor/Executor.hpp"
-#include "Processor/CommandSequence.hpp"
+#include "Processor/Continuation.hpp"
 
 namespace Turtle1::Processor {
 
@@ -17,8 +17,20 @@ bool Executor::Run(CommandSequencePtr sequence) {
     return NextSequence();
 }
 
-bool Executor::Run() {
+bool Executor::Run() noexcept {
     return NextSequence();
+}
+
+Scope& Executor::GetScope() {
+    return _context.back()->GetScope();
+}
+
+std::optional<Command> Executor::PopData() {
+    if (_data.empty())
+        return std::nullopt;
+    auto cmd = _data.back();
+    _data.pop_back();
+    return cmd;
 }
 
 bool Executor::NextSequence() {
@@ -30,8 +42,8 @@ bool Executor::NextSequence() {
     return Execute(*_commands);
 }
 
-bool Executor::Execute(CommandSequence& sequence) {
-    sequence.Enter();
+bool Executor::Execute(Continuation& sequence) {
+    sequence.Enter(*this);
     while (!sequence.AtEnd()) {
         Execute(sequence.Next());
         if (_break) {

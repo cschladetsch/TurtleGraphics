@@ -23,9 +23,9 @@ class AstNode {
     explicit AstNode(const Token token) : _token(token) { }
     explicit AstNode(const EToken type = EToken::None) : _token(type) { }
 
-    [[nodiscard]] EToken GetType() const { return _token.Type; }
-    [[nodiscard]] string GetText() const { return _token.Splice.GetText(); }
-    [[nodiscard]] vector<AstNodePtr> const &GetChildren() const { return _children; }
+    EToken GetType() const { return _token.Type; }
+    string GetText() const { return _token.Splice.GetText(); }
+    vector<AstNodePtr> const &GetChildren() const { return _children; }
 
     void AddChild(const AstNodePtr& node);
     void ForEachChild(const std::function<void(const AstNode&)>& action);

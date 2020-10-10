@@ -9,7 +9,7 @@ Translator::Translator(const AstNodePtr root) {
     _root = root;
 }
 
-bool Translator::Run() {
+bool Translator::Run() noexcept {
     if (_root == nullptr) {
         return Fail("Empty ast tree");
     }
@@ -84,7 +84,7 @@ bool Translator::TranslateRepeat(const AstNodePtr &node) {
 }
 
 CommandSequencePtr Translator::Enter() {
-    auto next = std::make_shared<CommandSequence>();
+    auto next = std::make_shared<Continuation>();
     _commands.push_back(next);
     return next;
 }
@@ -98,19 +98,23 @@ void Translator::Leave() {
     _commands.pop_back();
 }
 
-bool Translator::Append(ECommandType type) {
+bool Translator::Append(Command command) const {
+    Current()->Append(command);
+    return true;
+}
+
+bool Translator::Append(ECommandType type) const {
     Append(Command(type));
     return true;
 }
 
-bool Translator::AddUnaryOperation(AstNodePtr const &node, ECommandType type) {
+bool Translator::AddUnaryOperation(AstNodePtr const &node, ECommandType type) const {
     Append(Command(MakeValueInt(node->GetChildren()[0])));
     Append(Command(type));
     return true;
 }
 
-int Translator::MakeValueInt(const AstNodePtr &node) const
-{
+int Translator::MakeValueInt(const AstNodePtr &node) const {
     try {
         return std::stoi(node->GetText());
     }
@@ -121,7 +125,7 @@ int Translator::MakeValueInt(const AstNodePtr &node) const
     }
 }
 
-string Translator::MakeValueString(AstNodePtr node) {
+string Translator::MakeValueString(const AstNodePtr &node) {
     return node->GetText();
 }
 

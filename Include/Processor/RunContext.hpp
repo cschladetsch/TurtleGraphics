@@ -21,7 +21,9 @@ public:
     {
     }
 
-    bool Run() override;
+    bool Run() noexcept override;
+
+    Scope &GetScope();
 };
 
 }  // namespace Turtle1::Processor

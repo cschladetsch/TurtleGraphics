@@ -58,7 +58,7 @@ void Lexer::AddText(const char *text) {
     _lines.push_back(std::string(start, text + 1));
 }
 
-bool Lexer::Run() {
+bool Lexer::Run() noexcept {
     Reset();
 
     while (GetNext()) {
@@ -98,6 +98,7 @@ bool Lexer::GetNext() {
     case '}': return AddToken(EToken::CloseBrace, 1);
     case '(': return AddToken(EToken::OpenParan, 1);
     case ')': return AddToken(EToken::CloseParan, 1);
+    case ',': return AddToken(EToken::Comma, 1);
     default: ;
     }
 

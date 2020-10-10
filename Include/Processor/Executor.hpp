@@ -3,6 +3,12 @@
 #pragma once
 
 #include <optional>
+
+#include "Command.hpp"
+#include "Continuation.hpp"
+#include "Continuation.hpp"
+#include "Continuation.hpp"
+#include "Continuation.hpp"
 #include "Turtle.hpp"
 #include "Processor/Translator.hpp"
 
@@ -24,10 +30,12 @@ public:
     Executor(Turtle& turtle, const CommandSequencePtr sequence);
 
     bool Run(CommandSequencePtr sequence);
-    bool Run() override;
+    bool Run() noexcept override;
+    std::map<std::string, Command>& GetScope();
+    std::optional<Command> PopData();
 
 private:
-    bool Execute(CommandSequence& sequence);
+    bool Execute(Continuation& sequence);
     bool Execute(Command const& command);
     bool NextSequence();
 

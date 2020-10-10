@@ -12,9 +12,10 @@ struct ProcessBase {
 
 public:
     virtual ~ProcessBase() = default;
-    virtual bool Run() = 0;
 
-    virtual void Reset() {
+    virtual bool Run() noexcept = 0;
+
+    virtual void Reset() noexcept {
         _failed = false;
         _error.clear();
     }

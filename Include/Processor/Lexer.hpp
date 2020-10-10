@@ -24,7 +24,7 @@ class Lexer : public ProcessBase {
  public:
     explicit Lexer(const char* text);
 
-    bool Run() override;
+    bool Run() noexcept override;
 
     const vector<Token> GetTokens() const { return _tokens; }
     const vector<string>& GetLines() const { return _lines; }

@@ -36,4 +36,4 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-#endif // !TURTLE_UNIT_TESTS
+#endif  // !TURTLE_UNIT_TESTS
