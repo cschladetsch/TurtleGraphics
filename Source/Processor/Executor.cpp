@@ -12,6 +12,11 @@ Executor::Executor(Turtle& turtle, const CommandSequencePtr sequence)
     _context.push_back(sequence);
 }
 
+bool Executor::Run(Turtle& turtle, CommandSequencePtr sequence) {
+    _turtle = &turtle;
+    return Run(sequence);
+}
+
 bool Executor::Run(CommandSequencePtr sequence) {
     _context.push_back(sequence);
     return NextSequence();

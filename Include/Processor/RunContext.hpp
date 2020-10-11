@@ -14,10 +14,12 @@ class RunContext : public ProcessBase
     Parser _parser;
     Translator _translator;
     Executor _executor;
+    Turtle *_turtle = nullptr;
+    const char* _code = nullptr;
 
 public:
     RunContext(Turtle &turtle, const char *code)
-        : _lexer(code), _parser(_lexer), _translator(_parser.GetRoot()), _executor(turtle)
+        : _turtle(&turtle), _code(code)
     {
     }
 

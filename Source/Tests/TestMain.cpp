@@ -130,12 +130,13 @@ TEST_CASE("Test1", "[exec]") {
 TEST_CASE("Test RunContext", "[exec]") {
     Turtle turtle;
     Turtle1::Processor::RunContext context(turtle, "move 100");
+    REQUIRE(context.Run());
 }
 
-TEST_CASE("Test Function", "[lang]") {
+TEST_CASE("Test Function", "[exec][function]") {
     Turtle turtle;
-    Turtle1::Processor::RunContext context(turtle, "fun foo() { }");
-    //REQUIRE(context.GetScope().has)
+    Turtle1::Processor::RunContext context(turtle, "fun foo(a) { }");
+    REQUIRE(context.Run());
 }
 
 #endif // TURTLE_UNIT_TESTS

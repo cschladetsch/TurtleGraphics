@@ -15,8 +15,10 @@ class Translator final : public ProcessBase {
     AstNodePtr _root;
 
 public:
+    Translator() = default;
     explicit Translator(AstNodePtr root);
 
+    bool Run(AstNodePtr root) noexcept;
     bool Run() noexcept override;
 
     CommandSequencePtr GetCommands() const;

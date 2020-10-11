@@ -23,12 +23,14 @@ class Executor : public ProcessBase {
     CommandSequencePtr _sequence;
 
 public:
+    Executor() = default;
     Executor(Turtle &turtle) {
         _turtle = &turtle;
     }
 
     Executor(Turtle& turtle, const CommandSequencePtr sequence);
 
+    bool Run(Turtle& turtle, CommandSequencePtr sequence);
     bool Run(CommandSequencePtr sequence);
     bool Run() noexcept override;
     std::map<std::string, Command>& GetScope();

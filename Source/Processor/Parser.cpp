@@ -6,6 +6,10 @@
 namespace Turtle1::Processor {
 
 Parser::Parser(const Lexer& lexer) {
+    SetLexer(lexer);
+}
+
+void Parser::SetLexer(const Lexer& lexer) noexcept {
     _context.push_back(AstNode::New(EToken::Start));
     auto const& tokens = lexer.GetTokens();
 
@@ -15,8 +19,17 @@ Parser::Parser(const Lexer& lexer) {
     }
 }
 
+bool Parser::Run(const Lexer& lexer) noexcept {
+    SetLexer(lexer);
+    return Run();
+}
+
 bool Parser::Run() noexcept {
-    return ParseStatements();
+    try {
+        return ParseStatements();
+    } catch (std::exception &e) {
+        Fail() << e.what();
+    }
 }
 
 bool Parser::ParseStatements() {
@@ -65,10 +78,33 @@ AstNodePtr Parser::GetRoot() const {
     return _context.front();
 }
 
+bool Parser::ParseArguments(AstNodePtr const &fun) {
+    const auto args = AstNode::New(EToken::ArgList);
+    EnterNode(args);
+
+    while (Peek(EToken::Identifier)) {
+        if (!Peek(EToken::Comma)) {
+            break;
+        }
+
+        NextToken();
+    }
+
+    if (!Expect(EToken::CloseParan)) {
+        return Fail("Close parenthesis expected");
+    }
+
+    LeaveNode();
+    fun->AddChild(args);
+
+    return false;
+}
+
 bool Parser::ParseFunction() {
     if (!Expect(EToken::Identifier)) {
         return Fail("Function identifier expected");
     }
+
     const auto funName = CurrentToken();
 
     if (!Expect(EToken::OpenParan)) {
@@ -78,22 +114,18 @@ bool Parser::ParseFunction() {
     auto fun = AstNode::New(EToken::Function);
     fun->AddChild(AstNode::New(funName));
 
-    auto args = AstNode::New(EToken::ArgList);
-    EnterNode(args);
-    while (Peek(EToken::Identifier))
-    {
-        if (!Peek(EToken::Comma))
-            break;
-        NextToken();
+    if (!ParseArguments(fun)) {
+        return false;;
     }
 
-    if (!Expect(EToken::CloseParan)) {
-        return Fail("Close parenthesis expected");
+    if (!ParseStatementBlock()) {
+        return Fail("Statement block expected");
     }
-    LeaveNode();
 
-    //AddChild(args);
     LeaveNode();
+    AddChild(fun);
+
+    return true;
 }
 
 void Parser::EnterNode(const AstNodePtr node) {

@@ -3,12 +3,15 @@
 #pragma once
 
 #include <string>
+#include <sstream>
+#include <ostream>
 
-namespace Turtle1 { namespace Processor {
+namespace Turtle1::Processor {
+
 struct ProcessBase {
  protected:
     mutable bool _failed = false;
-    mutable std::string _error;
+    mutable std::ostringstream _errorStream;
 
 public:
     virtual ~ProcessBase() = default;
@@ -17,19 +20,25 @@ public:
 
     virtual void Reset() noexcept {
         _failed = false;
-        _error.clear();
+        _errorStream.clear();
     }
 
     bool HasFailed() const { return _failed; }
     bool HasSucceeded() const { return !_failed; }
+    string GetError() const { return _errorStream.str(); }
 
 protected:
     bool Fail(const char* errorText) const noexcept {
-        _failed = true;
-        _error = errorText;
+        Fail() << errorText;
         return false;
     }
+
+    std::ostringstream& Fail() const noexcept {
+        _failed = true;
+        return _errorStream;
+    }
+
 };
-}  // namespace Processor
+
 }  // namespace Turtle1
 

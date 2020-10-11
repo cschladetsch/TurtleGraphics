@@ -12,9 +12,16 @@ std::string StringSplice::GetText() const {
     return Source->GetLines()[LineNumber].substr(Offset, Length);
 }
 
-Lexer::Lexer(const char* text) {
-    AddText(text);
+Lexer::Lexer() {
     AddTokenNames();
+}
+Lexer::Lexer(const char* code) : Lexer() {
+    AddText(code);
+}
+
+bool Lexer::Run(const char* code) noexcept {
+    AddText(code);
+    return Run();
 }
 
 bool Lexer::IsValid(const StringSplice splice) const {

@@ -16,12 +16,19 @@ class Parser : public ProcessBase {
     size_t _currentToken = 0;
     std::vector<AstNodePtr> _context;
 
- public:
+public:
+    Parser() = default;
     explicit Parser(const Lexer& lexer);
-    bool Run() noexcept override;
-    AstNodePtr GetRoot() const;
 
- private:
+    void SetLexer(const Lexer& lexer) noexcept;
+
+    bool Run(const Lexer& lexer) noexcept;
+    bool Run() noexcept override;
+
+    AstNodePtr GetRoot() const;
+    bool ParseArguments(const AstNodePtr& fun);
+
+private:
     bool ParseFunction();
     bool ParseStatement();
     bool ParseRepeat();

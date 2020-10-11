@@ -5,26 +5,29 @@
 
 namespace Turtle1::Processor {
 
-//bool RunContext::Run(const char* text) {
-//    Reset();
-//
-//    _lexer = Lexer(text);
-//    if (!_lexer.Run())
-//        return false;
-//
-//    _parser = Parser(_lexer);
-//    if (!_parser.Run())
-//        return false;
-//
-//    _translator = Translator(_parser.GetRoot());
-//    if (!_translator.Run())
-//        return false;
-//
-//    return _executor.Run(_translator.GetCommands());
-//}
-//
 bool RunContext::Run() noexcept {
-    return HasSucceeded();
+    if (!_lexer.Run(_code)) {
+        Fail() << "Lexer: " << _lexer.GetError();
+        return false;
+    }
+
+    if (!_parser.Run(_lexer)) {
+        Fail() << "Parser: " << _parser.GetError();
+        return false;
+    }
+
+    if (!_translator.Run(_parser.GetRoot())) {
+        Fail() << "Translator: " << _translator.GetError();
+        return false;
+    }
+
+    if (!_executor.Run(_translator.GetCommands()))
+    {
+        Fail() << "Exec: " << _executor.GetError();
+        return false;
+    }
+
+    return true;
 }
 
 Scope &RunContext::GetScope() {
