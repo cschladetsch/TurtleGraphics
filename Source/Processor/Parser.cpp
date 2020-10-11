@@ -29,7 +29,10 @@ bool Parser::Run() noexcept {
         return ParseStatements();
     } catch (std::exception &e) {
         Fail() << e.what();
+        return false;
     }
+
+    return true;
 }
 
 bool Parser::ParseStatements() {

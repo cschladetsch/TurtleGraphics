@@ -24,25 +24,25 @@ class Executor : public ProcessBase {
 
 public:
     Executor() = default;
-    Executor(Turtle &turtle) {
+    Executor(Turtle &turtle) noexcept {
         _turtle = &turtle;
     }
 
-    Executor(Turtle& turtle, const CommandSequencePtr sequence);
+    Executor(Turtle& turtle, const CommandSequencePtr sequence) noexcept ;
 
-    bool Run(Turtle& turtle, CommandSequencePtr sequence);
-    bool Run(CommandSequencePtr sequence);
+    bool Run(Turtle& turtle, CommandSequencePtr sequence) noexcept;
+    bool Run(CommandSequencePtr sequence) noexcept;
     bool Run() noexcept override;
     std::map<std::string, Command>& GetScope();
-    std::optional<Command> PopData();
+    std::optional<Command> PopData() noexcept;
 
 private:
     bool Execute(Continuation& sequence);
     bool Execute(Command const& command);
-    bool NextSequence();
+    bool NextSequence() noexcept;
 
     template <typename Ty>
-    std::optional<Ty> DataPop() {
+    std::optional<Ty> DataPop() noexcept {
         if (_data.empty()) {
             Fail("Data stack empty");
             return std::nullopt;

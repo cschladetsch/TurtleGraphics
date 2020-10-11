@@ -6,18 +6,18 @@
 
 namespace Turtle1::Processor {
 
-Executor::Executor(Turtle& turtle, const CommandSequencePtr sequence)
+Executor::Executor(Turtle& turtle, const CommandSequencePtr sequence) noexcept
     : _sequence((sequence)) {
     _turtle = &turtle;
     _context.push_back(sequence);
 }
 
-bool Executor::Run(Turtle& turtle, CommandSequencePtr sequence) {
+bool Executor::Run(Turtle& turtle, CommandSequencePtr sequence) noexcept {
     _turtle = &turtle;
     return Run(sequence);
 }
 
-bool Executor::Run(CommandSequencePtr sequence) {
+bool Executor::Run(CommandSequencePtr sequence) noexcept {
     _context.push_back(sequence);
     return NextSequence();
 }
@@ -30,7 +30,7 @@ Scope& Executor::GetScope() {
     return _context.back()->GetScope();
 }
 
-std::optional<Command> Executor::PopData() {
+std::optional<Command> Executor::PopData() noexcept {
     if (_data.empty())
         return std::nullopt;
     auto cmd = _data.back();
@@ -38,13 +38,18 @@ std::optional<Command> Executor::PopData() {
     return cmd;
 }
 
-bool Executor::NextSequence() {
+bool Executor::NextSequence() noexcept {
     if (_context.empty())
         return true;
 
     _commands = _context.back();
     _context.pop_back();
-    return Execute(*_commands);
+    try {
+        return Execute(*_commands);
+    } catch (std::exception &e) {
+        Fail() << e.what();
+        return false;
+    }
 }
 
 bool Executor::Execute(Continuation& sequence) {
