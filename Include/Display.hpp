@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 
-namespace Turtle1 {
+namespace TurtleGraphics {
 
 class Display {
 public:
@@ -18,4 +18,4 @@ public:
     void Present();
 };
 
-}  // namespace Turtle1
+}  // namespace TurtleGraphics

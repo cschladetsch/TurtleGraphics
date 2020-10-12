@@ -12,7 +12,7 @@
 #include "Turtle.hpp"
 #include "Processor/Translator.hpp"
 
-namespace Turtle1 { namespace Processor {
+namespace TurtleGraphics { namespace Processor {
 
 class Executor : public ProcessBase {
     vector<CommandSequencePtr> _context;
@@ -64,4 +64,4 @@ private:
     bool DoRepeat();
 };
 }  // namespace Processor
-}  // namespace Turtle1
+}  // namespace TurtleGraphics

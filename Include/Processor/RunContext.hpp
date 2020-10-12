@@ -6,7 +6,7 @@
 #include "Processor/Parser.hpp"
 #include "Processor/Executor.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 class RunContext : public ProcessBase
 {
@@ -28,5 +28,5 @@ public:
     Scope &GetScope();
 };
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
 

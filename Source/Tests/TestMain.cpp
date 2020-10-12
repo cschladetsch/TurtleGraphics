@@ -3,10 +3,9 @@
 
 #define CATCH_CONFIG_MAIN
 
-#include "catch.hpp"
-
-#include <algorithm>
 #include <array>
+
+#include "catch.hpp"
 
 #include "Turtle.hpp"
 #include "Processor/Lexer.hpp"
@@ -16,17 +15,15 @@
 #include "Processor/Executor.hpp"
 #include "Processor/RunContext.hpp"
 
-using Turtle1::Turtle;
-
-using Turtle1::Processor::EToken;
-using Turtle1::Processor::Token;
-using Turtle1::Processor::Lexer;
-using Turtle1::Processor::Parser;
-using Turtle1::Processor::Translator;
-using Turtle1::Processor::Executor;
-using Turtle1::Processor::Command;
-using Turtle1::Processor::ECommandType;
-using Turtle1::Processor::Continuation;
+using TurtleGraphics::Turtle;
+using TurtleGraphics::Processor::EToken;
+using TurtleGraphics::Processor::Lexer;
+using TurtleGraphics::Processor::Parser;
+using TurtleGraphics::Processor::Translator;
+using TurtleGraphics::Processor::Executor;
+using TurtleGraphics::Processor::Command;
+using TurtleGraphics::Processor::ECommandType;
+using TurtleGraphics::Processor::Continuation;
 
 TEST_CASE("Test String", "[processor]") {
     const char* text = "hello\nworld";
@@ -96,7 +93,7 @@ TEST_CASE("Test Parser", "[processor]") {
 }
 
 TEST_CASE("Test Executor", "[exec]") {
-    Turtle turtle;
+    TurtleGraphics::Turtle turtle;
     auto commands = std::vector { 
         Command(50),
         Command(ECommandType::Rotate),
@@ -112,7 +109,7 @@ TEST_CASE("Test Executor", "[exec]") {
 }
 
 TEST_CASE("Test1", "[exec]") {
-    const char* i0 = "penDown repeat 4 { rotate 80 move 120 } quit";
+    const char* i0 = "penDown repeat 4 { rotate 80 move 120 }";
     Lexer lexer(i0);
     REQUIRE(lexer.Run());
 
@@ -129,13 +126,13 @@ TEST_CASE("Test1", "[exec]") {
 
 TEST_CASE("Test RunContext", "[exec]") {
     Turtle turtle;
-    Turtle1::Processor::RunContext context(turtle, "move 100");
+    TurtleGraphics::Processor::RunContext context(turtle, "move 100");
     REQUIRE(context.Run());
 }
 
 TEST_CASE("Test Function", "[exec][function]") {
     Turtle turtle;
-    Turtle1::Processor::RunContext context(turtle, "fun foo(a) { }");
+    TurtleGraphics::Processor::RunContext context(turtle, "fun foo(a) { }");
     REQUIRE(context.Run());
 }
 

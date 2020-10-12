@@ -9,7 +9,7 @@
 #include "Processor/Lexer.hpp"
 #include "Processor/AstNode.hpp"
 
-namespace Turtle1 { namespace Processor {
+namespace TurtleGraphics { namespace Processor {
 class Parser : public ProcessBase {
  private:
     std::vector<Token> _tokens;
@@ -64,4 +64,4 @@ private:
     bool AddParameterisedCommand(EToken type);
 };
 }  // namespace Processor
-}  // namespace Turtle1
+}  // namespace TurtleGraphics

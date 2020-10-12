@@ -2,5 +2,5 @@
 
 #include "Processor/Pch.hpp"
 
-namespace Turtle1::Processor {
-} // Turtle1::Processor
+namespace TurtleGraphics::Processor {
+} // TurtleGraphics::Processor

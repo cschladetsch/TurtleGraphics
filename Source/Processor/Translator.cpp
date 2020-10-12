@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/Translator.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 Translator::Translator(const AstNodePtr root) {
     _root = root;
@@ -134,5 +134,5 @@ string Translator::MakeValueString(const AstNodePtr &node) {
     return node->GetText();
 }
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
 

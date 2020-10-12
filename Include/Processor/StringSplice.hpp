@@ -6,7 +6,7 @@
 
 #include "StdAliases.hpp"
 
-namespace Turtle1 { namespace Processor {
+namespace TurtleGraphics { namespace Processor {
 
 class Lexer;
 
@@ -37,4 +37,4 @@ struct StringSplice {
     string GetText() const;
 };
 }  // namespace Processor
-}  // namespace Turtle1
+}  // namespace TurtleGraphics

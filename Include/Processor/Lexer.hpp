@@ -11,7 +11,7 @@
 #include "Processor/Token.hpp"
 #include "Processor/StringSplice.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 class Lexer : public ProcessBase {
     vector<Token> _tokens;
@@ -46,4 +46,4 @@ private:
     bool GetNext();
 };
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor

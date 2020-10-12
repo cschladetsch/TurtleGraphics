@@ -4,7 +4,7 @@
 #include "Processor/Executor.hpp"
 #include "Processor/Continuation.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 Executor::Executor(Turtle& turtle, const CommandSequencePtr sequence) noexcept
     : _sequence((sequence)) {
@@ -132,4 +132,4 @@ bool Executor::DoRepeat() {
     return true;
 }
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor

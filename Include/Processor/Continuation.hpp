@@ -8,46 +8,47 @@
 #include "Executor.hpp"
 #include "Processor/Command.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 typedef std::string Identifier;
 typedef std::map<Identifier, Command> Scope;
 
-class Continuation : public ProcessBase {
+class Continuation final : public ProcessBase {
     vector<Command> _commands;
     size_t _offset = 0;
     Scope _scope;
-    Scope _scopeEntered;
+    Scope _enteredScope;
     vector<Identifier> _formalArgs;
+    // TODO(cjs) Logger<Continuation> _log;
 
 public:
     Continuation() = default;
-    explicit Continuation(vector<Command> commands);
+    explicit Continuation(vector<Command>&& commands, vector<Identifier>&& formalArgs = vector<Identifier>());
 
     bool Run() noexcept override;
     void Reset() noexcept override;
+
     bool Enter(Executor& exec);
     Command Next();
-    void Leave(Executor& exec);
 
-    bool HasScoped(Identifier const& identifier) const noexcept {
+    [[nodiscard]] bool HasScoped(Identifier const& identifier) const noexcept {
         return _scope.contains(identifier);
     }
 
-    Command GetScoped(Identifier const& identifier) const {
+    [[nodiscard]] Command GetScoped(Identifier const& identifier) const {
         return _scope.at(identifier);
     }
 
-    std::optional<Command> GetScopedOpt(Identifier const& identifier) const noexcept {
+    [[nodiscard]] std::optional<Command> GetScopedOpt(Identifier const& identifier) const noexcept {
         return HasScoped(identifier)
             ? std::make_optional(_scope.at(identifier))
             : std::nullopt;
     }
 
-    const Scope& GetScope() const noexcept{ return _scope; }
-    Scope& GetScope() noexcept { return _scope; }
+    [[nodiscard]] const Scope& GetScope() const noexcept{ return _scope; }
+    [[nodiscard]] Scope& GetScope() noexcept { return _scope; }
 
-    bool AtEnd() const noexcept { return _offset == _commands.size(); }
+    [[nodiscard]] bool AtEnd() const noexcept { return _offset == _commands.size(); }
 
 private:
     friend class Translator;
@@ -55,5 +56,5 @@ private:
     void Append(const Command& command);
 };
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
 

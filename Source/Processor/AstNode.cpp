@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/AstNode.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 void AstNode::AddChild(const AstNodePtr& node) {
     assert(node);
@@ -23,5 +23,5 @@ AstNodePtr AstNode::New(Token token) {
     return std::make_shared<AstNode>(token);
 }
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
 

@@ -2,7 +2,7 @@
 
 #pragma once
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 class Foo {
 };
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor

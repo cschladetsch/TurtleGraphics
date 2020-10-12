@@ -2,7 +2,7 @@
 
 #pragma once
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 enum class EToken {
     None,
@@ -30,4 +30,4 @@ enum class EToken {
     Comma,
 };
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor

@@ -5,7 +5,7 @@
 #include <variant>
 #include "Processor/ECommandType.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 class Continuation;
 typedef std::shared_ptr<Continuation> CommandSequencePtr;
@@ -34,4 +34,4 @@ struct Command {
     }
 };
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor

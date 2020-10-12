@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/RunContext.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 bool RunContext::Run() noexcept {
     if (!_lexer.Run(_code)) {
@@ -34,4 +34,4 @@ Scope &RunContext::GetScope() {
     return _executor.GetScope();
 }
 
-}   // namespace Turtle1::Processor
+}   // namespace TurtleGraphics::Processor

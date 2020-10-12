@@ -8,7 +8,7 @@
 #include "Processor/AstNode.hpp"
 #include "Processor/Continuation.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 class Translator final : public ProcessBase {
     vector<CommandSequencePtr> _commands;
@@ -42,4 +42,4 @@ private:
     static string MakeValueString(const AstNodePtr& node);
 };
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor

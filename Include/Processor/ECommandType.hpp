@@ -2,7 +2,7 @@
 
 #pragma once
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 enum class ECommandType {
     None,
@@ -15,4 +15,4 @@ enum class ECommandType {
     Quit,
 };
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor

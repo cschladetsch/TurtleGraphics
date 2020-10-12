@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/Lexer.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 std::string StringSplice::GetText() const {
     assert(Source != nullptr);
@@ -159,5 +159,5 @@ char Lexer::GetCurrent() const {
     return GetCurrent(_offset);
 }
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
 

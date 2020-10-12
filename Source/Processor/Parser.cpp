@@ -3,7 +3,7 @@
 #include "Processor/Pch.hpp"
 #include "Processor/Parser.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 Parser::Parser(const Lexer& lexer) {
     SetLexer(lexer);
@@ -206,5 +206,5 @@ bool Parser::AddChild(const AstNodePtr node) {
     return true;
 }
 
-}  // namespace Turtle1::Processor 
+}  // namespace TurtleGraphics::Processor 
 

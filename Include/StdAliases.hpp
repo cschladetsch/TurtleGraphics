@@ -6,10 +6,11 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <optional>
 #include <utility>
 
 // usure if this is a good idea.
-namespace Turtle1 {
+namespace TurtleGraphics {
 
 using string = std::string;
 
@@ -25,5 +26,8 @@ using map = std::map<K, V>;
 template <typename A, typename B>
 using pair = std::pair<A, B>;
 
-}  // namespace Turtle1
+template <typename Ty>
+using optional = std::optional<Ty>;
+
+}  // namespace TurtleGraphics
 

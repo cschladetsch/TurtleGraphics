@@ -5,7 +5,7 @@
 #include "Processor/EToken.hpp"
 #include "Processor/StringSplice.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 struct Token {
     EToken Type;
     StringSplice Splice;
@@ -20,5 +20,5 @@ struct Token {
         return left.Type == right.Type;
     }
 };
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
 

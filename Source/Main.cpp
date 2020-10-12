@@ -8,10 +8,10 @@
 
 #include "SDL.h"
 #include "Display.hpp"
-#include "Turtle.hpp"
+#include "TurtleGraphics.hpp"
 
-using Turtle1::Display;
-using Turtle1::Turtle;
+using TurtleGraphics::Display;
+using TurtleGraphics::TurtleGraphics;
 
 using std::cout;
 using std::cerr;
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
-    Turtle turtle;
+    TurtleGraphics turtle;
     turtle.PenDown = false;
     turtle.Location = { 500, 500 };
 

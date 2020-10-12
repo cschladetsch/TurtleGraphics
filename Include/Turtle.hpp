@@ -10,7 +10,7 @@
 #include "Position.hpp"
 #include "StdAliases.hpp"
 
-namespace Turtle1 {
+namespace TurtleGraphics {
 
 class Turtle {
 public:
@@ -28,7 +28,7 @@ public:
     void Rotate(float angle);
     void Draw(SDL_Renderer* renderer) const;
 
-    string Trace() const;
+    [[nodiscard]] string Trace() const;
 
 protected:
     [[nodiscard]] Position GetForward() const;
@@ -36,5 +36,5 @@ protected:
     void DrawLineSegments(SDL_Renderer *renderer) const;
 };
 
-}  // namespace Turtle1
+}  // namespace TurtleGraphics
 

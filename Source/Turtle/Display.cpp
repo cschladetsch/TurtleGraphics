@@ -3,7 +3,7 @@
 #include "Pch.hpp"
 #include "Display.hpp"
 
-namespace Turtle1 {
+namespace TurtleGraphics {
 
 Display::~Display() {
     SDL_DestroyRenderer(Renderer);
@@ -46,4 +46,4 @@ bool Display::PreRender() const {
 void Display::Present() {
     SDL_RenderPresent(Renderer);
 }
-}  // namespace Turtle1
+}  // namespace TurtleGraphics

@@ -3,7 +3,7 @@
 #pragma once
 #include <ostream>
 
-namespace Turtle1 {
+namespace TurtleGraphics {
 
 struct Position {
     int x = 0;
@@ -41,5 +41,5 @@ struct Position {
 
 typedef Position Vector;
 
-}  // namespace Turtle1
+}  // namespace TurtleGraphics
 

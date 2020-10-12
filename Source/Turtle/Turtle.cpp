@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-namespace Turtle1 {
+namespace TurtleGraphics {
 
 void Turtle::Draw(SDL_Renderer* renderer) const {
     DrawTurtle(renderer);
@@ -64,8 +64,8 @@ Position Turtle::GetForward() const {
 }
 
 string Turtle::Trace() const {
-    return "Turtle";
+    return "TurtleGraphics";
 }
 
-}  // namespace Turtle1
+}  // namespace TurtleGraphics
 

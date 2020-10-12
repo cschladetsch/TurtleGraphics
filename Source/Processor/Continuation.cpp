@@ -3,46 +3,50 @@
 #include "Processor/Pch.hpp"
 #include "Processor/Continuation.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
-Continuation::Continuation(vector<Command> commands)
-    : _commands(std::move(commands)) {
+Continuation::Continuation(vector<Command>&& commands, vector<Identifier>&& formalArgs)
+    : _commands(std::move(commands))
+    , _formalArgs(std::move(formalArgs)) {
 }
 
 bool Continuation::Run() noexcept {
+    // Continuations cannot run themselves.
     return false;
 }
 
 void Continuation::Reset() noexcept {
-    _scope = _scopeEntered;
     _offset = 0;
+    _scope = _enteredScope;
 }
 
-bool Continuation::Enter(Executor &exec) {
-    for (const auto &arg : _formalArgs) {
+bool Continuation::Enter(Executor& exec) {
+    for (const auto& arg : _formalArgs) {
         auto opt = exec.PopData();
-        if (!opt.has_value())
-            return Fail("No arg for continuation");
+        if (!opt.has_value()) {
+            return Fail("Missing argument for continuation");
+        }
 
         _scope[arg] = *opt;
     }
 
-    _scopeEntered = _scope;
+    _enteredScope = _scope;
+    _offset = 0;
     return true;
 }
 
-void Continuation::Leave(Executor& exec) {
-}
-
 Command Continuation::Next() {
-    if (AtEnd())
+    if (AtEnd()) {
+        //Warn("At end of continuation");
         return Command();
+    }
 
     return _commands[_offset++];
 }
 
-void Continuation::Append(const Command& cmd) {
-    _commands.push_back(cmd);
+void Continuation::Append(const Command& command) {
+    _commands.push_back(command);
 }
 
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
+

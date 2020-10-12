@@ -9,7 +9,7 @@
 
 #include "Processor/Token.hpp"
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 class AstNode;
 
@@ -33,5 +33,5 @@ class AstNode {
     static AstNodePtr New(Token token);
     static AstNodePtr New(EToken token) { return New(Token(token)); }
 };
-}  // namespace Turtle1::Processor
+}  // namespace TurtleGraphics::Processor
 

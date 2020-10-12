@@ -6,7 +6,7 @@
 #include <sstream>
 #include <ostream>
 
-namespace Turtle1::Processor {
+namespace TurtleGraphics::Processor {
 
 struct ProcessBase {
  protected:
@@ -40,5 +40,5 @@ protected:
 
 };
 
-}  // namespace Turtle1
+}  // namespace TurtleGraphics
 
