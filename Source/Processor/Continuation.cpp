@@ -5,7 +5,7 @@
 
 namespace TurtleGraphics::Processor {
 
-Continuation::Continuation(vector<Command>&& commands, vector<Identifier>&& formalArgs)
+Continuation::Continuation(vector<Command> commands, vector<Identifier> formalArgs)
     : _commands(std::move(commands))
     , _formalArgs(std::move(formalArgs)) {
 }

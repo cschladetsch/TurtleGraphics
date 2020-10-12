@@ -31,12 +31,11 @@ bool Parser::Run() noexcept {
         Fail() << e.what();
         return false;
     }
-
-    return true;
 }
 
 bool Parser::ParseStatements() {
     while (ParseStatement()) {
+        continue;
     }
 
     return HasSucceeded();
@@ -44,12 +43,12 @@ bool Parser::ParseStatements() {
 
 bool Parser::ParseStatement() {
     switch (CurrentTokenType()) {
-    case EToken::PenDown: return AppendChild(EToken::PenDown);
-    case EToken::PenUp: return AppendChild(EToken::PenUp);
+    case EToken::PenDown: return AddChild(EToken::PenDown);
+    case EToken::PenUp: return AddChild(EToken::PenUp);
     case EToken::Repeat: return ParseRepeat();
     case EToken::Rotate: return ParseRotate();
     case EToken::Move: return ParseMove();
-    case EToken::Quit: return AppendChild(EToken::Quit);
+    case EToken::Quit: return AddChild(EToken::Quit);
     case EToken::Function: return ParseFunction();
     default: ;
     }
@@ -75,7 +74,7 @@ bool Parser::ParseRepeat() {
 AstNodePtr Parser::GetRoot() const {
     if (_context.size() != 1) {
         Fail("Unbalanced parse tree");
-        return 0;
+        return nullptr;
     }
 
     return _context.front();
@@ -131,7 +130,7 @@ bool Parser::ParseFunction() {
     return true;
 }
 
-void Parser::EnterNode(const AstNodePtr node) {
+void Parser::EnterNode(AstNodePtr const &node) {
     _context.back()->AddChild(node);
     _context.push_back(node);
 }
@@ -187,22 +186,17 @@ bool Parser::ParseExpression() {
     return false;
 }
 
-bool Parser::AppendChild(EToken token) {
-    return AppendChild(Token{ token });
-}
-
-bool Parser::AppendChild(Token token) {
-    AddChild(token);
+bool Parser::AddChild(Token const &token) {
     ++_currentToken;
-    return true;
-}
-
-bool Parser::AddChild(Token token) {
     return AddChild(AstNode::New(token));
 }
 
-bool Parser::AddChild(const AstNodePtr node) {
-    _context.back()->AddChild(node);
+bool Parser::AddChild(EToken type) {
+    return AddChild(Token(type));
+}
+
+bool Parser::AddChild(AstNodePtr const &child) {
+    _context.back()->AddChild(child);
     return true;
 }
 
