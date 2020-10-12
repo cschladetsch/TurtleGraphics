@@ -2,16 +2,14 @@
 
 #pragma once
 
-#include <stack>
 #include <vector>
 #include <string>
 
-#include "Processor/Lexer.hpp"
 #include "Processor/AstNode.hpp"
 
 namespace TurtleGraphics { namespace Processor {
-class Parser : public ProcessBase {
- private:
+
+class Parser final : public ProcessBase {
     std::vector<Token> _tokens;
     size_t _currentToken = 0;
     std::vector<AstNodePtr> _context;
@@ -26,10 +24,11 @@ public:
     bool Run() noexcept override;
 
     AstNodePtr GetRoot() const;
-    bool ParseArguments(const AstNodePtr& fun);
+    bool AddArguments();
 
 private:
     bool ParseFunction();
+    bool AddStatementBlock();
     bool ParseStatement();
     bool ParseRepeat();
     bool ParseMove();
@@ -42,23 +41,26 @@ private:
 
     Token CurrentToken() const { return GetTokens()[_currentToken]; }
     EToken CurrentTokenType() const { return CurrentToken().Type; }
+
     bool CurrentTokenType(EToken type) const {
         return CurrentToken().Type == type;
     }
+
     std::string CurrentTokenText() const {
         return CurrentToken().Splice.GetText();
     }
 
     Token NextToken() { return GetTokens()[++_currentToken]; }
+
     Token Peek() const { return Token{ GetTokens()[_currentToken + 1].Type }; }
     bool Peek(EToken type) const { return Peek().Type == type; }
     bool Expect(EToken type);
 
-    bool AddChild(Token token);
-    bool AppendChild(EToken token);
-    bool AppendChild(Token token);
-    bool AddChild(AstNodePtr node);
-    void EnterNode(AstNodePtr node);
+    bool AddChild(Token const &token);
+    bool AddChild(EToken type);
+    bool AddChild(AstNodePtr const &child);
+
+    void EnterNode(AstNodePtr const &node);
     void LeaveNode();
 
     bool AddParameterisedCommand(EToken type);

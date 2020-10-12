@@ -5,8 +5,12 @@
 namespace TurtleGraphics::Processor {
 
 enum class EToken {
+    // virtual
     None,
     Start,
+    StatementBlock,
+
+    // real
     PenDown,
     PenUp,
     Function,

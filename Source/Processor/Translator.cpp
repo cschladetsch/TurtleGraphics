@@ -35,6 +35,33 @@ CommandSequencePtr Translator::GetCommands() const {
     return _commands.back();
 }
 
+bool Translator::TranslateFunction(const AstNodePtr& node) {
+    auto const& children = node->GetChildren();
+    if (children.size() != 3) {
+        return Fail("Internal Error: Functions require 3 AST children.");
+    }
+
+    auto const& name = children[0]->GetText();
+    auto const& args = children[1]->GetChildren();
+    auto const& body = children[2]->GetChildren();
+
+    Append(Command(Translate(body)));
+    Append(Command(Translate(args)));
+    Append(Command(name));
+    Append(ECommandType::Function);
+
+    return true;
+}
+
+bool Translator::TranslateArgList(const AstNodePtr& node) const {
+    vector<Identifier> idents;
+    for (const auto& arg : node->GetChildren()) {
+        idents.push_back(arg->GetText());
+    }
+
+    return Append(Command(idents));
+}
+
 bool Translator::Translate(AstNodePtr const &node) {
     assert(node);
     switch (node->GetType()) {
@@ -53,6 +80,10 @@ bool Translator::Translate(AstNodePtr const &node) {
         return Append(ECommandType::PenUp);
     case EToken::Repeat:
         return TranslateRepeat(node);
+    case EToken::ArgList:
+        return TranslateArgList(node);
+    case EToken::Function:
+        return TranslateFunction(node);
     default: ;
     }
 
@@ -103,7 +134,7 @@ void Translator::Leave() {
     _commands.pop_back();
 }
 
-bool Translator::Append(Command command) const {
+bool Translator::Append(Command const &command) const {
     Current()->Append(command);
     return true;
 }

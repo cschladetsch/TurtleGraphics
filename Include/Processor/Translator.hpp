@@ -24,6 +24,8 @@ public:
     CommandSequencePtr GetCommands() const;
 
 private:
+    bool TranslateFunction(const AstNodePtr& node);
+    bool TranslateArgList(const AstNodePtr& node) const;
     bool Translate(AstNodePtr const& node);
     bool Translate(vector<AstNodePtr> const& children);
     bool TranslateRepeat(const AstNodePtr& node);
@@ -33,7 +35,7 @@ private:
 
     CommandSequencePtr Current() const { return _commands.back(); }
 
-    bool Append(Command command) const;
+    bool Append(Command const& command) const;
     bool Append(ECommandType type) const;
 
     bool AddUnaryOperation(AstNodePtr const& node, ECommandType type) const;

@@ -12,7 +12,7 @@ typedef std::shared_ptr<Continuation> CommandSequencePtr;
 
 struct Command {
     ECommandType Type;
-    std::variant<int, string, CommandSequencePtr> Value;
+    std::variant<int, string, CommandSequencePtr, vector<string>> Value;
 
     Command() : Command(ECommandType::None) {
     }
@@ -32,6 +32,8 @@ struct Command {
     explicit Command(const CommandSequencePtr& commands) : Value(commands) {
         Type = ECommandType::Value;
     }
+
+    explicit Command(vector<string> const& idents) : Type(ECommandType::Value), Value(idents) { }
 };
 
 }  // namespace TurtleGraphics::Processor

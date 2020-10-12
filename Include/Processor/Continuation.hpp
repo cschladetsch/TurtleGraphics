@@ -23,7 +23,7 @@ class Continuation final : public ProcessBase {
 
 public:
     Continuation() = default;
-    explicit Continuation(vector<Command>&& commands, vector<Identifier>&& formalArgs = vector<Identifier>());
+    explicit Continuation(vector<Command> commands, vector<Identifier> formalArgs = vector<Identifier>());
 
     bool Run() noexcept override;
     void Reset() noexcept override;
