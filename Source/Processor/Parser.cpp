@@ -140,8 +140,6 @@ void Parser::LeaveNode() {
 }
 
 bool Parser::ParseStatementBlock() {
-    NextToken();
-
     if (!Expect(EToken::OpenBrace))
         return false;
 
