@@ -23,7 +23,6 @@ class Executor : public ProcessBase {
     CommandSequencePtr _sequence;
 
 public:
-    Executor() = default;
     Executor(Turtle &turtle) noexcept {
         _turtle = &turtle;
     }

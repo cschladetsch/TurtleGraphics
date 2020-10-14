@@ -124,16 +124,16 @@ TEST_CASE("Test1", "[exec]") {
     REQUIRE(exec.Run());
 }
 
-//TEST_CASE("Test RunContext", "[exec]") {
-//    Turtle turtle;
-//    TurtleGraphics::Processor::RunContext context(turtle, "move 100");
-//    REQUIRE(context.Run());
-//}
-//
-//TEST_CASE("Test Function", "[exec][function]") {
-//    Turtle turtle;
-//    TurtleGraphics::Processor::RunContext context(turtle, "fun foo(a) { }");
-//    REQUIRE(context.Run());
-//}
+TEST_CASE("Test RunContext", "[exec]") {
+    Turtle turtle;
+    TurtleGraphics::Processor::RunContext context(turtle, "move 100");
+    REQUIRE(context.Run());
+}
+
+TEST_CASE("Test Function", "[exec][function]") {
+    Turtle turtle;
+    TurtleGraphics::Processor::RunContext context(turtle, "fun foo(a) { }");
+    REQUIRE(context.Run());
+}
 
 #endif // TURTLE_UNIT_TESTS

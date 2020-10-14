@@ -81,15 +81,19 @@ AstNodePtr Parser::GetRoot() const {
 }
 
 bool Parser::ParseArguments(AstNodePtr const &fun) {
+    if (!Expect(EToken::OpenParan)) {
+        return Fail("Open parenthesis expected");
+    }
+
     const auto args = AstNode::New(EToken::ArgList);
     EnterNode(args);
 
-    while (Peek(EToken::Identifier)) {
+    while (Expect(EToken::Identifier)) {
+        args->AddChild(AstNode::New(NextToken()));
+
         if (!Peek(EToken::Comma)) {
             break;
         }
-
-        NextToken();
     }
 
     if (!Expect(EToken::CloseParan)) {
@@ -103,21 +107,20 @@ bool Parser::ParseArguments(AstNodePtr const &fun) {
 }
 
 bool Parser::ParseFunction() {
+    NextToken();
+
+    const auto funName = CurrentToken();
+
     if (!Expect(EToken::Identifier)) {
         return Fail("Function identifier expected");
     }
 
-    const auto funName = CurrentToken();
-
-    if (!Expect(EToken::OpenParan)) {
-        return Fail("Open parenthesis expected");
-    }
-
     auto fun = AstNode::New(EToken::Function);
     fun->AddChild(AstNode::New(funName));
+    EnterNode(fun);
 
     if (!ParseArguments(fun)) {
-        return false;;
+        return Fail("Failed to parse arguments");
     }
 
     if (!ParseStatementBlock()) {
