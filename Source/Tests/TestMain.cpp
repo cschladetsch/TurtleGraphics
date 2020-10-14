@@ -132,7 +132,7 @@ TEST_CASE("Test RunContext", "[exec]") {
 
 TEST_CASE("Test Function", "[exec][function]") {
     Turtle turtle;
-    TurtleGraphics::Processor::RunContext context(turtle, "fun foo(a) { }");
+    TurtleGraphics::Processor::RunContext context(turtle, "fun foo(a) { 1 }");
     REQUIRE(context.Run());
 }
 

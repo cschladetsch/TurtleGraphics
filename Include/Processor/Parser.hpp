@@ -24,7 +24,7 @@ public:
     bool Run() noexcept override;
 
     AstNodePtr GetRoot() const;
-    bool ParseArguments(const AstNodePtr& fun);
+    bool ParseArguments();
 
 private:
     bool ParseFunction();

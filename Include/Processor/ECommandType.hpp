@@ -12,6 +12,7 @@ enum class ECommandType {
     Move,
     Rotate,
     Repeat,
+    Function,
     Quit,
 };
 

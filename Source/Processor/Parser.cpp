@@ -80,46 +80,20 @@ AstNodePtr Parser::GetRoot() const {
     return _context.front();
 }
 
-bool Parser::ParseArguments(AstNodePtr const &fun) {
-    if (!Expect(EToken::OpenParan)) {
-        return Fail("Open parenthesis expected");
-    }
-
-    const auto args = AstNode::New(EToken::ArgList);
-    EnterNode(args);
-
-    while (Expect(EToken::Identifier)) {
-        args->AddChild(AstNode::New(NextToken()));
-
-        if (!Peek(EToken::Comma)) {
-            break;
-        }
-    }
-
-    if (!Expect(EToken::CloseParan)) {
-        return Fail("Close parenthesis expected");
-    }
-
-    LeaveNode();
-    fun->AddChild(args);
-
-    return false;
-}
-
 bool Parser::ParseFunction() {
     NextToken();
 
     const auto funName = CurrentToken();
 
     if (!Expect(EToken::Identifier)) {
-        return Fail("Function identifier expected");
+        return Fail("Function name expected");
     }
 
     auto fun = AstNode::New(EToken::Function);
     fun->AddChild(AstNode::New(funName));
     EnterNode(fun);
 
-    if (!ParseArguments(fun)) {
+    if (!ParseArguments()) {
         return Fail("Failed to parse arguments");
     }
 
@@ -127,8 +101,33 @@ bool Parser::ParseFunction() {
         return Fail("Statement block expected");
     }
 
+    //AddChild(fun);
     LeaveNode();
-    AddChild(fun);
+
+    return true;
+}
+
+bool Parser::ParseArguments() {
+    if (!Expect(EToken::OpenParan)) {
+        return Fail("Open parenthesis expected");
+    }
+
+    const auto args = AstNode::New(EToken::ArgList);
+    EnterNode(args);
+
+    while (AddChild(EToken::Identifier)) {
+        if (!Peek(EToken::Comma)) {
+            break;
+        }
+
+        NextToken();
+    }
+
+    if (!Expect(EToken::CloseParan)) {
+        return Fail("Close parenthesis expected");
+    }
+
+    LeaveNode();
 
     return true;
 }
