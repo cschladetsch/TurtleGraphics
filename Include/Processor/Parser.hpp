@@ -24,10 +24,11 @@ public:
     bool Run() noexcept override;
 
     AstNodePtr GetRoot() const;
-    bool ParseArguments();
+    bool AddArguments();
 
 private:
     bool ParseFunction();
+    bool AddStatementBlock();
     bool ParseStatement();
     bool ParseRepeat();
     bool ParseMove();

@@ -94,25 +94,30 @@ bool Parser::ParseFunction() {
     fun->AddChild(AstNode::New(funName));
     EnterNode(fun);
 
-    if (!ParseArguments()) {
+    if (!AddArguments()) {
         return Fail("Failed to parse arguments");
     }
 
-    const auto block = AstNode::New(EToken::StatementBlock);
-    EnterNode(block);
-    if (!ParseStatementBlock()) {
+    if (!AddStatementBlock()) {
         return Fail("Statement block expected");
     }
 
     LeaveNode();
 
-    //AddChild(fun);
-    LeaveNode();
-
     return true;
 }
 
-bool Parser::ParseArguments() {
+bool Parser::AddStatementBlock() {
+    EnterNode(AstNode::New(EToken::StatementBlock));
+    if (!ParseStatementBlock()) {
+        return false;
+    }
+
+    LeaveNode();
+    return true;
+}
+
+bool Parser::AddArguments() {
     if (!Expect(EToken::OpenParan)) {
         return Fail("Open parenthesis expected");
     }
