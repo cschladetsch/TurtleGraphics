@@ -50,6 +50,7 @@ bool Parser::ParseStatement() {
     case EToken::Move: return ParseMove();
     case EToken::Quit: return AddChild(EToken::Quit);
     case EToken::Function: return ParseFunction();
+    case EToken::Number: return AddChild(CurrentToken());
     default: ;
     }
 
@@ -97,9 +98,13 @@ bool Parser::ParseFunction() {
         return Fail("Failed to parse arguments");
     }
 
+    const auto block = AstNode::New(EToken::StatementBlock);
+    EnterNode(block);
     if (!ParseStatementBlock()) {
         return Fail("Statement block expected");
     }
+
+    LeaveNode();
 
     //AddChild(fun);
     LeaveNode();
