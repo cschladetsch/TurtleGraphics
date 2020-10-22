@@ -21,20 +21,12 @@ See [video](https://www.youtube.com/watch?v=YXAmNWvC77M) and quick short [follow
 * Get an SDL window up, after building SDL from source
 * Draw a turtle
 
-## Add Interpreter structure 
-[video](https://www.youtube.com/watch?v=rBfrGET-t-4).
-
-## Add Lexer 
-[video](https://www.youtube.com/watch?v=eeoNcG8TW8s).
-
-## Add Parser 
-[video](https://www.youtube.com/watch?v=DpMwADQnzb0).
-
-## Add Executor
-[video](https://www.youtube.com/watch?v=ywQ5dmP9Gy4).
-
-## Add Translator
-[video](https://www.youtube.com/watch?v=g0glGzOOaWo)
+## Development Videos
+* [Add Interpreter Structure](https://www.youtube.com/watch?v=rBfrGET-t-4).
+* [Add Lexer](https://www.youtube.com/watch?v=eeoNcG8TW8s).
+* [Add Parser](https://www.youtube.com/watch?v=DpMwADQnzb0).
+* [Add Executor](https://www.youtube.com/watch?v=ywQ5dmP9Gy4).
+* [Add Translator](https://www.youtube.com/watch?v=g0glGzOOaWo)
 
 ## Todo
 Maybe have multiple Turtles?
