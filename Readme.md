@@ -15,13 +15,20 @@ Features:
 
 See [YouTube Playlist](https://youtube.com/sp4m) for realtime video commentary on development.
 
-## Setup
-See [video](https://www.youtube.com/watch?v=YXAmNWvC77M) and quick short [follow up](https://www.youtube.com/watch?v=tlwz-TaYKTk).
-* Setup Solution, tools and libs for Visual Studio 2019
-* Get an SDL window up, after building SDL from source
-* Draw a turtle
+## Building
+Either use the Visual Stuio solution directly, or CMake otherwise.
+
+### Using CMake
+The usual:
+```bash
+$ mkdir -p build && cd build && cmake .. && make
+```
 
 ## Development Videos
+* [Setup](https://www.youtube.com/watch?v=YXAmNWvC77M) and quick short [follow up](https://www.youtube.com/watch?v=tlwz-TaYKTk).
+  * Setup Solution, tools and libs for Visual Studio 2019
+  * Get an SDL window up, after building SDL from source
+  * Draw a turtle
 * [Add Interpreter Structure](https://www.youtube.com/watch?v=rBfrGET-t-4)
 * [Add Lexer](https://www.youtube.com/watch?v=eeoNcG8TW8s)
 * [Add Parser](https://www.youtube.com/watch?v=DpMwADQnzb0)
