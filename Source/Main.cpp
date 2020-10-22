@@ -21,15 +21,22 @@ using TurtleGraphics::Display;
 using TurtleGraphics::Turtle;
 using TurtleGraphics::Processor::RunContext;
 
-void ReadAndRunInput(Turtle turtle)
-{
-    string script;
+bool ReadAndRunInput(Turtle &turtle) {
     cout << "> ";
-    cin >> script;
-    RunContext runContext(turtle, script.c_str());
-    if (!runContext.Run()) {
-        cerr << runContext.GetError() << endl;
+    char buffer[9546];
+    if (!cin.getline(buffer, 9546)) {
+        return false;
     }
+
+    RunContext runContext(turtle, buffer);
+    if (!runContext.Run()) {
+        cout << runContext.GetError() << endl;
+    }
+
+    // TODO(cjs)
+    //turtle.Draw();
+
+    return true;
 }
 
 int main(int argc, char *argv[]) {
@@ -44,10 +51,12 @@ int main(int argc, char *argv[]) {
     turtle.Location = { 500, 500 };
 
     while (display.PreRender()) {
-        turtle.Draw(display.Renderer);
+        turtle.DrawPath(display.Renderer);
         display.Present();
 
-        ReadAndRunInput(turtle);
+        if (!ReadAndRunInput(turtle)) {
+            cout << "Error\n";
+        }
     }
 
     return 0;

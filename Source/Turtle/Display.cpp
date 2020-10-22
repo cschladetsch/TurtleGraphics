@@ -27,6 +27,9 @@ bool Display::Bootstrap(int width, int height) {
         return false;
     }
 
+    SDL_SetRenderDrawColor(Renderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_RenderClear(Renderer);
+
     return true;
 }
 
@@ -36,9 +39,6 @@ bool Display::PreRender() const {
     SDL_PollEvent(&event);
     if (event.type == SDL_QUIT)
         return false;
-
-    SDL_SetRenderDrawColor(Renderer, 0xff, 0xff, 0xff, 0xff);
-    SDL_RenderClear(Renderer);
 
     return true;
 }

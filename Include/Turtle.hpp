@@ -27,17 +27,17 @@ public:
 
     void Move(float distance);
     void Rotate(float angle);
-    void Draw(SDL_Renderer* renderer) const;
+    void DrawPath(SDL_Renderer* renderer);
+    void DrawTurtle(SDL_Renderer* renderer) const;
 
     [[nodiscard]] string Trace() const;
-    bool Process();
-    bool Process(std::function<bool (Turtle const &)> const &fun);
+    Position Process();
+    Position Process(std::function<bool(Turtle&, Position const& next)> const& fun);
 
 protected:
     [[nodiscard]] Position GetForward() const;
-    void DrawTurtle(SDL_Renderer* renderer) const;
-    void DrawLineSegments(SDL_Renderer *renderer) const;
+    void DrawLineSegments(SDL_Renderer* renderer);
+    void ClearHistory();
 };
 
 }  // namespace TurtleGraphics
-

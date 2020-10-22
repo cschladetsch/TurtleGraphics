@@ -15,8 +15,6 @@
 #include "Processor/Executor.hpp"
 #include "Processor/RunContext.hpp"
 
-using std::move;
-
 using TurtleGraphics::Turtle;
 using TurtleGraphics::Position;
 
@@ -29,33 +27,6 @@ using TurtleGraphics::Processor::Command;
 using TurtleGraphics::Processor::ECommandType;
 using TurtleGraphics::Processor::Continuation;
 using TurtleGraphics::Processor::RunContext;
-
-static Turtle Execute(const char* text)
-{
-    Turtle turtle;
-    RunContext context(turtle, text);
-    REQUIRE(context.Run());
-    REQUIRE(turtle.Process());
-    return turtle;
-}
-
-TEST_CASE("Test Empty String", "[processor]") {
-    Execute("");
-}
-
-TEST_CASE("Test Empty String With NL", "[processor]") {
-    Execute("\n");
-}
-
-TEST_CASE("Test Move 1", "[processor]") {
-    auto t = Execute("move 1");
-    REQUIRE(t.Location == Position(501, 500));
-}
-
-TEST_CASE("Test Move 1 NL", "[processor]") {
-    auto t = Execute("move 1\n");
-    REQUIRE(t.Location == Position(501, 500));
-}
 
 TEST_CASE("Test Lexer", "[processor]") {
     const char* i0 = "penDown  move\t50 repeat 123 quit";
@@ -160,6 +131,33 @@ TEST_CASE("Test RunContext", "[exec]") {
     Turtle turtle;
     RunContext context(turtle, "move 100");
     REQUIRE(context.Run());
+}
+
+static Turtle Execute(const char* text)
+{
+    Turtle turtle;
+    RunContext context(turtle, text);
+    REQUIRE(context.Run());
+    REQUIRE(turtle.Process());
+    return turtle;
+}
+
+TEST_CASE("Test Empty String", "[processor]") {
+    Execute("");
+}
+
+TEST_CASE("Test Empty String With NL", "[processor]") {
+    Execute("\n");
+}
+
+TEST_CASE("Test Move 1", "[processor]") {
+    auto t = Execute("move 1");
+    REQUIRE(t.Location == Position(501, 500));
+}
+
+TEST_CASE("Test Move 1 NL", "[processor]") {
+    auto t = Execute("move 1\n");
+    REQUIRE(t.Location == Position(501, 500));
 }
 
 TEST_CASE("Test Function decl", "[exec][function]") {

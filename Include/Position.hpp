@@ -5,24 +5,23 @@
 
 namespace TurtleGraphics {
 
+inline bool Approx(float a, float b) {
+    return fabs(a - b) < 0.0001f;
+}
+
 struct Position {
-    int x = 0;
-    int y = 0;
+    float x = 0;
+    float y = 0;
 
     Position() = default;
 
-    Position(int _x, int _y) {
+    Position(float _x, float _y) {
         x = _x;
         y = _y;
     }
 
-    Position(float _x, float _y) {
-        x = Round(_x);
-        y = Round(_y);
-    }
-
     friend Position operator*(const Position& A, float scalar) {
-        return { Round(A.x*scalar), Round(A.y*scalar)};
+        return { A.x*scalar, A.y*scalar};
     }
 
     friend Position operator+(const Position& A, const Position& B) {
@@ -30,16 +29,12 @@ struct Position {
     }
 
     friend bool operator==(const Position& A, const Position& B) {
-        return A.x == B.x && A.y == B.y;
+        return Approx(A.x, B.x) && Approx(A.y, B.y);
     }
 
     friend std::ostream& operator<<(std::ostream& lhs,
         const Position& rhs) {
         return lhs << "x=" << rhs.x << ", y=" << rhs.y;
-    }
-
-    static int Round(float scalar) {
-        return static_cast<int>(scalar + 0.0f);
     }
 };
 
