@@ -8,9 +8,9 @@ A cross-platform [Turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics
 Has both native Visual Studio project for ease of use and access, and fast build speeds. Also has a CMake-based system for cross-platform support (Linux, macOS, etc).
 
 Features:
-* [Modern C++](https://github.com/cschladetsch/TurtleGraphics/wiki/ModernCpp), and [SDL](https://github.com/cschladetsch/CardCHess/wiki/gameloop).
-* Implementation of [turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics), with an [interpreter](https://github.com/cschladetsch/TurtleGraphics/wiki/Interperter)
-* Trying to show [best practices](https://github.com/cschladetsch/TurtleGraphics/wiki/CppBestPractises)
+* [Modern C++](https://github.com/cschladetsch/TurtleGraphics/wiki/ModernCpp), and [SDL](See [Sdl](http://www.sdl.org)
+* Implementation of [turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics), with an [interpreter](Interperter)
+* Trying to show [best practices](CppBestPractises)
 * Passes [Google C++ lint](https://en.wikipedia.org/wiki/Cpplint)
 
 See [YouTube Playlist](https://youtube.com/sp4m) for realtime video commentary on development.
