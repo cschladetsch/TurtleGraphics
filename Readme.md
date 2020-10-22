@@ -9,8 +9,8 @@ Has both native Visual Studio project for ease of use and access, and fast build
 
 Features:
 * [Modern C++](https://github.com/cschladetsch/TurtleGraphics/wiki/ModernCpp), and [SDL](http://www.libsdl.org)
-* Implementation of [turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics), with an [interpreter](wiki/Interperter)
-* Trying to show [best practices](wiki/CppBestPractises)
+* Implementation of [turtle graphics](https://en.wikipedia.org/wiki/Turtle_graphics), with an [interpreter](https://github.com/cschladetsch/TurtleGraphics/wiki/Interperter)
+* Trying to show [best practices](https://github.com/cschladetsch/TurtleGraphics/wiki/CppBestPractises)
 * Passes [Google C++ lint](https://en.wikipedia.org/wiki/Cpplint)
 
 See [YouTube Playlist](https://youtube.com/sp4m) for realtime video commentary on development.
