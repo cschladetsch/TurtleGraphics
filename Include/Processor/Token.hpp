@@ -6,19 +6,21 @@
 #include "Processor/StringSplice.hpp"
 
 namespace TurtleGraphics::Processor {
+
 struct Token {
     EToken Type;
     StringSplice Splice;
 
     explicit Token(EToken type = EToken::None) noexcept : Type(type) { }
+
     Token(EToken type, const StringSplice splice) noexcept : Token(type) {
         Splice = splice;
     }
 
-    friend bool operator==(const Token& left, const Token& right) noexcept {
-        // note: we only compare the token types
+    friend bool operator==(const Token& left, const Token& right) {
         return left.Type == right.Type;
     }
 };
+
 }  // namespace TurtleGraphics::Processor
 

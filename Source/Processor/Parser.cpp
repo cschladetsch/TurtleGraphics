@@ -121,6 +121,23 @@ bool Parser::AddStatementBlock() {
     return true;
 }
 
+bool Parser::ParseColorName() {
+    if (!Peek(EToken::Identifier)) {
+        return Fail("Color Identifier expected");
+    }
+    //auto& changeColor = EnterNode(EToken::ColorName);
+
+    //auto colorName = NextToken();
+    //switch (colorName.Type)
+    //{
+    //case EToken::Red:
+    //case EToken::Blue:
+    //case EToken::Green:
+    //}
+
+    return Fail("Not implemented");
+}
+
 bool Parser::AddArguments() {
     if (!Expect(EToken::OpenParan)) {
         return Fail("Open parenthesis expected");

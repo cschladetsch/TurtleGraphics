@@ -5,16 +5,12 @@
 
 namespace TurtleGraphics::Processor {
 
-Translator::Translator(const AstNodePtr root) {
-    _root = root;
-}
-
-bool Translator::Run(AstNodePtr root) noexcept {
-    _root = root;
+bool Translator::Run(AstNodePtr root) {
+    _root = std::move(root);
     return Run();
 }
 
-bool Translator::Run() noexcept {
+bool Translator::Run() {
     if (_root == nullptr) {
         return Fail("Empty ast tree");
     }

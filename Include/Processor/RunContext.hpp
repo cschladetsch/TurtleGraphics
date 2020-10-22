@@ -9,8 +9,7 @@
 
 namespace TurtleGraphics::Processor {
 
-class RunContext : public ProcessBase
-{
+class RunContext : public ProcessBase {
     Lexer _lexer;
     Parser _parser;
     Translator _translator;
@@ -19,12 +18,10 @@ class RunContext : public ProcessBase
 
 public:
     RunContext(Turtle &turtle, const char *code)
-        : _executor(turtle), _code(code)
-    {
+        : _executor(turtle), _code(code) {
     }
 
     bool Run() override;
-
     Scope &GetScope();
 };
 

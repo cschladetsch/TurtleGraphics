@@ -11,27 +11,57 @@ enum class EToken {
     StatementBlock,
 
     // real
+    True,
+    False,
+    Number,
+    Identifier,
+
     PenDown,
     PenUp,
     Function,
+    OpenParan,
+    CloseParan,
     ArgList,
-    True,
-    False,
+    Comma,
+    OpenBrace,
+    CloseBrace,
+
     Move,
     Rotate,
+    RotateX,
+    RotateY,
+    RotateZ,
+
     WhiteSpace,
-    Number,
-    Identifier,
     Quit,
-    Color,
+
     Repeat,
     If,
     Else,
-    OpenBrace,
-    CloseBrace,
-    OpenParan,
-    CloseParan,
-    Comma,
+    While,
+
+    SetPositionComponent,
+    DeltaPositionComponent,
+
+    X, Y, Z,
+
+    SetColor,
+    SetColorByName, // color names set in config file
+    DeltaColorComponent,
+    SetColorComponent,
+    MulColorComponent,
+
+    Red, Green, Blue, Alpha,
+
+    // deal with these dynamically via config file
+    //Black,
+    //White,
+    //Pink,
+    //Cyan,
+    //Purple,
+    //Grey,
+    //Grey1,
+    //Grey2,
 };
 
 }  // namespace TurtleGraphics::Processor

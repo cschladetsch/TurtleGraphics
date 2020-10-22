@@ -138,7 +138,7 @@ static Turtle Execute(const char* text)
     Turtle turtle;
     RunContext context(turtle, text);
     REQUIRE(context.Run());
-    REQUIRE(turtle.Process());
+    turtle.Location = turtle.Process();
     return turtle;
 }
 

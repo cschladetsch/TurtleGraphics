@@ -24,7 +24,7 @@ public:
         _turtle = &turtle;
     }
 
-    Executor(Turtle& turtle, const CommandSequencePtr sequence) noexcept ;
+    Executor(Turtle& turtle, CommandSequencePtr sequence) noexcept;
 
     bool Run(Turtle& turtle, CommandSequencePtr sequence) noexcept;
     bool Run(CommandSequencePtr sequence) noexcept;

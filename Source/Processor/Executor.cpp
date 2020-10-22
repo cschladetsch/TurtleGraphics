@@ -6,8 +6,8 @@
 
 namespace TurtleGraphics::Processor {
 
-Executor::Executor(Turtle& turtle, const CommandSequencePtr sequence) noexcept
-    : _sequence((sequence)) {
+Executor::Executor(Turtle& turtle, CommandSequencePtr sequence) noexcept
+    : _sequence(sequence) {
     _turtle = &turtle;
     _context.push_back(sequence);
 }
@@ -98,6 +98,8 @@ bool Executor::Execute(Command const &command) {
     }
     case ECommandType::Repeat:
         return DoRepeat();
+    default:
+        ;
     }
 
     return Fail("Unhandled command");

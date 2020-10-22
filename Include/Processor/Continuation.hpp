@@ -16,13 +16,12 @@ typedef std::map<Identifier, Command> Scope;
 
 class Executor;
 
-class Continuation final : public ProcessBase {
+class Continuation : public ProcessBase {
     vector<Command> _commands;
     size_t _offset = 0;
     Scope _scope;
     Scope _enteredScope;
     vector<Identifier> _formalArgs;
-    // TODO(cjs) Logger<Continuation> _log;
 
 public:
     Continuation() = default;

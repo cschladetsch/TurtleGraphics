@@ -46,4 +46,5 @@ bool Display::PreRender() const {
 void Display::Present() {
     SDL_RenderPresent(Renderer);
 }
+
 }  // namespace TurtleGraphics

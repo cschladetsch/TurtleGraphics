@@ -40,13 +40,23 @@ void Lexer::AddTokenNames() {
     _tokenTypes["move"] = EToken::Move;
     _tokenTypes["rotate"] = EToken::Rotate;
     _tokenTypes["quit"] = EToken::Quit;
-    _tokenTypes["color"] = EToken::Color;
+    _tokenTypes["color"] = EToken::SetColor;
+    _tokenTypes["colorName"] = EToken::SetColorByName;
+    _tokenTypes["colorComponent"] = EToken::SetColorComponent;
+    _tokenTypes["mulColorComponent"] = EToken::MulColorComponent;
     _tokenTypes["true"] = EToken::True;
     _tokenTypes["false"] = EToken::False;
     _tokenTypes["repeat"] = EToken::Repeat;
     _tokenTypes["if"] = EToken::If;
     _tokenTypes["else"] = EToken::Else;
     _tokenTypes["fun"] = EToken::Function;
+    _tokenTypes["X"] = EToken::X;
+    _tokenTypes["Y"] = EToken::Y;
+    _tokenTypes["Z"] = EToken::Z;
+    _tokenTypes["Red"] = EToken::Red;
+    _tokenTypes["Green"] = EToken::Green;
+    _tokenTypes["Blue"] = EToken::Blue;
+    _tokenTypes["Alpha"] = EToken::Alpha;
 }
 
 void Lexer::AddText(const char *text) {
@@ -79,7 +89,7 @@ bool Lexer::Run() {
     return !_failed;
 }
 
-bool Lexer::GetNext() noexcept {
+bool Lexer::GetNext() {
     if (AtEnd()) {
         AddToken(EToken::None);
         return false;
@@ -123,12 +133,12 @@ bool Lexer::GetNext() noexcept {
     return false;
 }
 
-bool Lexer::AddToken(EToken type, size_t length) noexcept {
+bool Lexer::AddToken(EToken type, size_t length) {
     return AddToken(
         StringSplice(*this, _lineNumber, _offset, length), type);
 }
 
-bool Lexer::AddToken(StringSplice const splice, EToken type) noexcept {
+bool Lexer::AddToken(StringSplice const splice, EToken type) {
     try {
         _tokens.emplace_back(Token{ type, splice });
     } catch (std::exception &e) {
@@ -139,8 +149,7 @@ bool Lexer::AddToken(StringSplice const splice, EToken type) noexcept {
     return true;
 }
 
-StringSplice Lexer::Gather(std::function<bool(char)> const& predicate) const noexcept
-{
+StringSplice Lexer::Gather(std::function<bool(char)> const& predicate) const {
     auto end = _offset;
     while (!AtEnd(end) && predicate(GetCurrent(end)))
         ++end;
@@ -159,7 +168,7 @@ bool Lexer::AtEnd() const noexcept {
     return AtEnd(_offset);
 }
 
-char Lexer::GetCurrent(size_t offset) const noexcept {
+char Lexer::GetCurrent(size_t offset) const {
     if (AtEnd(offset))
         return 0;
 

@@ -1,14 +1,16 @@
 // Copyright © 2020 christian@schladetsch.com
 
 #include "Pch.hpp"
-#include "Turtle.hpp"
 
 #include <iostream>
+#include <sstream>
+
+#include "Turtle.hpp"
 
 namespace TurtleGraphics {
 
 int Round(const float x) {
-    return x < 0 ? static_cast<int>(x - 0.0f) : static_cast<int>(x + 0.5f);
+    return x < 0 ? static_cast<int>(x - 0.5f) : static_cast<int>(x + 0.5f);
 }
 
 void DrawLine(SDL_Renderer* renderer, const float x, const float y, const float x1, const float y1) {
@@ -44,8 +46,7 @@ void Turtle::DrawLineSegments(SDL_Renderer *renderer) {
     auto loc = Location;
     for (auto ls : _lineSegments) {
         const auto next = loc + ls.first;
-        SDL_RenderDrawLine(renderer
-            , loc.x, loc.y, next.x, next.y);
+        DrawLine(renderer , loc.x, loc.y, next.x, next.y);
 
         loc = next;
     }
@@ -69,10 +70,6 @@ Position Turtle::GetForward() const {
     const auto x = cosf(Orientation*d2F);
     const auto y = sinf(Orientation*d2F);
     return { x, y };
-}
-
-string Turtle::Trace() const {
-    return "TurtleGraphics";
 }
 
 Position Turtle::Process(std::function<bool (Turtle &, Position const &next)> const& fun) {

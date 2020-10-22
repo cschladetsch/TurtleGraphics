@@ -30,9 +30,12 @@ public:
     void DrawPath(SDL_Renderer* renderer);
     void DrawTurtle(SDL_Renderer* renderer) const;
 
-    [[nodiscard]] string Trace() const;
     Position Process();
     Position Process(std::function<bool(Turtle&, Position const& next)> const& fun);
+
+    friend std::ostream& operator<<(std::ostream& out, const Turtle &turtle) {
+        return out << "Turtle @" << turtle.Location;
+    }
 
 protected:
     [[nodiscard]] Position GetForward() const;
