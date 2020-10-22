@@ -29,6 +29,7 @@ public:
 private:
     bool ParseFunction();
     bool AddStatementBlock();
+    bool ParseColorName();
     bool ParseStatement();
     bool ParseRepeat();
     bool ParseMove();

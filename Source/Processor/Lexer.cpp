@@ -41,6 +41,7 @@ void Lexer::AddTokenNames() {
     _tokenTypes["rotate"] = EToken::Rotate;
     _tokenTypes["quit"] = EToken::Quit;
     _tokenTypes["color"] = EToken::Color;
+    _tokenTypes["colorName"] = EToken::ColorName;
     _tokenTypes["true"] = EToken::True;
     _tokenTypes["false"] = EToken::False;
     _tokenTypes["repeat"] = EToken::Repeat;

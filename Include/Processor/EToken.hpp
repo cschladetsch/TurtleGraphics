@@ -23,7 +23,6 @@ enum class EToken {
     Number,
     Identifier,
     Quit,
-    Color,
     Repeat,
     If,
     Else,
@@ -32,6 +31,27 @@ enum class EToken {
     OpenParan,
     CloseParan,
     Comma,
+
+    SetPositionComponent,
+    DeltaPositionComponent,
+
+    X, Y, Z,
+
+    SetColor,
+    SetColorByName,
+    DeltaColorComponent,
+    SetColorComponent,
+    MulColorComponent,
+
+    Red, Green, Blue, Alpha,
+
+    Pink,
+    Cyan,
+    Black,
+    White,
+    Grey,
+    Grey1,
+    Grey2,
 };
 
 }  // namespace TurtleGraphics::Processor

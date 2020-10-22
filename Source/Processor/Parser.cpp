@@ -55,6 +55,7 @@ bool Parser::ParseStatement() {
     case EToken::Quit: return AddChild(EToken::Quit);
     case EToken::Function: return ParseFunction();
     case EToken::Number: return AddChild(CurrentToken());
+    case EToken::ColorName: return ParseColorName();
     default: ;
     }
 
@@ -119,6 +120,23 @@ bool Parser::AddStatementBlock() {
 
     LeaveNode();
     return true;
+}
+
+bool Parser::ParseColorName() {
+    if (!Peek(EToken::Identifier)) {
+        return Fail("Color Identifier expected");
+    }
+    //auto& changeColor = EnterNode(EToken::ColorName);
+
+    //auto colorName = NextToken();
+    //switch (colorName.Type)
+    //{
+    //case EToken::Red:
+    //case EToken::Blue:
+    //case EToken::Green:
+    //}
+
+    return Fail("Not implemented");
 }
 
 bool Parser::AddArguments() {
