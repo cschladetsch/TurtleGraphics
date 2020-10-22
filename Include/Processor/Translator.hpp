@@ -37,7 +37,6 @@ private:
 
     bool Append(Command const& command) const;
     bool Append(ECommandType type) const;
-
     bool AddUnaryOperation(AstNodePtr const& node, ECommandType type) const;
 
     int MakeValueInt(const AstNodePtr& node) const;
