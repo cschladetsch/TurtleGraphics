@@ -6,17 +6,16 @@
 
 #include "StdAliases.hpp"
 
-namespace TurtleGraphics { namespace Processor {
+namespace TurtleGraphics::Processor {
 
 class Lexer;
 
 struct StringSplice {
-    const Lexer* Source = 0;
+    const Lexer* Source = nullptr;
     size_t LineNumber = 0;
-    size_t Offset = 0;
-    size_t Length = 0;
+    size_t Offset = 0; size_t Length = 0;
 
-    StringSplice() { }
+    StringSplice() = default;
 
     StringSplice(const Lexer& lex, std::size_t ln,
         size_t ofs, size_t len) noexcept
@@ -36,5 +35,6 @@ struct StringSplice {
 
     string GetText() const;
 };
-}  // namespace Processor
-}  // namespace TurtleGraphics
+
+}  // namespace TurtleGraphics::Processor
+

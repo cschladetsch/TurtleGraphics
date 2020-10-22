@@ -55,7 +55,6 @@ bool Parser::ParseStatement() {
     case EToken::Quit: return AddChild(EToken::Quit);
     case EToken::Function: return ParseFunction();
     case EToken::Number: return AddChild(CurrentToken());
-    case EToken::ColorName: return ParseColorName();
     default: ;
     }
 

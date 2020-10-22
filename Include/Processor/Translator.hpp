@@ -10,25 +10,25 @@
 
 namespace TurtleGraphics::Processor {
 
-class Translator final : public ProcessBase {
+class Translator : public ProcessBase {
     vector<CommandSequencePtr> _commands;
     AstNodePtr _root;
 
 public:
     Translator() = default;
-    explicit Translator(AstNodePtr root);
+    explicit Translator(AstNodePtr root) : _root(move(root)) { }
 
-    bool Run(AstNodePtr root) noexcept;
-    bool Run() noexcept override;
+    bool Run() override;
+    bool Run(AstNodePtr root);
 
     CommandSequencePtr GetCommands() const;
 
 private:
-    bool TranslateFunction(const AstNodePtr& node);
-    bool TranslateArgList(const AstNodePtr& node) const;
     bool Translate(AstNodePtr const& node);
     bool Translate(vector<AstNodePtr> const& children);
     bool TranslateRepeat(const AstNodePtr& node);
+    bool TranslateArgList(const AstNodePtr& node) const;
+    bool TranslateFunction(const AstNodePtr& node);
 
     CommandSequencePtr Enter();
     void Leave();

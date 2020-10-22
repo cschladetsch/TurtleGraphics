@@ -6,7 +6,6 @@
 
 #include <iostream>
 
-#include "SDL.h"
 #include "Display.hpp"
 #include "Processor/Executor.hpp"
 #include "Processor/RunContext.hpp"

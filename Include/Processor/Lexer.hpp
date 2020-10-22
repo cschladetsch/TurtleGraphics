@@ -39,11 +39,11 @@ private:
     bool AtEnd() const noexcept;
     bool AtEnd(size_t offset) const noexcept;
     char GetCurrent() const noexcept;
-    char GetCurrent(size_t offset) const noexcept;
-    StringSplice Gather(std::function<bool(char)> const &predicate) const noexcept;
-    bool AddToken(StringSplice splice, EToken type) noexcept;
-    bool AddToken(EToken type, size_t length = 0) noexcept;
-    bool GetNext() noexcept;
+    char GetCurrent(size_t offset) const;
+    StringSplice Gather(std::function<bool(char)> const& predicate) const;
+    bool AddToken(StringSplice splice, EToken type);
+    bool AddToken(EToken type, size_t length = 0);
+    bool GetNext();
 };
 
 }  // namespace TurtleGraphics::Processor

@@ -9,7 +9,7 @@
 #include <optional>
 #include <utility>
 
-// usure if this is a good idea.
+// unsure if this is a good idea.
 namespace TurtleGraphics {
 
 using string = std::string;

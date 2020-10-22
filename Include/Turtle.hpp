@@ -34,6 +34,10 @@ public:
     Position Process();
     Position Process(std::function<bool(Turtle&, Position const& next)> const& fun);
 
+    friend std::ostream& operator<<(std::ostream& out, const Turtle &turtle) {
+        return out << "Turtle @" << turtle.Location;
+    }
+
 protected:
     [[nodiscard]] Position GetForward() const;
     void DrawLineSegments(SDL_Renderer* renderer);

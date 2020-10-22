@@ -8,8 +8,8 @@
 #include <map>
 #include <algorithm>
 
-#include <SDL_render.h>
 #include <SDL.h>
+#include <SDL_render.h>
 
 #include "Config.hpp"
 #include "Display.hpp"
