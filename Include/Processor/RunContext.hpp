@@ -4,6 +4,7 @@
 
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
+#include "Processor/Translator.hpp"
 #include "Processor/Executor.hpp"
 
 namespace TurtleGraphics::Processor {
@@ -22,7 +23,7 @@ public:
     {
     }
 
-    bool Run() noexcept override;
+    bool Run() override;
 
     Scope &GetScope();
 };

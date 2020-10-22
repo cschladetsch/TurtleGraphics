@@ -7,7 +7,7 @@
 
 #include "Processor/AstNode.hpp"
 
-namespace TurtleGraphics { namespace Processor {
+namespace TurtleGraphics::Processor {
 
 class Parser final : public ProcessBase {
     std::vector<Token> _tokens;
@@ -50,6 +50,8 @@ private:
         return CurrentToken().Splice.GetText();
     }
 
+    bool AtEnd() const { return GetTokens().size() == _currentToken; }
+
     Token NextToken() { return GetTokens()[++_currentToken]; }
 
     Token Peek() const { return Token{ GetTokens()[_currentToken + 1].Type }; }
@@ -65,5 +67,5 @@ private:
 
     bool AddParameterisedCommand(EToken type);
 };
-}  // namespace Processor
-}  // namespace TurtleGraphics
+
+}  // namespace TurtleGraphics::Processor

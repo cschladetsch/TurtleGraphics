@@ -29,6 +29,10 @@ struct Position {
         return {A.x + B.x, A.y + B.y};
     }
 
+    friend bool operator==(const Position& A, const Position& B) {
+        return A.x == B.x && A.y == B.y;
+    }
+
     friend std::ostream& operator<<(std::ostream& lhs,
         const Position& rhs) {
         return lhs << "x=" << rhs.x << ", y=" << rhs.y;

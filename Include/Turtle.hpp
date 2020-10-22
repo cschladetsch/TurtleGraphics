@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <functional>
 #include <list>
 #include <string>
 #include <utility>
@@ -29,6 +30,8 @@ public:
     void Draw(SDL_Renderer* renderer) const;
 
     [[nodiscard]] string Trace() const;
+    bool Process();
+    bool Process(std::function<bool (Turtle const &)> const &fun);
 
 protected:
     [[nodiscard]] Position GetForward() const;

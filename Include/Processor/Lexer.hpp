@@ -24,26 +24,26 @@ public:
     Lexer();
     explicit Lexer(const char* code);
 
-    bool Run(const char* code) noexcept;
-    bool Run() noexcept override;
+    bool Run(const char* code);
+    bool Run() override;
 
-    const vector<Token>& GetTokens() const { return _tokens; }
-    const vector<string>& GetLines() const { return _lines; }
+    const vector<Token>& GetTokens() const noexcept { return _tokens; }
+    const vector<string>& GetLines() const noexcept { return _lines; }
 
-    bool IsValid(StringSplice splice) const;
+    [[nodiscard]] bool IsValid(StringSplice splice) const noexcept;
 
 private:
     void AddText(const char* text);
     void AddTokenNames();
 
-    bool AtEnd() const;
-    bool AtEnd(size_t offset) const;
-    char GetCurrent() const;
-    char GetCurrent(size_t offset) const;
-    StringSplice Gather(std::function<bool(char)> predicate) const;
-    bool AddToken(StringSplice splice, EToken type);
-    bool AddToken(EToken type, size_t length);
-    bool GetNext();
+    bool AtEnd() const noexcept;
+    bool AtEnd(size_t offset) const noexcept;
+    char GetCurrent() const noexcept;
+    char GetCurrent(size_t offset) const noexcept;
+    StringSplice Gather(std::function<bool(char)> const &predicate) const noexcept;
+    bool AddToken(StringSplice splice, EToken type) noexcept;
+    bool AddToken(EToken type, size_t length = 0) noexcept;
+    bool GetNext() noexcept;
 };
 
 }  // namespace TurtleGraphics::Processor

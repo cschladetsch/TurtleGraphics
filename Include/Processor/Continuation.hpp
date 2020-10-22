@@ -7,11 +7,14 @@
 #include "Config.hpp"
 #include "Executor.hpp"
 #include "Processor/Command.hpp"
+#include "Processor/ProcessBase.hpp"
 
 namespace TurtleGraphics::Processor {
 
 typedef std::string Identifier;
 typedef std::map<Identifier, Command> Scope;
+
+class Executor;
 
 class Continuation final : public ProcessBase {
     vector<Command> _commands;

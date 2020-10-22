@@ -44,13 +44,11 @@ void Turtle::DrawLineSegments(SDL_Renderer *renderer) const {
 }
 
 void Turtle::Move(float distance) {
-    //std::cout << "Move " << distance << std::endl;
     auto end = GetForward()*distance;
     _lineSegments.emplace_back(end, PenDown);
 }
 
 void Turtle::Rotate(float angle) {
-    //std::cout << "Rotate " << angle << std::endl;
     Orientation += angle;
     while (Orientation > 360)
         Orientation -= 360;
@@ -65,6 +63,26 @@ Position Turtle::GetForward() const {
 
 string Turtle::Trace() const {
     return "TurtleGraphics";
+}
+
+bool Turtle::Process(std::function<bool (Turtle const &)> const &fun) {
+    auto loc = Location;
+    for (auto ls : _lineSegments) {
+        const auto next = loc + ls.first;
+        if (!fun(*this)) {
+            return false;
+        }
+
+        loc = next;
+    }
+
+    Location = loc;
+
+    return true;
+}
+
+bool Turtle::Process() {
+    return Process([](auto) { return true; });
 }
 
 }  // namespace TurtleGraphics

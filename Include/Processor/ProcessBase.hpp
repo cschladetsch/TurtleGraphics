@@ -4,7 +4,6 @@
 
 #include <string>
 #include <sstream>
-#include <ostream>
 
 namespace TurtleGraphics::Processor {
 
@@ -16,20 +15,30 @@ struct ProcessBase {
 public:
     virtual ~ProcessBase() = default;
 
-    virtual bool Run() noexcept = 0;
+    virtual bool Run() = 0;
 
     virtual void Reset() noexcept {
         _failed = false;
         _errorStream.clear();
     }
 
-    bool HasFailed() const { return _failed; }
-    bool HasSucceeded() const { return !_failed; }
-    string GetError() const { return _errorStream.str(); }
+    bool HasFailed() const noexcept { return _failed; }
+    bool HasSucceeded() const noexcept { return !_failed; }
+    string GetError() const noexcept {
+        try {
+            return _errorStream.str();
+        } catch (...) {
+            return "Internal error";
+        }
+    }
 
 protected:
-    bool Fail(const char* errorText) const noexcept {
-        Fail() << errorText;
+    virtual bool Fail(const char* errorText) const noexcept {
+        try {
+            Fail() << errorText;
+        } catch (std::exception& e) {
+            (void)e;
+        }
         return false;
     }
 
@@ -37,8 +46,7 @@ protected:
         _failed = true;
         return _errorStream;
     }
-
 };
 
-}  // namespace TurtleGraphics
+}  // namespace TurtleGraphics::Processor
 

@@ -12,19 +12,20 @@ std::string StringSplice::GetText() const {
     return Source->GetLines()[LineNumber].substr(Offset, Length);
 }
 
-Lexer::Lexer() {
+Lexer::Lexer()
+{
     AddTokenNames();
 }
 Lexer::Lexer(const char* code) : Lexer() {
     AddText(code);
 }
 
-bool Lexer::Run(const char* code) noexcept {
+bool Lexer::Run(const char* code) {
     AddText(code);
     return Run();
 }
 
-bool Lexer::IsValid(const StringSplice splice) const {
+bool Lexer::IsValid(const StringSplice splice) const noexcept {
     if (splice.LineNumber >= _lines.size())
         return false;
 
@@ -51,7 +52,7 @@ void Lexer::AddTokenNames() {
 void Lexer::AddText(const char *text) {
     assert(text != nullptr);
 
-    const char* start = text;
+    const auto* start = text;
     while (text && *text) {
         const auto ch = *text;
         if (ch == '\n') {
@@ -62,10 +63,14 @@ void Lexer::AddText(const char *text) {
         ++text;
     }
 
-    _lines.push_back(std::string(start, text + 1));
+    auto line = std::string(start, text);
+    if (line.empty() || line.back() != '\n')
+        line.push_back('\n');
+
+    _lines.push_back(line);
 }
 
-bool Lexer::Run() noexcept {
+bool Lexer::Run() {
     Reset();
 
     while (GetNext()) {
@@ -74,9 +79,11 @@ bool Lexer::Run() noexcept {
     return !_failed;
 }
 
-bool Lexer::GetNext() {
-    if (AtEnd())
+bool Lexer::GetNext() noexcept {
+    if (AtEnd()) {
+        AddToken(EToken::None);
         return false;
+    }
 
     const auto current = GetCurrent();
     if (current == '\n') {
@@ -110,25 +117,29 @@ bool Lexer::GetNext() {
     }
 
     // TODO(cjs): error reporting
-    _failed = current != 0;
     if (!_failed)
         _tokens.emplace_back(Token{ EToken::None });
 
     return false;
 }
 
-bool Lexer::AddToken(EToken type, size_t length) {
+bool Lexer::AddToken(EToken type, size_t length) noexcept {
     return AddToken(
         StringSplice(*this, _lineNumber, _offset, length), type);
 }
 
-bool Lexer::AddToken(StringSplice const splice, EToken type) {
-    _tokens.emplace_back(Token{ type, splice });
+bool Lexer::AddToken(StringSplice const splice, EToken type) noexcept {
+    try {
+        _tokens.emplace_back(Token{ type, splice });
+    } catch (std::exception &e) {
+        return Fail(e.what());
+    }
+
     _offset += splice.Length;
     return true;
 }
 
-StringSplice Lexer::Gather(std::function<bool(char)> predicate) const
+StringSplice Lexer::Gather(std::function<bool(char)> const& predicate) const noexcept
 {
     auto end = _offset;
     while (!AtEnd(end) && predicate(GetCurrent(end)))
@@ -137,25 +148,25 @@ StringSplice Lexer::Gather(std::function<bool(char)> predicate) const
     return { *this, _lineNumber, _offset, end - _offset };
 }
 
-bool Lexer::AtEnd(size_t offset) const {
-    if (_lineNumber == _lines.size())
-        return false;
+bool Lexer::AtEnd(size_t offset) const noexcept {
+    if (_lineNumber >= _lines.size())
+        return true;
 
     return offset >= _lines[_lineNumber].size();
 }
 
-bool Lexer::AtEnd() const {
+bool Lexer::AtEnd() const noexcept {
     return AtEnd(_offset);
 }
 
-char Lexer::GetCurrent(size_t offset) const {
+char Lexer::GetCurrent(size_t offset) const noexcept {
     if (AtEnd(offset))
         return 0;
 
     return _lines[_lineNumber][offset];
 }
 
-char Lexer::GetCurrent() const {
+char Lexer::GetCurrent() const noexcept {
     return GetCurrent(_offset);
 }
 

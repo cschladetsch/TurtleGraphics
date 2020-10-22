@@ -6,13 +6,10 @@
 
 #include "Command.hpp"
 #include "Continuation.hpp"
-#include "Continuation.hpp"
-#include "Continuation.hpp"
-#include "Continuation.hpp"
 #include "Turtle.hpp"
 #include "Processor/Translator.hpp"
 
-namespace TurtleGraphics { namespace Processor {
+namespace TurtleGraphics::Processor {
 
 class Executor : public ProcessBase {
     vector<CommandSequencePtr> _context;
@@ -23,7 +20,7 @@ class Executor : public ProcessBase {
     CommandSequencePtr _sequence;
 
 public:
-    Executor(Turtle &turtle) noexcept {
+    explicit Executor(Turtle &turtle) noexcept {
         _turtle = &turtle;
     }
 
@@ -62,5 +59,5 @@ private:
     bool PopFloat(float &num);
     bool DoRepeat();
 };
-}  // namespace Processor
-}  // namespace TurtleGraphics
+
+}  // namespace TurtleGraphics::Processor

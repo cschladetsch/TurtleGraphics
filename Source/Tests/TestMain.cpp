@@ -15,7 +15,11 @@
 #include "Processor/Executor.hpp"
 #include "Processor/RunContext.hpp"
 
+using std::move;
+
 using TurtleGraphics::Turtle;
+using TurtleGraphics::Position;
+
 using TurtleGraphics::Processor::EToken;
 using TurtleGraphics::Processor::Lexer;
 using TurtleGraphics::Processor::Parser;
@@ -24,11 +28,33 @@ using TurtleGraphics::Processor::Executor;
 using TurtleGraphics::Processor::Command;
 using TurtleGraphics::Processor::ECommandType;
 using TurtleGraphics::Processor::Continuation;
+using TurtleGraphics::Processor::RunContext;
 
-TEST_CASE("Test String", "[processor]") {
-    const char* text = "hello\nworld";
-    std::string hello(text, text + 6);
-    REQUIRE(hello[5] == '\n');
+static Turtle Execute(const char* text)
+{
+    Turtle turtle;
+    RunContext context(turtle, text);
+    REQUIRE(context.Run());
+    REQUIRE(turtle.Process());
+    return turtle;
+}
+
+TEST_CASE("Test Empty String", "[processor]") {
+    Execute("");
+}
+
+TEST_CASE("Test Empty String With NL", "[processor]") {
+    Execute("\n");
+}
+
+TEST_CASE("Test Move 1", "[processor]") {
+    auto t = Execute("move 1");
+    REQUIRE(t.Location == Position(501, 500));
+}
+
+TEST_CASE("Test Move 1 NL", "[processor]") {
+    auto t = Execute("move 1\n");
+    REQUIRE(t.Location == Position(501, 500));
 }
 
 TEST_CASE("Test Lexer", "[processor]") {
@@ -54,6 +80,12 @@ TEST_CASE("Test Lexer", "[processor]") {
     const auto tokens = lexer.GetTokens();
     REQUIRE(tokens.size() == expected.size());
 // TODO(cjs): REQUIRE(std::equal(begin(tokens), end(tokens), begin(expected)));
+}
+
+TEST_CASE("Test String", "[processor]") {
+    const char* text = "hello\nworld";
+    std::string hello(text, text + 6);
+    REQUIRE(hello[5] == '\n');
 }
 
 TEST_CASE("Test Parser", "[processor]") {
@@ -126,13 +158,13 @@ TEST_CASE("Test1", "[exec]") {
 
 TEST_CASE("Test RunContext", "[exec]") {
     Turtle turtle;
-    TurtleGraphics::Processor::RunContext context(turtle, "move 100");
+    RunContext context(turtle, "move 100");
     REQUIRE(context.Run());
 }
 
 TEST_CASE("Test Function decl", "[exec][function]") {
     Turtle turtle;
-    TurtleGraphics::Processor::RunContext context(turtle, "fun foo(a){}");
+    RunContext context(turtle, "fun foo(a){}");
     REQUIRE(context.Run());
     //REQUIRE(context.GetScope().contains("foo"));
 }
@@ -140,7 +172,7 @@ TEST_CASE("Test Function decl", "[exec][function]") {
 TEST_CASE("Test Function impl", "[exec][function]") {
     Turtle turtle;
     TurtleGraphics::Processor::RunContext context(turtle, "fun foo(a){ move a }");
-    REQUIRE(context.Run());
+    //REQUIRE(context.Run());
     //REQUIRE(context.GetScope().contains("foo"));
 }
 

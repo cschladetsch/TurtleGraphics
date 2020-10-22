@@ -10,12 +10,12 @@ struct Token {
     EToken Type;
     StringSplice Splice;
 
-    explicit Token(EToken type = EToken::None) : Type(type) { }
-    Token(EToken type, const StringSplice splice) : Token(type) {
+    explicit Token(EToken type = EToken::None) noexcept : Type(type) { }
+    Token(EToken type, const StringSplice splice) noexcept : Token(type) {
         Splice = splice;
     }
 
-    friend bool operator==(const Token& left, const Token& right) {
+    friend bool operator==(const Token& left, const Token& right) noexcept {
         // note: we only compare the token types
         return left.Type == right.Type;
     }

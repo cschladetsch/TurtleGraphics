@@ -19,7 +19,7 @@ struct StringSplice {
     StringSplice() { }
 
     StringSplice(const Lexer& lex, std::size_t ln,
-        size_t ofs, size_t len)
+        size_t ofs, size_t len) noexcept
         : Source(&lex) {
         LineNumber = ln;
         Offset = ofs;

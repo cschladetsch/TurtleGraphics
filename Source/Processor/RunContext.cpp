@@ -5,7 +5,7 @@
 
 namespace TurtleGraphics::Processor {
 
-bool RunContext::Run() noexcept {
+bool RunContext::Run() {
     if (!_lexer.Run(_code)) {
         Fail() << "Lexer: " << _lexer.GetError();
         return false;

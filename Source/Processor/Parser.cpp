@@ -42,6 +42,10 @@ bool Parser::ParseStatements() {
 }
 
 bool Parser::ParseStatement() {
+    if (AtEnd()) {
+        return false;
+    }
+
     switch (CurrentTokenType()) {
     case EToken::PenDown: return AddChild(EToken::PenDown);
     case EToken::PenUp: return AddChild(EToken::PenUp);

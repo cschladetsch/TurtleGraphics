@@ -33,5 +33,6 @@ class AstNode {
     static AstNodePtr New(Token token);
     static AstNodePtr New(EToken token) { return New(Token(token)); }
 };
+
 }  // namespace TurtleGraphics::Processor
 
