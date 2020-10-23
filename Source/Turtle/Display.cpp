@@ -3,12 +3,20 @@
 #include "Pch.hpp"
 #include "Display.hpp"
 
+#include <utility>
+
 namespace TurtleGraphics {
 
 Display::~Display() {
     SDL_DestroyRenderer(Renderer);
     SDL_DestroyWindow(Window);
     SDL_Quit();
+}
+
+void Display::Clear()
+{
+    SDL_SetRenderDrawColor(Renderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_RenderClear(Renderer);
 }
 
 bool Display::Bootstrap(int width, int height) {
@@ -27,10 +35,15 @@ bool Display::Bootstrap(int width, int height) {
         return false;
     }
 
-    SDL_SetRenderDrawColor(Renderer, 0xff, 0xff, 0xff, 0xff);
-    SDL_RenderClear(Renderer);
+    SDL_SetWindowTitle(Window, "Turtle Graphics++");
+
+    Clear();
 
     return true;
+}
+
+void Display::AddKeyMap(SDL_KeyCode key, Function function) {
+    _keyMappings[key] = std::move(function);
 }
 
 bool Display::PreRender() const {
@@ -39,6 +52,13 @@ bool Display::PreRender() const {
     SDL_PollEvent(&event);
     if (event.type == SDL_QUIT)
         return false;
+
+    if (event.type == SDL_KEYDOWN) {
+        const auto code = static_cast<SDL_KeyCode>(event.key.keysym.sym);
+        if (_keyMappings.contains(code)) {
+            _keyMappings.at(code)();
+        }
+    }
 
     return true;
 }

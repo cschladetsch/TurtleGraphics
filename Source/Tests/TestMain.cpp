@@ -111,8 +111,8 @@ TEST_CASE("Test Executor", "[exec]") {
     REQUIRE(true);
 }
 
-TEST_CASE("Test1", "[exec]") {
-    const char* i0 = "penDown repeat 4 { rotate 80 move 120 }";
+TEST_CASE("Test Whitespace in Parser", "[exec]") {
+    const char* i0 = "penDown repeat 4\n{\trotate 80\n\tmove 120\n}\n";
     Lexer lexer(i0);
     REQUIRE(lexer.Run());
 

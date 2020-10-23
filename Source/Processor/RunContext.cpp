@@ -21,8 +21,7 @@ bool RunContext::Run() {
         return false;
     }
 
-    if (!_executor.Run(_translator.GetCommands()))
-    {
+    if (!_executor.Run(_translator.GetCommands())) {
         Fail() << "Exec: " << _executor.GetError();
         return false;
     }

@@ -3,6 +3,9 @@
 #pragma once
 
 #include <optional>
+#include <vector>
+#include <map>
+#include <string>
 
 #include "Command.hpp"
 #include "Continuation.hpp"
@@ -26,9 +29,9 @@ public:
 
     Executor(Turtle& turtle, CommandSequencePtr sequence) noexcept;
 
-    bool Run(Turtle& turtle, CommandSequencePtr sequence) noexcept;
-    bool Run(CommandSequencePtr sequence) noexcept;
-    bool Run() noexcept override;
+    bool Run(Turtle& turtle, CommandSequencePtr sequence);
+    bool Run(CommandSequencePtr sequence);
+    bool Run() override;
     std::map<std::string, Command>& GetScope();
     std::optional<Command> PopData() noexcept;
 
@@ -48,7 +51,7 @@ private:
             auto top = _data.back();
             _data.pop_back();
             return std::get<Ty>(top.Value);
-        } catch (std::exception& e) {
+        } catch (std::exception const &e) {
             (void)e;
             Fail("Wrong data type");
         }

@@ -80,7 +80,8 @@ bool Translator::Translate(AstNodePtr const &node) {
         return TranslateArgList(node);
     case EToken::Function:
         return TranslateFunction(node);
-    default: ;
+    default:
+        {}
     }
 
     return false;
@@ -140,7 +141,8 @@ bool Translator::Append(ECommandType type) const {
     return true;
 }
 
-bool Translator::AddUnaryOperation(AstNodePtr const &node, ECommandType type) const {
+bool Translator::AddUnaryOperation(
+    AstNodePtr const &node, ECommandType type) const {
     Append(Command(MakeValueInt(node->GetChildren()[0])));
     Append(Command(type));
     return true;

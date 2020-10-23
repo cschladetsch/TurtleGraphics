@@ -17,7 +17,7 @@ struct Token {
         Splice = splice;
     }
 
-    friend bool operator==(const Token& left, const Token& right) {
+    friend bool operator==(const Token& left, const Token& right) noexcept {
         return left.Type == right.Type;
     }
 };

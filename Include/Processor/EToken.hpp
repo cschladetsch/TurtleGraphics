@@ -46,22 +46,12 @@ enum class EToken {
     X, Y, Z,
 
     SetColor,
-    SetColorByName, // color names set in config file
+    SetColorByName,  // color names set in config file
     DeltaColorComponent,
     SetColorComponent,
     MulColorComponent,
 
     Red, Green, Blue, Alpha,
-
-    // deal with these dynamically via config file
-    //Black,
-    //White,
-    //Pink,
-    //Cyan,
-    //Purple,
-    //Grey,
-    //Grey1,
-    //Grey2,
 };
 
 }  // namespace TurtleGraphics::Processor

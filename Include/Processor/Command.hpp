@@ -3,6 +3,10 @@
 #pragma once
 
 #include <variant>
+#include <memory>
+#include <string>
+#include <vector>
+
 #include "Processor/ECommandType.hpp"
 
 namespace TurtleGraphics::Processor {
@@ -14,10 +18,10 @@ struct Command {
     ECommandType Type;
     std::variant<int, string, CommandSequencePtr, vector<string>> Value;
 
-    Command() : Command(ECommandType::None) {
+    Command() noexcept : Command(ECommandType::None) {
     }
 
-    explicit Command(const ECommandType type) {
+    explicit Command(const ECommandType type) noexcept {
         Type = type;
     }
 
@@ -29,11 +33,13 @@ struct Command {
         Value = num;
     }
 
-    explicit Command(const CommandSequencePtr& commands) : Value(commands) {
+    explicit Command(const CommandSequencePtr& commands) noexcept
+        : Value(commands) {
         Type = ECommandType::Value;
     }
 
-    explicit Command(vector<string> const& idents) : Type(ECommandType::Value), Value(idents) { }
+    explicit Command(vector<string> const& idents)
+        : Type(ECommandType::Value), Value(idents) { }
 };
 
 }  // namespace TurtleGraphics::Processor

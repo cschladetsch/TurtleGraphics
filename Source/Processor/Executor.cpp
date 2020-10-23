@@ -12,17 +12,17 @@ Executor::Executor(Turtle& turtle, CommandSequencePtr sequence) noexcept
     _context.push_back(sequence);
 }
 
-bool Executor::Run(Turtle& turtle, CommandSequencePtr sequence) noexcept {
+bool Executor::Run(Turtle& turtle, CommandSequencePtr sequence) {
     _turtle = &turtle;
     return Run(sequence);
 }
 
-bool Executor::Run(CommandSequencePtr sequence) noexcept {
+bool Executor::Run(CommandSequencePtr sequence) {
     _context.push_back(sequence);
     return NextSequence();
 }
 
-bool Executor::Run() noexcept {
+bool Executor::Run() {
     return NextSequence();
 }
 
@@ -46,7 +46,7 @@ bool Executor::NextSequence() noexcept {
     _context.pop_back();
     try {
         return Execute(*_commands);
-    } catch (std::exception &e) {
+    } catch (std::exception const &e) {
         Fail() << e.what();
         return false;
     }
@@ -99,7 +99,7 @@ bool Executor::Execute(Command const &command) {
     case ECommandType::Repeat:
         return DoRepeat();
     default:
-        ;
+        {}
     }
 
     return Fail("Unhandled command");

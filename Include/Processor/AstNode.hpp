@@ -20,12 +20,13 @@ class AstNode {
     vector<AstNodePtr> _children;
 
  public:
-    explicit AstNode(const Token token) : _token(token) { }
-    explicit AstNode(const EToken type = EToken::None) : _token(type) { }
+    explicit AstNode(const Token token) noexcept : _token(token) { }
+    explicit AstNode(const EToken type = EToken::None) noexcept
+        : _token(type) { }
 
-    EToken GetType() const { return _token.Type; }
+    EToken GetType() const noexcept { return _token.Type; }
     string GetText() const { return _token.Splice.GetText(); }
-    vector<AstNodePtr> const &GetChildren() const { return _children; }
+    vector<AstNodePtr> const &GetChildren() const noexcept { return _children; }
 
     void AddChild(const AstNodePtr& node);
     void ForEachChild(const std::function<void(const AstNode&)>& action);

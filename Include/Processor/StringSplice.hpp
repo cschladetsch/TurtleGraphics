@@ -26,7 +26,7 @@ struct StringSplice {
     }
 
     friend bool operator==(const StringSplice& left,
-        const StringSplice& right) {
+        const StringSplice& right) noexcept {
         return left.Source == right.Source
             && left.LineNumber == right.LineNumber
             && left.Offset == right.Offset

@@ -9,13 +9,13 @@ std::string StringSplice::GetText() const {
     assert(Source != nullptr);
     assert(Source->IsValid(*this));
 
-    return Source->GetLines()[LineNumber].substr(Offset, Length);
+    return Source->GetLines().at(LineNumber).substr(Offset, Length);
 }
 
-Lexer::Lexer()
-{
+Lexer::Lexer() noexcept {
     AddTokenNames();
 }
+
 Lexer::Lexer(const char* code) : Lexer() {
     AddText(code);
 }
@@ -29,7 +29,7 @@ bool Lexer::IsValid(const StringSplice splice) const noexcept {
     if (splice.LineNumber >= _lines.size())
         return false;
 
-    auto const& line = _lines[splice.LineNumber];
+    auto const& line = _lines.at(splice.LineNumber);
     return splice.Offset < line.size()
         && splice.Offset + splice.Length < line.size();
 }
@@ -50,13 +50,13 @@ void Lexer::AddTokenNames() {
     _tokenTypes["if"] = EToken::If;
     _tokenTypes["else"] = EToken::Else;
     _tokenTypes["fun"] = EToken::Function;
-    _tokenTypes["X"] = EToken::X;
-    _tokenTypes["Y"] = EToken::Y;
-    _tokenTypes["Z"] = EToken::Z;
-    _tokenTypes["Red"] = EToken::Red;
-    _tokenTypes["Green"] = EToken::Green;
-    _tokenTypes["Blue"] = EToken::Blue;
-    _tokenTypes["Alpha"] = EToken::Alpha;
+    _tokenTypes["x"] = EToken::X;
+    _tokenTypes["y"] = EToken::Y;
+    _tokenTypes["z"] = EToken::Z;
+    _tokenTypes["red"] = EToken::Red;
+    _tokenTypes["green"] = EToken::Green;
+    _tokenTypes["blue"] = EToken::Blue;
+    _tokenTypes["alpha"] = EToken::Alpha;
 }
 
 void Lexer::AddText(const char *text) {
@@ -98,6 +98,7 @@ bool Lexer::GetNext() {
     const auto current = GetCurrent();
     if (current == '\n') {
         _lineNumber++;
+        _offset = 0;
         return true;
     }
 
@@ -123,7 +124,8 @@ bool Lexer::GetNext() {
     case '(': return AddToken(EToken::OpenParan, 1);
     case ')': return AddToken(EToken::CloseParan, 1);
     case ',': return AddToken(EToken::Comma, 1);
-    default: ;
+    default:
+        {}
     }
 
     // TODO(cjs): error reporting

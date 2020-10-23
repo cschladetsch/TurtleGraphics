@@ -5,17 +5,18 @@
 
 namespace TurtleGraphics::Processor {
 
-Continuation::Continuation(vector<Command> commands, vector<Identifier> formalArgs)
+Continuation::Continuation(
+    vector<Command> commands, vector<Identifier> formalArgs)
     : _commands(std::move(commands))
     , _formalArgs(std::move(formalArgs)) {
 }
 
-bool Continuation::Run() noexcept {
+bool Continuation::Run() {
     // Continuations cannot run themselves.
     return false;
 }
 
-void Continuation::Reset() noexcept {
+void Continuation::Reset() {
     _offset = 0;
     _scope = _enteredScope;
 }
@@ -37,11 +38,11 @@ bool Continuation::Enter(Executor& exec) {
 
 Command Continuation::Next() {
     if (AtEnd()) {
-        //Warn("At end of continuation");
+        // Warn("At end of continuation");
         return Command();
     }
 
-    return _commands[_offset++];
+    return _commands.at(_offset++);
 }
 
 void Continuation::Append(const Command& command) {

@@ -18,6 +18,7 @@ public:
     Position Location = { 500, 500 };
     float Orientation = 0;
     bool PenDown = false;
+    Color Color;
 
 private:
     list<pair<Position, bool>> _lineSegments;
@@ -31,7 +32,8 @@ public:
     void DrawTurtle(SDL_Renderer* renderer) const;
 
     Position Process();
-    Position Process(std::function<bool(Turtle&, Position const& next)> const& fun);
+    Position Process(
+        std::function<bool(Turtle&, Position const& next)> const& fun);
 
     friend std::ostream& operator<<(std::ostream& out, const Turtle &turtle) {
         return out << "Turtle @" << turtle.Location;

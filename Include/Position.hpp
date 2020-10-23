@@ -38,7 +38,7 @@ struct Position {
     }
 };
 
-typedef Position Vector;
+typedef Position Vector, Color;
 
 }  // namespace TurtleGraphics
 

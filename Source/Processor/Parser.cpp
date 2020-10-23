@@ -55,7 +55,7 @@ bool Parser::ParseStatement() {
     case EToken::Quit: return AddChild(EToken::Quit);
     case EToken::Function: return ParseFunction();
     case EToken::Number: return AddChild(CurrentToken());
-    default: ;
+    default: {}
     }
 
     return false;
@@ -125,15 +125,15 @@ bool Parser::ParseColorName() {
     if (!Peek(EToken::Identifier)) {
         return Fail("Color Identifier expected");
     }
-    //auto& changeColor = EnterNode(EToken::ColorName);
+    // auto& changeColor = EnterNode(EToken::ColorName);
 
-    //auto colorName = NextToken();
-    //switch (colorName.Type)
-    //{
-    //case EToken::Red:
-    //case EToken::Blue:
-    //case EToken::Green:
-    //}
+    // Use span instead (bounds.1).auto colorName = NextToken();
+    // switch (colorName.Type)
+    // {
+    // case EToken::Red:
+    // case EToken::Blue:
+    // case EToken::Green:
+    // }
 
     return Fail("Not implemented");
 }
@@ -231,5 +231,5 @@ bool Parser::AddChild(AstNodePtr const &child) {
     return true;
 }
 
-}  // namespace TurtleGraphics::Processor 
+}  // namespace TurtleGraphics::Processor
 

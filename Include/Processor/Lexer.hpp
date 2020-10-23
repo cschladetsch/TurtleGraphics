@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <string>
 #include <vector>
 #include <map>
 #include <functional>
@@ -20,7 +21,7 @@ class Lexer : public ProcessBase {
     map<string, EToken> _tokenTypes;
 
 public:
-    Lexer();
+    Lexer() noexcept;
     explicit Lexer(const char* code);
 
     bool Run(const char* code);

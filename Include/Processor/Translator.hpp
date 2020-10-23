@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <string>
+#include <utility>
 
 #include "Processor/AstNode.hpp"
 #include "Processor/Continuation.hpp"
@@ -33,7 +34,7 @@ private:
     CommandSequencePtr Enter();
     void Leave();
 
-    CommandSequencePtr Current() const { return _commands.back(); }
+    CommandSequencePtr Current() const noexcept { return _commands.back(); }
 
     bool Append(Command const& command) const;
     bool Append(ECommandType type) const;

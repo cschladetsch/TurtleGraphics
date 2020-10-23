@@ -40,7 +40,7 @@ private:
 
     std::vector<Token> GetTokens() const { return _tokens; }
 
-    Token CurrentToken() const { return GetTokens()[_currentToken]; }
+    Token CurrentToken() const { return GetTokens().at(_currentToken); }
     EToken CurrentTokenType() const { return CurrentToken().Type; }
 
     bool CurrentTokenType(EToken type) const {
@@ -53,9 +53,9 @@ private:
 
     bool AtEnd() const { return GetTokens().size() == _currentToken; }
 
-    Token NextToken() { return GetTokens()[++_currentToken]; }
+    Token NextToken() { return GetTokens().at(++_currentToken); }
 
-    Token Peek() const { return Token{ GetTokens()[_currentToken + 1].Type }; }
+    Token Peek() const { return Token{ GetTokens().at(_currentToken + 1).Type }; }
     bool Peek(EToken type) const { return Peek().Type == type; }
     bool Expect(EToken type);
 

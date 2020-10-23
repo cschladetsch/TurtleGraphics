@@ -3,6 +3,9 @@
 #pragma once
 
 #include <optional>
+#include <string>
+#include <map>
+#include <vector>
 
 #include "Config.hpp"
 #include "Executor.hpp"
@@ -25,15 +28,16 @@ class Continuation : public ProcessBase {
 
 public:
     Continuation() = default;
-    explicit Continuation(vector<Command> commands, vector<Identifier> formalArgs = vector<Identifier>());
+    explicit Continuation(vector<Command> commands
+        , vector<Identifier> formalArgs = vector<Identifier>());
 
-    bool Run() noexcept override;
-    void Reset() noexcept override;
+    bool Run() override;
+    void Reset() override;
 
     bool Enter(Executor& exec);
     Command Next();
 
-    [[nodiscard]] bool HasScoped(Identifier const& identifier) const noexcept {
+    [[nodiscard]] bool HasScoped(Identifier const& identifier) const {
         return _scope.contains(identifier);
     }
 
@@ -41,16 +45,18 @@ public:
         return _scope.at(identifier);
     }
 
-    [[nodiscard]] std::optional<Command> GetScopedOpt(Identifier const& identifier) const noexcept {
+    [[nodiscard]] std::optional<Command> GetScopedOpt(Identifier const& identifier)
+        const {
         return HasScoped(identifier)
             ? std::make_optional(_scope.at(identifier))
             : std::nullopt;
     }
 
-    [[nodiscard]] const Scope& GetScope() const noexcept{ return _scope; }
+    [[nodiscard]] const Scope& GetScope() const noexcept { return _scope; }
     [[nodiscard]] Scope& GetScope() noexcept { return _scope; }
-
-    [[nodiscard]] bool AtEnd() const noexcept { return _offset == _commands.size(); }
+    [[nodiscard]] bool AtEnd() const noexcept {
+        return _offset == _commands.size();
+    }
 
 private:
     friend class Translator;

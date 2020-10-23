@@ -17,7 +17,7 @@ public:
 
     virtual bool Run() = 0;
 
-    virtual void Reset() noexcept {
+    virtual void Reset() {
         _failed = false;
         _errorStream.clear();
     }
@@ -36,7 +36,7 @@ protected:
     virtual bool Fail(const char* errorText) const noexcept {
         try {
             Fail() << errorText;
-        } catch (std::exception& e) {
+        } catch (const std::exception& e) {
             (void)e;
         }
         return false;

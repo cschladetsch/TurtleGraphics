@@ -5,9 +5,9 @@
 #ifndef TURTLE_UNIT_TESTS
 
 #include <iostream>
+#include <fstream>
 
 #include "Display.hpp"
-#include "Processor/Executor.hpp"
 #include "Processor/RunContext.hpp"
 
 using std::cout;
@@ -21,7 +21,7 @@ using TurtleGraphics::Turtle;
 using TurtleGraphics::Processor::RunContext;
 
 bool ReadAndRunInput(Turtle &turtle) {
-    cout << "> ";
+    cout << "turtle> ";
     char buffer[9546];
     if (!cin.getline(buffer, 9546)) {
         return false;
@@ -32,10 +32,30 @@ bool ReadAndRunInput(Turtle &turtle) {
         cout << runContext.GetError() << endl;
     }
 
-    // TODO(cjs)
-    //turtle.Draw();
-
     return true;
+}
+
+std::string ReadAllText(const char* fileName) {
+    return (std::stringstream() << std::ifstream(fileName).rdbuf()).str();
+}
+
+void RunCommands(Turtle& turtle, const char* fileName) {
+    const auto commands = ReadAllText(fileName);
+    RunContext context(turtle, commands.c_str());
+    if (!context.Run()) {
+        cout << context.GetError() << endl;
+    }
+}
+
+void AddKeyMappings(Display &display, Turtle &turtle)
+{
+    display.AddKeyMap(SDLK_ESCAPE, []() noexcept {
+        exit(0);
+    });
+
+    display.AddKeyMap(SDLK_l, [&turtle]() {
+        RunCommands(turtle, "commands.turtle");
+    });
 }
 
 int main(int argc, char *argv[]) {
@@ -49,13 +69,15 @@ int main(int argc, char *argv[]) {
     turtle.PenDown = false;
     turtle.Location = { 500, 500 };
 
+    AddKeyMappings(display, turtle);
+
     while (display.PreRender()) {
         turtle.DrawPath(display.Renderer);
         display.Present();
 
-        if (!ReadAndRunInput(turtle)) {
-            cout << "Error\n";
-        }
+        //if (!ReadAndRunInput(turtle)) {
+        //    cout << "Error\n";
+        //}
     }
 
     return 0;

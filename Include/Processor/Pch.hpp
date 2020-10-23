@@ -4,6 +4,7 @@
 
 #include <assert.h>
 
+#include <span>
 #include <string>
 #include <vector>
 #include <list>
