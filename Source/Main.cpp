@@ -47,8 +47,7 @@ void RunCommands(Turtle& turtle, const char* fileName) {
     }
 }
 
-void AddKeyMappings(Display &display, Turtle &turtle)
-{
+void AddKeyMappings(Display &display, Turtle &turtle) {
     display.AddKeyMap(SDLK_ESCAPE, []() noexcept {
         exit(0);
     });
@@ -75,9 +74,9 @@ int main(int argc, char *argv[]) {
         turtle.DrawPath(display.Renderer);
         display.Present();
 
-        //if (!ReadAndRunInput(turtle)) {
+        // if (!ReadAndRunInput(turtle)) {
         //    cout << "Error\n";
-        //}
+        // }
     }
 
     return 0;

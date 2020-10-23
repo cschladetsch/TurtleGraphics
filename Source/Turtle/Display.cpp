@@ -13,8 +13,7 @@ Display::~Display() {
     SDL_Quit();
 }
 
-void Display::Clear()
-{
+void Display::Clear() {
     SDL_SetRenderDrawColor(Renderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderClear(Renderer);
 }

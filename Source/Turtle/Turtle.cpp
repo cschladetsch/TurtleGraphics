@@ -72,7 +72,7 @@ Position Turtle::GetForward() const {
     return { x, y };
 }
 
-Position Turtle::Process(std::function<bool (Turtle &, Position const &next)> const& fun) {
+Position Turtle::Process(std::function<bool(Turtle &, Position const &next)> const& fun) {
     auto loc = Location;
     for (auto ls : _lineSegments) {
         const auto next = loc + ls.first;
