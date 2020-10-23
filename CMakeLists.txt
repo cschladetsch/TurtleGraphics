@@ -5,6 +5,7 @@ project(${proj_name})
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 
 add_compile_options(/std:c++latest)
+add_compile_options(/DTURTLE_UNIT_TESTS)
 
 # Add SDL
 set(SDL_ROOT "External\\SDL2-2.0.12")
@@ -12,15 +13,16 @@ set(SDL_ROOT "External\\SDL2-2.0.12")
 add_subdirectory(${SDL_ROOT})
 
 # Add Boost
-set(BOOST_ROOT "c:\\Boost\\boost_1_73_0")
-set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost 1.5 REQUIRED COMPONENTS filesystem)
+#set(BOOST_ROOT "c:\\Boost\\boost_1_73_0")
+#set(Boost_USE_STATIC_LIBS ON)
+#find_package(Boost 1.5 REQUIRED COMPONENTS filesystem)
 
-include_directories(Include)
+include_directories("Include")
 
 file(GLOB_RECURSE sources CONFIGURE_DEPENDS "Source/*.cpp")
+file(GLOB_RECURSE tests CONFIGURE_DEPENDS "Tests/*.cpp")
 
-add_executable(${proj_name} ${sources})
+add_executable(${proj_name} ${sources} ${tests})
 set(Win64_libs
     winmm.lib
     version.lib
@@ -38,5 +40,6 @@ set(Win64_libs
     comdlg32.lib
     advapi32.lib
 )
-target_link_libraries(${proj_name} PUBLIC Boost::filesystem ${Win64_libs} SDL2)
+#target_link_libraries(${proj_name} PUBLIC Boost::filesystem ${Win64_libs} SDL2)
+target_link_libraries(${proj_name} PUBLIC ${Win64_libs} SDL2)
 
