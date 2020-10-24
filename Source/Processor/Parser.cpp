@@ -9,9 +9,8 @@ Parser::Parser(const Lexer& lexer) {
     SetLexer(lexer);
 }
 
-void Parser::SetLexer(const Lexer& lexer) noexcept {
-    _context.push_back(AstNode::New(EToken::Start));
-    auto const& tokens = lexer.GetTokens();
+void Parser::SetLexer(const Lexer& lexer) {
+    EnterNode(AstNode::New(EToken::Start));
 
     for (const auto& token : lexer.GetTokens()) {
         if (token.Type != EToken::WhiteSpace)
@@ -19,15 +18,15 @@ void Parser::SetLexer(const Lexer& lexer) noexcept {
     }
 }
 
-bool Parser::Run(const Lexer& lexer) noexcept {
+bool Parser::Run(const Lexer& lexer) {
     SetLexer(lexer);
     return Run();
 }
 
-bool Parser::Run() noexcept {
+bool Parser::Run() {
     try {
         return ParseStatements();
-    } catch (std::exception &e) {
+    } catch (std::exception const &e) {
         Fail() << e.what();
         return false;
     }
@@ -91,7 +90,7 @@ bool Parser::ParseFunction() {
     const auto funName = CurrentToken();
 
     if (!Expect(EToken::Identifier)) {
-        return Fail("Function name expected");
+        return Fail("KeyResponseFunction name expected");
     }
 
     auto fun = AstNode::New(EToken::Function);
@@ -164,7 +163,10 @@ bool Parser::AddArguments() {
 }
 
 void Parser::EnterNode(AstNodePtr const &node) {
-    _context.back()->AddChild(node);
+    if (!_context.empty()) {
+        _context.back()->AddChild(node);
+    }
+
     _context.push_back(node);
 }
 

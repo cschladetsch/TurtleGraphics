@@ -18,17 +18,16 @@ public:
     Parser() = default;
     explicit Parser(const Lexer& lexer);
 
-    void SetLexer(const Lexer& lexer) noexcept;
+    void SetLexer(const Lexer& lexer);
 
-    bool Run(const Lexer& lexer) noexcept;
-    bool Run() noexcept override;
+    bool Run(const Lexer& lexer);
+    bool Run() override;
 
     AstNodePtr GetRoot() const;
     bool AddArguments();
 
 private:
     bool ParseFunction();
-    bool AddStatementBlock();
     bool ParseColorName();
     bool ParseStatement();
     bool ParseRepeat();
@@ -37,6 +36,8 @@ private:
     bool ParseExpression();
     bool ParseStatements();
     bool ParseStatementBlock();
+
+    bool AddStatementBlock();
 
     std::vector<Token> GetTokens() const { return _tokens; }
 
@@ -51,9 +52,13 @@ private:
         return CurrentToken().Splice.GetText();
     }
 
-    bool AtEnd() const { return GetTokens().size() == _currentToken; }
+    bool AtEnd() const {
+        return GetTokens().size() == _currentToken;
+    }
 
-    Token NextToken() { return GetTokens().at(++_currentToken); }
+    Token NextToken() {
+        return GetTokens().at(++_currentToken);
+    }
 
     Token Peek() const { return Token{ GetTokens().at(_currentToken + 1).Type }; }
     bool Peek(EToken type) const { return Peek().Type == type; }

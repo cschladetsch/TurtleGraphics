@@ -10,17 +10,23 @@
 namespace TurtleGraphics {
 
 class Display {
-    typedef std::function<void()> Function;
-    std::map<SDL_KeyCode, Function> _keyMappings;
+public:
+    typedef std::function<void()> KeyResponseFunction;
+
+private:
+    std::map<SDL_KeyCode, KeyResponseFunction> _keyMappings;
+    SDL_Window* _window = nullptr;
+    SDL_Renderer* _renderer = nullptr;
 
 public:
-    SDL_Window* Window = nullptr;
-    SDL_Renderer* Renderer = nullptr;
-
+    Display() = default;
     ~Display();
-    void Clear();
+    void Clear() const noexcept;
 
-    void AddKeyMap(SDL_KeyCode key, Function function);
+    SDL_Window* GetWindow() const { return _window; }
+    SDL_Renderer* GetRenderer() const { return _renderer; }
+
+    void AddKeyMap(SDL_KeyCode key, KeyResponseFunction function);
 
     [[nodiscard]] bool Bootstrap(int width, int height);
     [[nodiscard]] bool PreRender() const;

@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
     AddKeyMappings(display, turtle);
 
     while (display.PreRender()) {
-        turtle.DrawPath(display.Renderer);
+        turtle.DrawPath(display.GetRenderer());
         display.Present();
 
         // if (!ReadAndRunInput(turtle)) {

@@ -8,14 +8,14 @@
 namespace TurtleGraphics {
 
 Display::~Display() {
-    SDL_DestroyRenderer(Renderer);
-    SDL_DestroyWindow(Window);
+    SDL_DestroyRenderer(_renderer);
+    SDL_DestroyWindow(_window);
     SDL_Quit();
 }
 
-void Display::Clear() {
-    SDL_SetRenderDrawColor(Renderer, 0xff, 0xff, 0xff, 0xff);
-    SDL_RenderClear(Renderer);
+void Display::Clear() const noexcept {
+    SDL_SetRenderDrawColor(_renderer, 0xff, 0xff, 0xff, 0xff);
+    SDL_RenderClear(_renderer);
 }
 
 bool Display::Bootstrap(int width, int height) {
@@ -27,21 +27,21 @@ bool Display::Bootstrap(int width, int height) {
     }
 
     if (SDL_CreateWindowAndRenderer(width, height,
-        SDL_WINDOW_RESIZABLE, &Window, &Renderer)) {
+        SDL_WINDOW_RESIZABLE, &_window, &_renderer)) {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION,
             "Couldn't create window and renderer: %s",
             SDL_GetError());
         return false;
     }
 
-    SDL_SetWindowTitle(Window, "Turtle Graphics++");
+    SDL_SetWindowTitle(_window, "Turtle Graphics++");
 
     Clear();
 
     return true;
 }
 
-void Display::AddKeyMap(SDL_KeyCode key, Function function) {
+void Display::AddKeyMap(SDL_KeyCode key, KeyResponseFunction function) {
     _keyMappings[key] = std::move(function);
 }
 
@@ -63,7 +63,7 @@ bool Display::PreRender() const {
 }
 
 void Display::Present() {
-    SDL_RenderPresent(Renderer);
+    SDL_RenderPresent(_renderer);
 }
 
 }  // namespace TurtleGraphics
