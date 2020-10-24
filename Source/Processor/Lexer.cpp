@@ -53,6 +53,7 @@ void Lexer::AddTokenNames() {
     _tokenTypes["x"] = EToken::X;
     _tokenTypes["y"] = EToken::Y;
     _tokenTypes["z"] = EToken::Z;
+    _tokenTypes["delta"] = EToken::Delta;
     _tokenTypes["red"] = EToken::Red;
     _tokenTypes["green"] = EToken::Green;
     _tokenTypes["blue"] = EToken::Blue;

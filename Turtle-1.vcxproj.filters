@@ -86,6 +86,12 @@
     <ClInclude Include="Include\Processor\Continuation.hpp">
       <Filter>Include\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="Include\Color.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Math.hpp">
+      <Filter>Include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Processor\Lexer.cpp">

@@ -9,10 +9,6 @@
 
 namespace TurtleGraphics {
 
-int Round(const float x) {
-    return x < 0 ? static_cast<int>(x - 0.5f) : static_cast<int>(x + 0.5f);
-}
-
 void DrawLine(SDL_Renderer* renderer, const float x, const float y, const float x1, const float y1) {
     SDL_RenderDrawLine(renderer, Round(x), Round(y), Round(x1), Round(y1));
 }

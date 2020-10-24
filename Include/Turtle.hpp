@@ -8,6 +8,8 @@
 #include <utility>
 
 #include <SDL.h>
+
+#include "Color.hpp"
 #include "Position.hpp"
 #include "StdAliases.hpp"
 

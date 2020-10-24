@@ -220,8 +220,10 @@
     <Text Include="Commands.turtle" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\Color.hpp" />
     <ClInclude Include="Include\Config.hpp" />
     <ClInclude Include="Include\Display.hpp" />
+    <ClInclude Include="Include\Math.hpp" />
     <ClInclude Include="Include\Pch.hpp" />
     <ClInclude Include="Include\Position.hpp" />
     <ClInclude Include="Include\Processor\AstNode.hpp" />

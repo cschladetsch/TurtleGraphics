@@ -47,7 +47,7 @@ enum class EToken {
 
     SetColor,
     SetColorByName,  // color names set in config file
-    DeltaColorComponent,
+    Delta,
     SetColorComponent,
     MulColorComponent,
 

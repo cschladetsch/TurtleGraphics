@@ -3,11 +3,9 @@
 #pragma once
 #include <ostream>
 
-namespace TurtleGraphics {
+#include "Config.hpp"
 
-inline bool Approx(float a, float b) {
-    return fabs(a - b) < 0.0001f;
-}
+namespace TurtleGraphics {
 
 struct Position {
     float x = 0;
@@ -29,7 +27,7 @@ struct Position {
     }
 
     friend bool operator==(const Position& A, const Position& B) {
-        return Approx(A.x, B.x) && Approx(A.y, B.y);
+        return ApproxEqual(A.x, B.x) && ApproxEqual(A.y, B.y);
     }
 
     friend std::ostream& operator<<(std::ostream& lhs,
@@ -38,7 +36,7 @@ struct Position {
     }
 };
 
-typedef Position Vector, Color;
+typedef Position Vector;
 
 }  // namespace TurtleGraphics
 

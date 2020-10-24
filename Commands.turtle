@@ -1,19 +1,6 @@
 repeat 4 {
     rotate 90
-    repeat 3 {
-        rotate 75
-        move 15
-        repeat 5 {
-            rotate 75
-            move 20
-        }
-    }
-    move 100
-
-    repeat 5 {
-        rotate 35
-        move 30
-    }
+    move 200
+    delta red -50
 }
-
 

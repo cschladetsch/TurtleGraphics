@@ -8,6 +8,7 @@
 #include "catch.hpp"
 
 #include "Turtle.hpp"
+#include "Color.hpp"
 #include "Processor/Lexer.hpp"
 #include "Processor/Parser.hpp"
 #include "Processor/Translator.hpp"
@@ -17,6 +18,8 @@
 
 using TurtleGraphics::Turtle;
 using TurtleGraphics::Position;
+using TurtleGraphics::Color;
+using TurtleGraphics::ColorInt;
 
 using TurtleGraphics::Processor::EToken;
 using TurtleGraphics::Processor::Lexer;
@@ -158,6 +161,28 @@ TEST_CASE("Test Move 1", "[processor]") {
 TEST_CASE("Test Move 1 NL", "[processor]") {
     auto t = Execute("move 1\n");
     REQUIRE(t.Location == Position(501, 500));
+}
+
+TEST_CASE("Test Color", "[prims]") {
+    Color a(0, 0, 0);
+    REQUIRE(a.Normalise() == Color(0, 0, 0));
+
+    Color b(-4.75f, 0, 0);
+    REQUIRE(b.Normalise() == Color(0.25f, 0, 0));
+
+    Color c(1.75f, 0, 0);
+    REQUIRE(c.Normalise() == Color(0.75f, 0, 0));
+
+    ColorInt v(c);
+    REQUIRE(v == ColorInt(static_cast<int>(0.75f * 255), 0, 0));
+}
+
+TEST_CASE("Test Delta color", "[exec]") {
+    const char* code = "delta red -0.25";
+    Turtle turtle;
+    RunContext context(turtle, code);
+    REQUIRE(context.Run());
+    //REQUIRE(turtle.Color == Color(0.75f, 0, 0));
 }
 
 TEST_CASE("Test Function decl", "[exec][function]") {
