@@ -219,7 +219,10 @@ TEST_CASE("Test Delta color", "[exec]") {
     const char* code = "delta red -25";
     Turtle turtle;
     RunContext context(turtle, code);
-    REQUIRE(context.Run());
+    context.Run();
+    std::cout << context.GetError().c_str();
+    REQUIRE(context.HasSucceeded());
+
     //REQUIRE(turtle.Color == Color(0.75f, 0, 0));
 }
 

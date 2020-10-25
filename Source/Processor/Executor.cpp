@@ -6,18 +6,18 @@
 
 namespace TurtleGraphics::Processor {
 
-Executor::Executor(Turtle& turtle, CommandSequencePtr sequence) noexcept
+Executor::Executor(Turtle& turtle, CommandSequencePtr const &sequence) noexcept
     : _sequence(sequence) {
     _turtle = &turtle;
     _context.push_back(sequence);
 }
 
-bool Executor::Run(Turtle& turtle, CommandSequencePtr sequence) {
+bool Executor::Run(Turtle& turtle, CommandSequencePtr const &sequence) {
     _turtle = &turtle;
     return Run(sequence);
 }
 
-bool Executor::Run(CommandSequencePtr sequence) {
+bool Executor::Run(CommandSequencePtr const &sequence) {
     _context.push_back(sequence);
     return NextSequence();
 }
@@ -64,6 +64,10 @@ bool Executor::Execute(Continuation& sequence) {
     return NextSequence();
 }
 
+bool Executor::DoDelta() {
+    return Fail("");
+}
+
 bool Executor::Execute(Command const &command) {
     switch (command.Type) {
     case ECommandType::PenUp:
@@ -98,6 +102,8 @@ bool Executor::Execute(Command const &command) {
     }
     case ECommandType::Repeat:
         return DoRepeat();
+    case ECommandType::Delta:
+        return DoDelta();
     default:
         {}
     }
@@ -106,9 +112,9 @@ bool Executor::Execute(Command const &command) {
 }
 
 bool Executor::PopFloat(float &num) {
-    const auto opt = DataPop<int>();
+    const auto opt = DataPop<float>();
     if (!opt.has_value())
-        return Fail("No value");
+        return false;
 
     num = static_cast<float>(opt.value());
     return true;
@@ -120,13 +126,19 @@ bool Executor::DoRepeat() {
         return Fail("Number of times to repeat expected");
     }
 
+    const auto numTimes = *numTimesOpt;
+    if (numTimes < 0) {
+        Fail() << "Cannot repeat a negative number of times: " << numTimes;
+        return false;
+    }
+
     auto commandsOpt = DataPop<CommandSequencePtr>();
     if (!commandsOpt.has_value()) {
         return Fail("Commands to repeat expected");
     }
 
     auto commands = *commandsOpt;
-    for (auto n = 0; n < *numTimesOpt; ++n) {
+    for (auto n = 0; n < numTimes; ++n) {
         Run(commands);
         commands->Reset();
     }

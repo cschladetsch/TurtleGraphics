@@ -16,7 +16,7 @@ typedef std::shared_ptr<Continuation> CommandSequencePtr;
 
 struct Command {
     ECommandType Type;
-    std::variant<int, string, CommandSequencePtr, vector<string>> Value;
+    std::variant<int, float, string, CommandSequencePtr, vector<string>> Value;
 
     Command() noexcept : Command(ECommandType::None) {
     }
@@ -30,6 +30,10 @@ struct Command {
     }
 
     explicit Command(int num) : Command(ECommandType::Value) {
+        Value = num;
+    }
+
+    explicit Command(float num) : Command(ECommandType::Value) {
         Value = num;
     }
 

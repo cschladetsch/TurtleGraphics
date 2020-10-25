@@ -139,8 +139,8 @@ bool Parser::ParseColorName() {
 }
 
 bool Parser::AddDelta(EToken type) {
-    auto delta = AstNode::New(EToken::Delta);
-    const auto what = NextToken();
+    auto delta = AstNode::New(type);
+    const auto what = CurrentToken();
     const auto num = NextToken();
     delta->AddChild(what);
     delta->AddChild(num);

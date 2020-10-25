@@ -80,6 +80,8 @@ bool Translator::Translate(AstNodePtr const &node) {
         return TranslateArgList(node);
     case EToken::Function:
         return TranslateFunction(node);
+    case EToken::Delta:
+        return TranslateDelta(node);
     default:
         {}
     }
@@ -131,6 +133,27 @@ void Translator::Leave() {
     _commands.pop_back();
 }
 
+bool Translator::TranslateDelta(const AstNodePtr& node) {
+    Append(ECommandType::Delta);
+    auto const &children = node->GetChildren();
+    switch (children.at(0)->GetType()) {
+    case EToken::Red:
+        Append(ECommandType::Red);
+        break;
+    case EToken::Green:
+        Append(ECommandType::Green);
+        break;
+    case EToken::Blue:
+        Append(ECommandType::Blue);
+        break;
+    default:
+        Fail() << "Bad delta argument";
+        return false;
+    }
+
+    return Append(Command(children.at(1)->GetFloat()));
+}
+
 bool Translator::Append(Command const &command) const {
     Current()->Append(command);
     return true;
@@ -141,8 +164,7 @@ bool Translator::Append(ECommandType type) const {
     return true;
 }
 
-bool Translator::AddUnaryOperation(
-    AstNodePtr const &node, ECommandType type) const {
+bool Translator::AddUnaryOperation(AstNodePtr const &node, ECommandType type) const {
     Append(Command(MakeValueInt(node->GetChildren()[0])));
     Append(Command(type));
     return true;

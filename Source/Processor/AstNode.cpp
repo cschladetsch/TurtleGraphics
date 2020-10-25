@@ -27,6 +27,10 @@ void AstNode::AddChild(Token token) {
     AddChild(New(token));
 }
 
+float AstNode::GetFloat() const {
+    return static_cast<float>(atof(GetText().c_str()));
+}
+
 AstNodePtr AstNode::New(Token token) {
     return std::make_shared<AstNode>(token);
 }

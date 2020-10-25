@@ -30,6 +30,7 @@ private:
     bool TranslateRepeat(const AstNodePtr& node);
     bool TranslateArgList(const AstNodePtr& node) const;
     bool TranslateFunction(const AstNodePtr& node);
+    bool TranslateDelta(const AstNodePtr& node);
 
     CommandSequencePtr Enter();
     void Leave();

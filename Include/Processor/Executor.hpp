@@ -27,16 +27,18 @@ public:
         _turtle = &turtle;
     }
 
-    Executor(Turtle& turtle, CommandSequencePtr sequence) noexcept;
+    Executor(Turtle& turtle, CommandSequencePtr const& sequence) noexcept;
 
-    bool Run(Turtle& turtle, CommandSequencePtr sequence);
-    bool Run(CommandSequencePtr sequence);
+    bool Run(Turtle& turtle, CommandSequencePtr const& sequence);
+    bool Run(CommandSequencePtr const& sequence);
     bool Run() override;
+
     std::map<std::string, Command>& GetScope();
     std::optional<Command> PopData() noexcept;
 
 private:
     bool Execute(Continuation& sequence);
+    bool DoDelta();
     bool Execute(Command const& command);
     bool NextSequence() noexcept;
 

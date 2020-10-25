@@ -7,6 +7,8 @@
 #include <string>
 #include <functional>
 
+
+#include "Command.hpp"
 #include "Processor/Token.hpp"
 
 namespace TurtleGraphics::Processor {
@@ -32,6 +34,7 @@ class AstNode {
     void AddChild(const AstNodePtr& node);
     void AddChild(EToken type);
     void AddChild(Token token);
+    float GetFloat() const;
 
     static AstNodePtr New(Token token);
     static AstNodePtr New(EToken token) { return New(Token(token)); }

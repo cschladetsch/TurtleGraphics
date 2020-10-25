@@ -14,6 +14,9 @@ enum class ECommandType {
     Repeat,
     Function,
     Quit,
+    Delta,
+    X, Y, Z,
+    Red, Green, Blue,
 };
 
 }  // namespace TurtleGraphics::Processor
