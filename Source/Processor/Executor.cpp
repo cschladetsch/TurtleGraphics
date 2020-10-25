@@ -112,9 +112,16 @@ bool Executor::Execute(Command const &command) {
 }
 
 bool Executor::PopFloat(float &num) {
+    auto const top = _data.back();
     const auto opt = DataPop<float>();
-    if (!opt.has_value())
-        return false;
+    if (!opt.has_value()) {
+        _data.push_back(top);
+        const auto intOpt = DataPop<int>();
+        if (intOpt.has_value()) {
+            num = *intOpt;
+            return true;
+        }
+    }
 
     num = static_cast<float>(opt.value());
     return true;
