@@ -139,6 +139,9 @@
     <ClCompile Include="Source\Processor\Continuation.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
+    <ClCompile Include="Source\EToken.cpp">
+      <Filter>Source\Processor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />

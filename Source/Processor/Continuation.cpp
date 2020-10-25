@@ -12,7 +12,6 @@ Continuation::Continuation(
 }
 
 bool Continuation::Run() {
-    // Continuations cannot run themselves.
     return false;
 }
 
@@ -38,7 +37,6 @@ bool Continuation::Enter(Executor& exec) {
 
 Command Continuation::Next() {
     if (AtEnd()) {
-        // Warn("At end of continuation");
         return Command();
     }
 

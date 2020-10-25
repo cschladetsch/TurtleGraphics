@@ -31,6 +31,14 @@ CommandSequencePtr Translator::GetCommands() const {
     return _commands.back();
 }
 
+std::ostream& Translator::Fail() const {
+    return Fail();
+}
+
+bool Translator::Fail(const char* errorText) const {
+    return Fail(errorText);
+}
+
 bool Translator::TranslateFunction(const AstNodePtr& node) {
     auto const& children = node->GetChildren();
     if (children.size() != 3) {

@@ -10,9 +10,10 @@
 namespace TurtleGraphics::Processor {
 
 class Parser final : public ProcessBase {
-    std::vector<Token> _tokens;
+    Lexer const* _lexer = 0;
     size_t _currentToken = 0;
-    std::vector<AstNodePtr> _context;
+    vector<Token> _tokens;
+    vector<AstNodePtr> _context;
 
 public:
     Parser() = default;
@@ -20,28 +21,38 @@ public:
 
     void SetLexer(const Lexer& lexer);
 
-    bool Run(const Lexer& lexer);
     bool Run() override;
+    bool Run(const Lexer& lexer);
 
     AstNodePtr GetRoot() const;
-    bool AddArguments();
+
+protected:
+    bool Fail(const char* text) const override {
+        Fail() << "Parser : " << text;
+        return false;
+    }
+
+    std::ostream& Fail() const override {
+        return ErrorStream() << "Parser: ";
+    }
 
 private:
-    bool ParseFunction();
-    bool ParseColorName();
-    bool ParseDelta();
     bool ParseStatement();
+    bool ParseStatements();
+    bool ParseExpression();
+    bool ParseStatementBlock();
     bool ParseRepeat();
     bool ParseMove();
     bool ParseRotate();
-    bool ParseExpression();
-    bool ParseStatements();
-    bool ParseStatementBlock();
+    bool ParseFunction();
+    bool ParseColorName();
+    bool ParseDelta();
 
     bool AddStatementBlock();
     bool AddDelta(EToken type);
+    bool AddArguments();
 
-    std::vector<Token> GetTokens() const { return _tokens; }
+    vector<Token> GetTokens() const { return _tokens; }
 
     Token CurrentToken() const { return GetTokens().at(_currentToken); }
     EToken CurrentTokenType() const { return CurrentToken().Type; }
@@ -50,7 +61,7 @@ private:
         return CurrentToken().Type == type;
     }
 
-    std::string CurrentTokenText() const {
+    string CurrentTokenText() const {
         return CurrentToken().Splice.GetText();
     }
 
@@ -58,9 +69,7 @@ private:
         return GetTokens().size() == _currentToken;
     }
 
-    Token NextToken() {
-        return GetTokens().at(++_currentToken);
-    }
+    Token NextToken();
 
     Token Peek() const { return Token{ GetTokens().at(_currentToken + 1).Type }; }
     bool Peek(EToken type) const { return Peek().Type == type; }
@@ -77,3 +86,4 @@ private:
 };
 
 }  // namespace TurtleGraphics::Processor
+

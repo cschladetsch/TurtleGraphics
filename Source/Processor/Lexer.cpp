@@ -150,12 +150,28 @@ char Lexer::Peek() const {
         return 0;
     }
 
-    return GetCurrent(_offset + 1);
+    return GetAt(_offset + 1);
 }
 
 bool Lexer::AddToken(EToken type, size_t length) {
     return AddToken(
         StringSplice(*this, _lineNumber, _offset, length), type);
+}
+
+bool Lexer::Fail(const char* errorText) const {
+    return Fail(errorText);
+}
+
+std::ostream& Lexer::Fail() const {
+    auto& str = _errorStream;
+    str << fileName << ":(" << _lineNumber << "):\n";
+    str << "\n" << _lines[_lineNumber] << "\n";
+    for (size_t n = 0; n < _offset; ++n) {
+        str << ' ';
+    }
+    str << "^" << std::endl;
+
+    return str;
 }
 
 StringSplice Lexer::GatherNumber() const {
@@ -174,8 +190,8 @@ StringSplice Lexer::GatherNumber() const {
         default: {}
     }
 
-    while (!AtEnd(offset)) {
-        auto ch = GetCurrent(offset);
+    while (!AtEndAt(offset)) {
+        auto ch = GetAt(offset);
         switch (ch) {
         case '.':
             if (hasDot) {
@@ -228,13 +244,13 @@ bool Lexer::AddToken(StringSplice const splice, EToken type) {
 
 StringSplice Lexer::Gather(std::function<bool(char)> const& predicate) const {
     auto end = _offset;
-    while (!AtEnd(end) && predicate(GetCurrent(end)))
+    while (!AtEndAt(end) && predicate(GetAt(end)))
         ++end;
 
     return { *this, _lineNumber, _offset, end - _offset };
 }
 
-bool Lexer::AtEnd(size_t offset) const noexcept {
+bool Lexer::AtEndAt(size_t offset) const noexcept {
     if (_lineNumber >= _lines.size())
         return true;
 
@@ -242,18 +258,18 @@ bool Lexer::AtEnd(size_t offset) const noexcept {
 }
 
 bool Lexer::AtEnd() const noexcept {
-    return AtEnd(_offset);
+    return AtEndAt(_offset);
 }
 
-char Lexer::GetCurrent(size_t offset) const {
-    if (AtEnd(offset))
+char Lexer::GetAt(size_t offset) const {
+    if (AtEndAt(offset))
         return 0;
 
     return _lines[_lineNumber][offset];
 }
 
 char Lexer::GetCurrent() const noexcept {
-    return GetCurrent(_offset);
+    return GetAt(_offset);
 }
 
 }  // namespace TurtleGraphics::Processor

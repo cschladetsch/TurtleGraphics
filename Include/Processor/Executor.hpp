@@ -27,7 +27,7 @@ public:
         _turtle = &turtle;
     }
 
-    Executor(Turtle& turtle, CommandSequencePtr const& sequence) noexcept;
+    Executor(Turtle& turtle, CommandSequencePtr const& sequence);
 
     bool Run(Turtle& turtle, CommandSequencePtr const& sequence);
     bool Run(CommandSequencePtr const& sequence);
@@ -38,9 +38,9 @@ public:
 
 private:
     bool Execute(Continuation& sequence);
-    bool DoDelta();
     bool Execute(Command const& command);
-    bool NextSequence() noexcept;
+
+    bool NextSequence();
 
     template <typename Ty>
     std::optional<Ty> DataPop() noexcept {
@@ -62,7 +62,9 @@ private:
     }
 
     bool PopFloat(float &num);
+
     bool DoRepeat();
+    bool DoDelta();
 };
 
 }  // namespace TurtleGraphics::Processor

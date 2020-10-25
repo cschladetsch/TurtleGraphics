@@ -6,7 +6,7 @@
 
 namespace TurtleGraphics::Processor {
 
-Executor::Executor(Turtle& turtle, CommandSequencePtr const &sequence) noexcept
+Executor::Executor(Turtle& turtle, CommandSequencePtr const &sequence)
     : _sequence(sequence) {
     _turtle = &turtle;
     _context.push_back(sequence);
@@ -38,7 +38,7 @@ std::optional<Command> Executor::PopData() noexcept {
     return cmd;
 }
 
-bool Executor::NextSequence() noexcept {
+bool Executor::NextSequence() {
     if (_context.empty())
         return true;
 
@@ -118,12 +118,14 @@ bool Executor::PopFloat(float &num) {
         _data.push_back(top);
         const auto intOpt = DataPop<int>();
         if (intOpt.has_value()) {
-            num = *intOpt;
+            num = static_cast<float>(*intOpt);
             return true;
         }
+
+        return false;
     }
 
-    num = static_cast<float>(opt.value());
+    num = opt.value();
     return true;
 }
 
@@ -141,13 +143,17 @@ bool Executor::DoRepeat() {
 
     auto commandsOpt = DataPop<CommandSequencePtr>();
     if (!commandsOpt.has_value()) {
-        return Fail("Commands to repeat expected");
+        return Fail("Require some commands to repeat.");
     }
 
     auto commands = *commandsOpt;
     for (auto n = 0; n < numTimes; ++n) {
-        Run(commands);
+        if (!Run(commands)) {
+            return false;
+        }
+
         commands->Reset();
+
     }
 
     return true;

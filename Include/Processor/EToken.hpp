@@ -55,4 +55,9 @@ enum class EToken {
     ,
 };
 
+std::string TokenToString(EToken type);
+
+std::ostream& operator<<(std::ostream& str, EToken type);
+
 }  // namespace TurtleGraphics::Processor
+

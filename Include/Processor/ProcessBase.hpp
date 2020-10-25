@@ -8,9 +8,9 @@
 namespace TurtleGraphics::Processor {
 
 struct ProcessBase {
- protected:
+protected:
     mutable bool _failed = false;
-    mutable std::ostringstream _errorStream;
+    mutable std::stringstream _errorStream;
 
 public:
     virtual ~ProcessBase() = default;
@@ -33,7 +33,11 @@ public:
     }
 
 protected:
-    virtual bool Fail(const char* errorText) const noexcept {
+    std::ostream &ErrorStream() const {
+        return _errorStream;
+    }
+
+    virtual bool Fail(const char* errorText) const {
         try {
             Fail() << errorText;
         } catch (const std::exception& e) {
@@ -42,7 +46,7 @@ protected:
         return false;
     }
 
-    std::ostringstream& Fail() const noexcept {
+    virtual std::ostream& Fail() const {
         _failed = true;
         return _errorStream;
     }

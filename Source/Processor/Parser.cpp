@@ -160,7 +160,8 @@ bool Parser::ParseDelta() {
 
 bool Parser::AddArguments() {
     if (!Expect(EToken::OpenParan)) {
-        return Fail("Open parenthesis expected");
+        Fail() << "Open parenthesis expected";
+        return false;
     }
 
     const auto args = AstNode::New(EToken::ArgList);
@@ -175,7 +176,8 @@ bool Parser::AddArguments() {
     }
 
     if (!Expect(EToken::CloseParan)) {
-        return Fail("Close parenthesis expected");
+        _lexer->Fail() << "Close parenthesis expected";
+        return false;
     }
 
     LeaveNode();
@@ -208,9 +210,19 @@ bool Parser::ParseStatementBlock() {
     return true;
 }
 
+Token Parser::NextToken() {
+    if (AtEnd()) {
+        Fail() << "Token expected";
+        return Token();
+    }
+    return GetTokens().at(++_currentToken);
+}
+
 bool Parser::Expect(EToken type) {
-    if (!CurrentTokenType(type))
-        return Fail("Unexpected different token type");
+    if (!CurrentTokenType(type)) {
+        Fail() << "Expected " << type << ", got " << CurrentToken().Type;
+        return false;
+    }
 
     ++_currentToken;
 
@@ -226,8 +238,10 @@ bool Parser::ParseMove() {
 }
 
 bool Parser::AddParameterisedCommand(EToken type) {
-    if (!Peek(EToken::Number))
-        return Fail("Number expected");
+    if (!Peek(EToken::Number)) {
+        Fail() << "Number expected";
+        return false;
+    }
 
     auto node = AstNode::New(type);
     node->AddChild(AstNode::New(NextToken()));

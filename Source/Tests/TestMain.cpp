@@ -90,6 +90,15 @@ TEST_CASE("Test Lexer Number", "[lexer]") {
     REQUIRE(ToNumber(l5) == 0.123f);
 }
 
+Turtle turtle;
+
+//TEST_CASE("Test Lexer Error Text", "[lexer]") {
+//    const char* i0 = "foo";
+//    RunContext context(turtle, i0);
+//    REQUIRE(!context.Run());
+//    std::cout << context.GetError();
+//}
+
 TEST_CASE("Test Lexer Number with Exponents", "[lexer]") {
     //Lexer l6("+0.1e-1");
     //Lexer l7("+0.1e+12");

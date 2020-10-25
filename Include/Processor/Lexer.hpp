@@ -14,6 +14,7 @@
 namespace TurtleGraphics::Processor {
 
 class Lexer : public ProcessBase {
+    string fileName = "<in>";
     vector<Token> _tokens;
     vector<string> _lines;
     size_t _lineNumber = 0;
@@ -30,23 +31,30 @@ public:
     const vector<Token>& GetTokens() const noexcept { return _tokens; }
     const vector<string>& GetLines() const noexcept { return _lines; }
 
-    [[nodiscard]] bool IsValid(StringSplice splice) const noexcept;
+    bool IsValid(StringSplice splice) const noexcept;
+
+protected:
+    friend class Parser;
+    bool Fail(const char* errorText) const override ;
+    std::ostream& Fail() const override;
 
 private:
     void AddText(const char* text);
     void AddTokenNames();
 
-    bool AtEnd() const noexcept;
-    bool AtEnd(size_t offset) const noexcept;
     char GetCurrent() const noexcept;
-    char GetCurrent(size_t offset) const;
-    StringSplice Gather(std::function<bool(char)> const& predicate) const;
-    bool AddToken(StringSplice splice, EToken type);
-    bool AddToken(EToken type, size_t length = 0);
-    StringSplice GatherNumber() const;
-    bool GetNext();
+    char GetAt(size_t offset) const;
 
     char Peek() const;
+    bool AtEnd() const noexcept;
+    bool AtEndAt(size_t offset) const noexcept;
+
+    bool AddToken(StringSplice splice, EToken type);
+    bool AddToken(EToken type, size_t length = 0);
+    bool GetNext();
+
+    StringSplice Gather(std::function<bool(char)> const& predicate) const;
+    StringSplice GatherNumber() const;
 };
 
 }  // namespace TurtleGraphics::Processor
