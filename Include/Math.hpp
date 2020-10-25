@@ -7,11 +7,11 @@ namespace TurtleGraphics {
 constexpr float float_epsilon = 0.001f;
 constexpr float double_epsilon = 0.00001f;
 
-inline bool ApproxEqual(float a, float b) {
+inline bool ApproxEqual(const float a, const float b) {
     return fabs(a - b) < float_epsilon;
 }
 
-inline bool ApproxEqual(double a, double b) {
+inline bool ApproxEqual(const double a, const double b) {
     return fabs(a - static_cast<long double>(b)) < double_epsilon;
 }
 

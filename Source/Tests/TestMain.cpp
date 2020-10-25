@@ -62,6 +62,44 @@ TEST_CASE("Test String", "[processor]") {
     REQUIRE(hello[5] == '\n');
 }
 
+float ToNumber(Lexer const &lexer) {
+    return static_cast<float>(
+        atof(lexer.GetTokens().at(0).Splice.GetText().c_str()));
+}
+
+TEST_CASE("Test Lexer Number", "[lexer]") {
+    Lexer l0("0");
+    Lexer l1("-0");
+    Lexer l2("+0");
+    Lexer l3("-0.123");
+    Lexer l5("+0.123");
+    Lexer l4("0.123");
+
+    l0.Run();
+    l1.Run();
+    l2.Run();
+    l3.Run();
+    l4.Run();
+    l5.Run();
+
+    REQUIRE(ToNumber(l0) == 0);
+    REQUIRE(ToNumber(l1) == 0);
+    REQUIRE(ToNumber(l2) == 0);
+    REQUIRE(ToNumber(l3) == -0.123f);
+    REQUIRE(ToNumber(l4) == 0.123f);
+    REQUIRE(ToNumber(l5) == 0.123f);
+}
+
+TEST_CASE("Test Lexer Number with Exponents", "[lexer]") {
+    //Lexer l6("+0.1e-1");
+    //Lexer l7("+0.1e+12");
+    //l6.Run();
+    //l7.Run();
+    //REQUIRE(ToNumber(l6) == 0.1e-1);
+    //REQUIRE(ToNumber(l7) == 0.1e+12);
+}
+
+
 TEST_CASE("Test Parser", "[processor]") {
     const char* i0 = "penDown repeat 4 { rotate 90 move 100 } quit";
     Lexer lexer(i0);
@@ -178,7 +216,7 @@ TEST_CASE("Test Color", "[prims]") {
 }
 
 TEST_CASE("Test Delta color", "[exec]") {
-    const char* code = "delta red -0.25";
+    const char* code = "delta red -25";
     Turtle turtle;
     RunContext context(turtle, code);
     REQUIRE(context.Run());

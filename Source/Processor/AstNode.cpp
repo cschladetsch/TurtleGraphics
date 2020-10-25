@@ -19,6 +19,14 @@ void AstNode::ForEachChild(const std::function<void(const AstNode&)>& action) {
     }
 }
 
+void AstNode::AddChild(EToken type) {
+    AddChild(New(Token(type)));
+}
+
+void AstNode::AddChild(Token token) {
+    AddChild(New(token));
+}
+
 AstNodePtr AstNode::New(Token token) {
     return std::make_shared<AstNode>(token);
 }

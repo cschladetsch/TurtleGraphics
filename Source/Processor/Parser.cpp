@@ -54,6 +54,7 @@ bool Parser::ParseStatement() {
     case EToken::Quit: return AddChild(EToken::Quit);
     case EToken::Function: return ParseFunction();
     case EToken::Number: return AddChild(CurrentToken());
+    case EToken::Delta: return ParseDelta();
     default: {}
     }
 
@@ -135,6 +136,26 @@ bool Parser::ParseColorName() {
     // }
 
     return Fail("Not implemented");
+}
+
+bool Parser::AddDelta(EToken type) {
+    auto delta = AstNode::New(EToken::Delta);
+    const auto what = NextToken();
+    const auto num = NextToken();
+    delta->AddChild(what);
+    delta->AddChild(num);
+    AddChild(delta);
+    return true;
+}
+
+bool Parser::ParseDelta() {
+    switch (NextToken().Type) {
+    case EToken::Red:
+        return AddDelta(EToken::Red);
+    default: { }
+    }
+
+    return false;
 }
 
 bool Parser::AddArguments() {

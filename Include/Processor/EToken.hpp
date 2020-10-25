@@ -51,7 +51,8 @@ enum class EToken {
     SetColorComponent,
     MulColorComponent,
 
-    Red, Green, Blue, Alpha,
+    Red, Green, Blue, Alpha, Rotation
+    ,
 };
 
 }  // namespace TurtleGraphics::Processor

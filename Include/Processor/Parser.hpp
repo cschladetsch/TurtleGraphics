@@ -29,6 +29,7 @@ public:
 private:
     bool ParseFunction();
     bool ParseColorName();
+    bool ParseDelta();
     bool ParseStatement();
     bool ParseRepeat();
     bool ParseMove();
@@ -38,6 +39,7 @@ private:
     bool ParseStatementBlock();
 
     bool AddStatementBlock();
+    bool AddDelta(EToken type);
 
     std::vector<Token> GetTokens() const { return _tokens; }
 

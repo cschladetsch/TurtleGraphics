@@ -7,7 +7,7 @@
 
 namespace TurtleGraphics {
 
-// Components are in range [0..1]
+// Components are in range [-inf..inf], and can be normalised to [0..1]
 struct Color
 {
     float r = 0;
@@ -24,15 +24,7 @@ struct Color
     }
 
     static float Normalise(const float c) {
-        if (c < 0) {
-            return c - static_cast<float>(static_cast<int>(c - 0.5f));
-        }
-
-        if (c > 0) {
-            return c - static_cast<float>(static_cast<int>(c));
-        }
-
-        return 0;
+        return c - static_cast<float>(static_cast<int>(c + (c < 0 ? -0.5f : 0)));
     }
 
     friend bool operator==(Color const &A, Color const &B) {
@@ -64,7 +56,7 @@ struct ColorInt {
     }
 
     friend bool operator==(ColorInt const &A, ColorInt const &B) {
-        return A.r == B.r && A.g == B.g && A.b == B.g;
+        return A.r == B.r && A.g == B.g && A.b == B.b;
     }
 };
 

@@ -43,7 +43,10 @@ private:
     StringSplice Gather(std::function<bool(char)> const& predicate) const;
     bool AddToken(StringSplice splice, EToken type);
     bool AddToken(EToken type, size_t length = 0);
+    StringSplice GatherNumber() const;
     bool GetNext();
+
+    char Peek() const;
 };
 
 }  // namespace TurtleGraphics::Processor

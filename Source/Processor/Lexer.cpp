@@ -58,6 +58,7 @@ void Lexer::AddTokenNames() {
     _tokenTypes["green"] = EToken::Green;
     _tokenTypes["blue"] = EToken::Blue;
     _tokenTypes["alpha"] = EToken::Alpha;
+    _tokenTypes["rot"] = EToken::Rotation;
 }
 
 void Lexer::AddText(const char *text) {
@@ -114,7 +115,7 @@ bool Lexer::GetNext() {
     }
 
     if (std::isdigit(current))
-        return AddToken(Gather(std::isdigit), EToken::Number);
+        return AddToken(GatherNumber(), EToken::Number);
 
     if (std::isspace(current))
         return AddToken(Gather(std::isspace), EToken::WhiteSpace);
@@ -125,20 +126,93 @@ bool Lexer::GetNext() {
     case '(': return AddToken(EToken::OpenParan, 1);
     case ')': return AddToken(EToken::CloseParan, 1);
     case ',': return AddToken(EToken::Comma, 1);
-    default:
-        {}
+    case '+':
+    case '-': {
+        if (std::isdigit(Peek())) {
+            return AddToken(GatherNumber(), EToken::Number);
+        }
+        Fail() << "Not Implemented";
+        return false;
+    }
+    default: {}
     }
 
     // TODO(cjs): error reporting
-    if (!_failed)
+    if (!_failed) {
         _tokens.emplace_back(Token{ EToken::None });
+    }
 
     return false;
+}
+
+char Lexer::Peek() const {
+    if (AtEnd()) {
+        return 0;
+    }
+
+    return GetCurrent(_offset + 1);
 }
 
 bool Lexer::AddToken(EToken type, size_t length) {
     return AddToken(
         StringSplice(*this, _lineNumber, _offset, length), type);
+}
+
+StringSplice Lexer::GatherNumber() const {
+    auto hasExponent = false;
+    auto hasNumber = false;
+    auto hasDot = false;
+    auto offset = _offset;
+    const auto ch = GetCurrent();
+    switch (ch) {
+        case '-':
+            ++offset;
+            break;
+        case '+':
+            ++offset;
+            break;
+        default: {}
+    }
+
+    while (!AtEnd(offset)) {
+        auto ch = GetCurrent(offset);
+        switch (ch) {
+        case '.':
+            if (hasDot) {
+                Fail() << "Bad number";
+                return {};
+            }
+            hasDot = true;
+            break;
+        case 'e':
+        case 'E':
+            if (!hasNumber || hasDot) {
+                Fail() << "Bad number";
+                return {};
+            }
+            if (hasExponent) {
+                Fail() << "Multiple exponents in Number";
+                return {};
+            }
+            hasExponent = true;
+            break;
+        default:
+            if (!isdigit(ch)) {
+                if (!hasNumber) {
+                    Fail() << "Bad number";
+                    return {};
+                }
+                return StringSplice(*this, _lineNumber,
+                    _offset, offset - _offset);
+            }
+            hasNumber = true;
+            break;
+        }
+
+        ++offset;
+    }
+
+    return StringSplice(*this, _lineNumber, _offset, offset - _offset);
 }
 
 bool Lexer::AddToken(StringSplice const splice, EToken type) {
@@ -164,7 +238,7 @@ bool Lexer::AtEnd(size_t offset) const noexcept {
     if (_lineNumber >= _lines.size())
         return true;
 
-    return offset >= _lines[_lineNumber].size();
+    return offset >= _lines.at(_lineNumber).size();
 }
 
 bool Lexer::AtEnd() const noexcept {

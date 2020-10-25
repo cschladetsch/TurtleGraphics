@@ -27,9 +27,11 @@ class AstNode {
     EToken GetType() const noexcept { return _token.Type; }
     string GetText() const { return _token.Splice.GetText(); }
     vector<AstNodePtr> const &GetChildren() const noexcept { return _children; }
+    void ForEachChild(const std::function<void(const AstNode&)>& action);
 
     void AddChild(const AstNodePtr& node);
-    void ForEachChild(const std::function<void(const AstNode&)>& action);
+    void AddChild(EToken type);
+    void AddChild(Token token);
 
     static AstNodePtr New(Token token);
     static AstNodePtr New(EToken token) { return New(Token(token)); }
