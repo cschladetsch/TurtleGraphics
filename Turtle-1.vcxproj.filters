@@ -142,6 +142,9 @@
     <ClCompile Include="Source\EToken.cpp">
       <Filter>Source\Processor</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\TestCases.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />

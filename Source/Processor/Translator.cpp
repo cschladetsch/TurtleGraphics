@@ -5,8 +5,8 @@
 
 namespace TurtleGraphics::Processor {
 
-bool Translator::Run(AstNodePtr root) {
-    _root = std::move(root);
+bool Translator::Run(AstNodePtr const &root) {
+    _root = root;
     return Run();
 }
 
@@ -19,7 +19,7 @@ bool Translator::Run() {
         return Fail("Start expected");
     }
 
-    return Translate(_root);
+    return HasSucceeded() && Translate(_root);
 }
 
 CommandSequencePtr Translator::GetCommands() const {
@@ -141,9 +141,9 @@ void Translator::Leave() {
     _commands.pop_back();
 }
 
-bool Translator::TranslateDelta(const AstNodePtr& node) {
-    Append(ECommandType::Delta);
+bool Translator::TranslateDelta(const AstNodePtr& node) const {
     auto const &children = node->GetChildren();
+    Append(Command(children.at(1)->GetFloat()));
     switch (children.at(0)->GetType()) {
     case EToken::Red:
         Append(ECommandType::Red);
@@ -159,7 +159,7 @@ bool Translator::TranslateDelta(const AstNodePtr& node) {
         return false;
     }
 
-    return Append(Command(children.at(1)->GetFloat()));
+    return Append(ECommandType::Delta);
 }
 
 bool Translator::Append(Command const &command) const {

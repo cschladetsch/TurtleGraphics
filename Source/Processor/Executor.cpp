@@ -19,7 +19,7 @@ bool Executor::Run(Turtle& turtle, CommandSequencePtr const &sequence) {
 
 bool Executor::Run(CommandSequencePtr const &sequence) {
     _context.push_back(sequence);
-    return NextSequence();
+    return HasSucceeded() && NextSequence();
 }
 
 bool Executor::Run() {
@@ -55,12 +55,16 @@ bool Executor::NextSequence() {
 bool Executor::Execute(Continuation& sequence) {
     sequence.Enter(*this);
     while (!sequence.AtEnd()) {
-        Execute(sequence.Next());
+        if (!Execute(sequence.Next())) {
+            return false;
+        }
+
         if (_break) {
             break;
         }
     }
 
+    // TODO(cjs) remove recursion
     return NextSequence();
 }
 

@@ -20,7 +20,7 @@ public:
     explicit Translator(AstNodePtr root) : _root(move(root)) { }
 
     bool Run() override;
-    bool Run(AstNodePtr root);
+    bool Run(AstNodePtr const& root);
 
     CommandSequencePtr GetCommands() const;
 
@@ -34,7 +34,7 @@ private:
     bool TranslateRepeat(const AstNodePtr& node);
     bool TranslateArgList(const AstNodePtr& node) const;
     bool TranslateFunction(const AstNodePtr& node);
-    bool TranslateDelta(const AstNodePtr& node);
+    bool TranslateDelta(const AstNodePtr& node) const;
 
     CommandSequencePtr Enter();
     void Leave();

@@ -337,6 +337,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pch.hpp</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="Tests\TestCases.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Processor/Pch.hpp</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)$(TargetName)-Processor.pch</PrecompiledHeaderOutputFile>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Readme.md" />
