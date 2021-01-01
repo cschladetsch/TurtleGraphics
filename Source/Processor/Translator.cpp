@@ -24,25 +24,17 @@ bool Translator::Run() {
 
 CommandSequencePtr Translator::GetCommands() const {
     if (_commands.size() != 1) {
-        Fail("Internal Error: Unbalanced translation");
+        TURTLE_FAIL() << "Internal Error: Unbalanced translation";
         return nullptr;
     }
 
     return _commands.back();
 }
 
-std::ostream& Translator::Fail() const {
-    return Fail();
-}
-
-bool Translator::Fail(const char* errorText) const {
-    return Fail(errorText);
-}
-
 bool Translator::TranslateFunction(const AstNodePtr& node) {
     auto const& children = node->GetChildren();
     if (children.size() != 3) {
-        return Fail("Internal Error: Functions require 3 AST children.");
+        return TURTLE_FAIL() << "Internal Error: Functions require 3 AST children.";
     }
 
     auto const& name = children[0]->GetText();

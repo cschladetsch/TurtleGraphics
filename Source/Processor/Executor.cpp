@@ -68,8 +68,9 @@ bool Executor::Execute(Continuation& sequence) {
     return NextSequence();
 }
 
-bool Executor::DoDelta() {
-    return Fail("");
+bool Executor::DoDelta() const {
+    NotImplemented("Executor::DoDelta");
+    return true;
 }
 
 bool Executor::Execute(Command const &command) {
@@ -123,6 +124,7 @@ bool Executor::PopFloat(float &num) {
         const auto intOpt = DataPop<int>();
         if (intOpt.has_value()) {
             num = static_cast<float>(*intOpt);
+            _failed = false;
             return true;
         }
 
@@ -157,7 +159,6 @@ bool Executor::DoRepeat() {
         }
 
         commands->Reset();
-
     }
 
     return true;

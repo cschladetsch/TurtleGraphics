@@ -131,7 +131,7 @@ bool Lexer::GetNext() {
         if (std::isdigit(Peek())) {
             return AddToken(GatherNumber(), EToken::Number);
         }
-        Fail() << "Not Implemented";
+        TURTLE_FAIL() << "Not Implemented";
         return false;
     }
     default: {}
@@ -159,19 +159,16 @@ bool Lexer::AddToken(EToken type, size_t length) {
 }
 
 bool Lexer::Fail(const char* errorText) const {
-    return Fail(errorText);
-}
-
-std::ostream& Lexer::Fail() const {
-    auto& str = _errorStream;
+    auto& str = _stream;
     str << fileName << ":(" << _lineNumber << "):\n";
     str << "\n" << _lines[_lineNumber] << "\n";
     for (size_t n = 0; n < _offset; ++n) {
         str << ' ';
     }
-    str << "^" << std::endl;
+    str << "^" << errorText << std::endl;
 
-    return str;
+    TURTLE_FAIL() << errorText << "\n" << str.str() << '\n';
+    return false;
 }
 
 StringSplice Lexer::GatherNumber() const {

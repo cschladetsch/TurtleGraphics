@@ -45,7 +45,7 @@ private:
     template <typename Ty>
     std::optional<Ty> DataPop() noexcept {
         if (_data.empty()) {
-            Fail("Data stack empty");
+            TURTLE_FAIL() << "Data stack empty";
             return std::nullopt;
         }
 
@@ -55,7 +55,7 @@ private:
             return std::get<Ty>(top.Value);
         } catch (std::exception const &e) {
             (void)e;
-            Fail("Wrong data type");
+            TURTLE_FAIL() << "Wrong data type";
         }
 
         return std::nullopt;
@@ -64,7 +64,7 @@ private:
     bool PopFloat(float &num);
 
     bool DoRepeat();
-    bool DoDelta();
+    bool DoDelta() const;
 };
 
 }  // namespace TurtleGraphics::Processor

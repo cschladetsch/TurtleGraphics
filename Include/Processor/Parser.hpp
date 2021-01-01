@@ -28,12 +28,12 @@ public:
 
 protected:
     bool Fail(const char* text) const override {
-        Fail() << "Parser : " << text;
+        Fail() << "Parser: " << text;
         return false;
     }
 
     std::ostream& Fail() const override {
-        return ErrorStream() << "Parser: ";
+        return GetStream() << "Parser: ";
     }
 
 private:

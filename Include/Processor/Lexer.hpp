@@ -36,6 +36,7 @@ public:
 protected:
     friend class Parser;
     bool Fail(const char* errorText) const override ;
+    virtual bool FailWithText(const char* errorText) const override ;
     std::ostream& Fail() const override;
 
 private:
