@@ -158,7 +158,7 @@ bool Lexer::AddToken(EToken type, size_t length) {
         StringSplice(*this, _lineNumber, _offset, length), type);
 }
 
-bool Lexer::Fail(const char* errorText) const {
+bool Lexer::FailWithText(const char* errorText) const {
     auto& str = _stream;
     str << fileName << ":(" << _lineNumber << "):\n";
     str << "\n" << _lines[_lineNumber] << "\n";

@@ -25,8 +25,8 @@ public:
     CommandSequencePtr GetCommands() const;
 
 protected:
-    std::ostream& Fail() const override ;
-    bool Fail(const char* errorText) const override ;
+    //std::ostream& Fail() const override ;
+    //bool Fail(const char* errorText) const override ;
 
 private:
     bool Translate(AstNodePtr const& node);

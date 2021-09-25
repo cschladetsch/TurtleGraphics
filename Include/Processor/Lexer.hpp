@@ -35,9 +35,9 @@ public:
 
 protected:
     friend class Parser;
-    bool Fail(const char* errorText) const override ;
+    bool FailWithError(const char *errorText) const;
     virtual bool FailWithText(const char* errorText) const override ;
-    std::ostream& Fail() const override;
+    //std::ostream& Fail() const override;
 
 private:
     void AddText(const char* text);

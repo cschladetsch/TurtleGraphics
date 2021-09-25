@@ -34,7 +34,8 @@ CommandSequencePtr Translator::GetCommands() const {
 bool Translator::TranslateFunction(const AstNodePtr& node) {
     auto const& children = node->GetChildren();
     if (children.size() != 3) {
-        return TURTLE_FAIL() << "Internal Error: Functions require 3 AST children.";
+        TURTLE_FAIL() << "Internal Error: Functions require 3 AST children.";
+        return false;
     }
 
     auto const& name = children[0]->GetText();
