@@ -1,14 +1,20 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 set(proj_name turtle)
 project(${proj_name})
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
 
-add_compile_options(/std:c++latest)
-add_compile_options(/DTURTLE_UNIT_TESTS)
+# these for MSVC
+#add_compile_options(/DTURTLE_UNIT_TESTS)
+#add_compile_options(/std:c++latest)
+
+#add_compile_options(-std=c++17)
+add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-std=c++20>)
+add_compile_options($<$<COMPILE_LANGUAGE:CXX>:-stdlib=libc++>)
+
 
 # Add SDL
-set(SDL_ROOT "External\\SDL2-2.0.12")
+set(SDL_ROOT "External/SDL2-2.0.12")
 #set(BUILD_SHARED_LIBS OFF)
 add_subdirectory(${SDL_ROOT})
 

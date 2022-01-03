@@ -118,7 +118,7 @@ bool Lexer::GetNext() {
         return AddToken(GatherNumber(), EToken::Number);
 
     if (std::isspace(current))
-        return AddToken(Gather(std::isspace), EToken::WhiteSpace);
+        return AddToken(Gather([](char c) { return std::isspace(c); }, EToken::WhiteSpace);
 
     switch (current) {
     case '{': return AddToken(EToken::OpenBrace, 1);
@@ -242,7 +242,7 @@ bool Lexer::AddToken(StringSplice const splice, EToken type) {
     return true;
 }
 
-StringSplice Lexer::Gather(std::function<bool(char)> const& predicate) const {
+StringSplice Lexer::Gather(std::function<int (char)> const& predicate) const {
     auto end = _offset;
     while (!AtEndAt(end) && predicate(GetAt(end)))
         ++end;
