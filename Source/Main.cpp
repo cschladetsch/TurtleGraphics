@@ -74,9 +74,9 @@ int main(int argc, char *argv[]) {
         turtle.DrawPath(display.GetRenderer());
         display.Present();
 
-        // if (!ReadAndRunInput(turtle)) {
-        //    cout << "Error\n";
-        // }
+         if (!ReadAndRunInput(turtle)) {
+            cout << "Error\n";
+         }
     }
 
     return 0;
